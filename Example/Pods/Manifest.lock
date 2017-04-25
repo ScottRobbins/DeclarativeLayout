@@ -1,0 +1,16 @@
+PODS:
+  - DeclarativeLayout (0.1.0)
+
+DEPENDENCIES:
+  - DeclarativeLayout (from `../`)
+
+EXTERNAL SOURCES:
+  DeclarativeLayout:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DeclarativeLayout: cc28fa19747b49a4262430623603b15c27614e19
+
+PODFILE CHECKSUM: 0d1373e0bb9795c40cf58254d7f6d2b1a31601a7
+
+COCOAPODS: 1.2.1

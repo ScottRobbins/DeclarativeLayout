@@ -1,0 +1,22 @@
+{
+  "name": "DeclarativeLayout",
+  "version": "0.1.0",
+  "summary": "A short description of DeclarativeLayout.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/hotcocoatouch/DeclarativeLayout",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "hotcocoatouch": "scott.robbins@mobiledefense.com"
+  },
+  "source": {
+    "git": "https://github.com/hotcocoatouch/DeclarativeLayout.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "DeclarativeLayout/Classes/**/*"
+}

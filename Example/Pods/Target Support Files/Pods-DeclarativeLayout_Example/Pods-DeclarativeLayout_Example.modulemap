@@ -1,0 +1,6 @@
+framework module Pods_DeclarativeLayout_Example {
+  umbrella header "Pods-DeclarativeLayout_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
