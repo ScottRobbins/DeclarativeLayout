@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'DeclarativeLayout_Example' do
+  pod 'DeclarativeLayout', :path => '../'
+
+  target 'DeclarativeLayout_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
