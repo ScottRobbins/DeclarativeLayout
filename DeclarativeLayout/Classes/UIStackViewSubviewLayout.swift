@@ -3,6 +3,28 @@ import UIKit
 public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     
     private var arrangedSubviewsToAdd = [UIView]()
+    var axis: UILayoutConstraintAxis
+    var distribution: UIStackViewDistribution
+    var alignment: UIStackViewAlignment
+    var spacing: CGFloat
+    var isBaselineRelativeArrangement: Bool
+    var isLayoutMarginsRelativeArrangement: Bool
+    
+    override init(view: UIStackView,
+                  superview: UIView,
+                  active: Bool)
+    {
+        axis = view.axis
+        distribution = view.distribution
+        alignment = view.alignment
+        spacing = view.spacing
+        isBaselineRelativeArrangement = view.isBaselineRelativeArrangement
+        isLayoutMarginsRelativeArrangement = view.isLayoutMarginsRelativeArrangement
+        
+        super.init(view: view,
+                   superview: superview,
+                   active: active)
+    }
     
     public func addArranged(_ subview: UIView,
                             layoutClosure: ((UIViewSubviewLayout) -> Void)?)
@@ -57,5 +79,16 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
                 layout.executeAddSubviews()
             }
         }
+    }
+    
+    override func executeActivateConstraints() {
+        super.executeActivateConstraints()
+        
+        view.axis = axis
+        view.distribution = distribution
+        view.alignment = alignment
+        view.spacing = spacing
+        view.isBaselineRelativeArrangement = isBaselineRelativeArrangement
+        view.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
     }
 }
