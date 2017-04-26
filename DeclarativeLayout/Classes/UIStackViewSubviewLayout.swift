@@ -2,13 +2,14 @@ import UIKit
 
 public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     
+    public var axis: UILayoutConstraintAxis
+    public var distribution: UIStackViewDistribution
+    public var alignment: UIStackViewAlignment
+    public var spacing: CGFloat
+    public var isBaselineRelativeArrangement: Bool
+    public var isLayoutMarginsRelativeArrangement: Bool
+    
     private var arrangedSubviewsToAdd = [UIView]()
-    var axis: UILayoutConstraintAxis
-    var distribution: UIStackViewDistribution
-    var alignment: UIStackViewAlignment
-    var spacing: CGFloat
-    var isBaselineRelativeArrangement: Bool
-    var isLayoutMarginsRelativeArrangement: Bool
     
     override init(view: UIStackView,
                   superview: UIView,
