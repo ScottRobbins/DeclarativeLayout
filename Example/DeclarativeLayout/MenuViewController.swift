@@ -1,13 +1,13 @@
 import UIKit
-import DeclarativeLayout
 
 class MenuViewController: UITableViewController {
     
     enum Row {
         case registrationWithoutFramework
+        case registrationWithFramework
         
         static var allRows: [Row] {
-            return [.registrationWithoutFramework]
+            return [.registrationWithoutFramework, .registrationWithFramework]
         }
     }
     
@@ -31,6 +31,8 @@ class MenuViewController: UITableViewController {
         switch Row.allRows[indexPath.row] {
         case .registrationWithoutFramework:
             cell.textLabel?.text = "Registration Screen Without Framework"
+        case .registrationWithFramework:
+            cell.textLabel?.text = "Registration Screen With Framework"
         }
         
         return cell
@@ -40,6 +42,8 @@ class MenuViewController: UITableViewController {
         switch Row.allRows[indexPath.row] {
         case .registrationWithoutFramework:
             navigationController?.pushViewController(RegistrationWithoutFrameworkViewController(), animated: true)
+        case .registrationWithFramework:
+            navigationController?.pushViewController(RegistrationExampleWithFrameworkViewController(), animated: true)
         }
     }
 }
