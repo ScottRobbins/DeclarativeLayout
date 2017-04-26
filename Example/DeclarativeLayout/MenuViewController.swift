@@ -1,54 +1,45 @@
 import UIKit
 import DeclarativeLayout
 
-class MenuViewController: UIViewController {
+class MenuViewController: UITableViewController {
     
-    private let tableView = UITableView()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    enum Row {
+        case registrationWithoutFramework
         
-        layout()
-        configureTableView()
-    }
-    
-    private func layout() {
-        
-        view.updateLayoutTo { (layout) in
-            
-            layout.add(tableView) { (layout) in
-                
-                layout.activate([
-                    layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
-                    layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
-                    layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor),
-                    layout.view.bottomAnchor.constraint(equalTo: layout.superview.bottomAnchor),
-                ])
-            }
+        static var allRows: [Row] {
+            return [.registrationWithoutFramework]
         }
     }
     
-    private func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
-}
-
-extension MenuViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-}
-
-extension MenuViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        title = "Menu"
+        tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Row.allRows.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        
+        switch Row.allRows[indexPath.row] {
+        case .registrationWithoutFramework:
+            cell.textLabel?.text = "Registration Screen Without Framework"
+        }
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch Row.allRows[indexPath.row] {
+        case .registrationWithoutFramework:
+            navigationController?.pushViewController(RegistrationWithoutFrameworkViewController(), animated: true)
+        }
     }
 }

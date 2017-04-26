@@ -17,6 +17,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "No Framework"
         layoutAllViews()
         configureAllViews()
     }
@@ -62,7 +63,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
     }
     
     private func layoutRegisterOrSignInSegmentedControl() {
-        registerOrSignInSegmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 64).isActive = true
+        registerOrSignInSegmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 84).isActive = true
         registerOrSignInSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         registerOrSignInSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
@@ -97,7 +98,6 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         emailTextField.trailingAnchor.constraint(equalTo: emailContainerView.trailingAnchor, constant: -20).isActive = true
         emailTextField.bottomAnchor.constraint(greaterThanOrEqualTo: emailContainerView.bottomAnchor, constant: -20).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: emailContainerView.centerYAnchor).isActive = true
-        emailTextField.widthAnchor.constraint(equalTo: emailContainerView.widthAnchor, multiplier: 0.6, constant: 0).isActive = true
     }
     
     private func layoutPasswordContainerView() {
@@ -118,7 +118,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: passwordContainerView.trailingAnchor, constant: -20).isActive = true
         passwordTextField.bottomAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.bottomAnchor, constant: -20).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: passwordContainerView.centerYAnchor).isActive = true
-        passwordTextField.widthAnchor.constraint(equalTo: passwordContainerView.widthAnchor, multiplier: 0.6, constant: 0).isActive = true
+        passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor).isActive = true
     }
     
     private func layoutSubmitButton() {
@@ -161,6 +161,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         emailTextField.layer.borderColor = UIColor.blue.cgColor
         emailTextField.layer.borderWidth = 1
         emailTextField.textAlignment = .center
+        emailTextField.isUserInteractionEnabled = false
         
         passwordLabel.text = "Password"
         passwordTextField.placeholder = "secure password here"
@@ -168,6 +169,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         passwordTextField.layer.borderColor = UIColor.blue.cgColor
         passwordTextField.layer.borderWidth = 1
         passwordTextField.textAlignment = .center
+        passwordTextField.isUserInteractionEnabled = false
         
         submitButton.setTitle("Submit", for: .normal)
         submitButton.backgroundColor = UIColor.blue
