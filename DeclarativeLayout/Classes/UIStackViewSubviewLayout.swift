@@ -42,7 +42,7 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     }
     
     public func addArrangedStack(_ subview: UIStackView,
-                            layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
+                                 layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
     {
         guard active else { return }
         
