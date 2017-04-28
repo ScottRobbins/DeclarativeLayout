@@ -12,8 +12,7 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     private var arrangedSubviewsToAdd = [UIView]()
     
     override init(view: UIStackView,
-                  superview: UIView,
-                  active: Bool)
+                  superview: UIView)
     {
         axis = view.axis
         distribution = view.distribution
@@ -23,18 +22,14 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
         isLayoutMarginsRelativeArrangement = view.isLayoutMarginsRelativeArrangement
         
         super.init(view: view,
-                   superview: superview,
-                   active: active)
+                   superview: superview)
     }
     
     public func addArranged(_ subview: UIView,
                             layoutClosure: ((UIViewSubviewLayout) -> Void)?)
     {
-        guard active else { return }
-        
         let subLayout = UIViewSubviewLayout(view: subview,
-                                            superview: view,
-                                            active: active)
+                                            superview: view)
         
         sublayouts.append(.uiview(layout: subLayout))
         arrangedSubviewsToAdd.append(subview)
@@ -45,11 +40,8 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     public func addArrangedStack(_ subview: UIStackView,
                                  layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
     {
-        guard active else { return }
-        
         let subLayout = UIStackViewSubviewLayout(view: subview,
-                                                 superview: view,
-                                                 active: active)
+                                                 superview: view)
         
         sublayouts.append(.uistackview(layout: subLayout))
         arrangedSubviewsToAdd.append(subview)
@@ -58,7 +50,6 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     }
     
     override func executeAddSubviews() {
-        guard active else { return }
         
         for (i, subview) in subviewsToAdd.enumerated() {
             view.insertSubview(subview, at: i)

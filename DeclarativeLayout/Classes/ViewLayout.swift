@@ -8,24 +8,19 @@ public class ViewLayout<T: UIView> {
     }
     
     public let view: T
-    let active: Bool
     var subviewsToAdd = [UIView]()
     var sublayouts = [LayoutType]()
     private var constraintClosures = [() -> [NSLayoutConstraint]]()
     
-    init(view: T, active: Bool) {
+    init(view: T) {
         self.view = view
-        self.active = active
     }
     
     public func add(_ subview: UIView,
                     layoutClosure: ((UIViewSubviewLayout) -> Void)?)
     {
-        guard active else { return }
-        
         let subLayout = UIViewSubviewLayout(view: subview,
-                                            superview: view,
-                                            active: active)
+                                            superview: view)
         
         sublayouts.append(.uiview(layout: subLayout))
         subviewsToAdd.append(subview)
@@ -36,20 +31,13 @@ public class ViewLayout<T: UIView> {
     public func addStack(_ stackview: UIStackView,
                          layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
     {
-        guard active else { return }
-        
         let subLayout = UIStackViewSubviewLayout(view: stackview,
-                                                 superview: view,
-                                                 active: active)
+                                                 superview: view)
         
         sublayouts.append(.uistackview(layout: subLayout))
         subviewsToAdd.append(stackview)
         
         layoutClosure?(subLayout)
-    }
-    
-    public func `if`(_ condition: Bool) -> UIViewLayout {
-        return UIViewLayout(view: view, active: active && condition)
     }
     
     /*
@@ -63,7 +51,6 @@ public class ViewLayout<T: UIView> {
     }
     
     func executeAddSubviews() {
-        guard active else { return }
         
         for (i, subview) in subviewsToAdd.enumerated() {
             view.insertSubview(subview, at: i)
@@ -85,8 +72,7 @@ public class ViewLayout<T: UIView> {
     }
     
     func executeActivateConstraints() {
-        guard active else { return }
-        
+
         view
             .constraints
             .forEach { $0.isActive = false }
