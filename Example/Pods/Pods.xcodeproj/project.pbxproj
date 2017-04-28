@@ -17,6 +17,7 @@
 		461195FF1EAEF48A0021C497 /* UIViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461195F91EAEF48A0021C497 /* UIViewLayout.swift */; };
 		461196001EAEF48A0021C497 /* UIViewSubviewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461195FA1EAEF48A0021C497 /* UIViewSubviewLayout.swift */; };
 		461196011EAEF48A0021C497 /* ViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461195FB1EAEF48A0021C497 /* ViewLayout.swift */; };
+		46D4EAD21EB3164500D7EFD2 /* NSLayoutConstraint+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EAD11EB3164500D7EFD2 /* NSLayoutConstraint+Equatable.swift */; };
 		63515C502148ACE508FA6B223AE3EBA2 /* DeclarativeLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B5D54806F4841FB58371215D8AD93C43 /* DeclarativeLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9479C8BA893DAD064804CD65FAA51D80 /* Pods-DeclarativeLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F0BE1FB1491146BAE8F3055268D6A7DB /* Pods-DeclarativeLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAAD83271C38C9BFDAA675BEFB3AEDC3 /* Pods-DeclarativeLayout_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3248DF928AF43A47110E710E3FF73D6D /* Pods-DeclarativeLayout_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +53,7 @@
 		461195F91EAEF48A0021C497 /* UIViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewLayout.swift; sourceTree = "<group>"; };
 		461195FA1EAEF48A0021C497 /* UIViewSubviewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewSubviewLayout.swift; sourceTree = "<group>"; };
 		461195FB1EAEF48A0021C497 /* ViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayout.swift; sourceTree = "<group>"; };
+		46D4EAD11EB3164500D7EFD2 /* NSLayoutConstraint+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Equatable.swift"; sourceTree = "<group>"; };
 		4D5B289AB83C6F3AC89D92B2DADDB699 /* Pods-DeclarativeLayout_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DeclarativeLayout_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		547D9AD232396F3134DE3B02C1C5698B /* Pods-DeclarativeLayout_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DeclarativeLayout_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		5D2197D21DAFD62D421BBB053F5DC36B /* DeclarativeLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DeclarativeLayout-prefix.pch"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				461195F91EAEF48A0021C497 /* UIViewLayout.swift */,
 				461195FA1EAEF48A0021C497 /* UIViewSubviewLayout.swift */,
 				461195FB1EAEF48A0021C497 /* ViewLayout.swift */,
+				46D4EAD11EB3164500D7EFD2 /* NSLayoutConstraint+Equatable.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D4EAD21EB3164500D7EFD2 /* NSLayoutConstraint+Equatable.swift in Sources */,
 				45465B6560CE9D054B436FE23AAC8EC1 /* DeclarativeLayout-dummy.m in Sources */,
 				461196011EAEF48A0021C497 /* ViewLayout.swift in Sources */,
 				461195FE1EAEF48A0021C497 /* UIView+UpdateLayout.swift in Sources */,
