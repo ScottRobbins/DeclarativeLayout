@@ -14,4 +14,5 @@ func ==(lhs: NSLayoutConstraint, rhs: NSLayoutConstraint) -> Bool {
         && lhsSecondItem == rhsSecondItem
         && lhs.secondAttribute == rhs.secondAttribute
         && lhs.relation == rhs.relation
+        && lhs.multiplier == rhs.multiplier
 }
