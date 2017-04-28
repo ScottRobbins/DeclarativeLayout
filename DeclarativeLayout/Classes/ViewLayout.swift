@@ -2,14 +2,15 @@ import UIKit
 
 public class ViewLayout<T: UIView> {
     
-    public enum LayoutType {
+    private enum LayoutType {
         case uiview(layout: UIViewSubviewLayout)
         case uistackview(layout: UIStackViewSubviewLayout)
     }
     
     public let view: T
-    var subviewsToAdd = [UIView]()
-    var sublayouts = [LayoutType]()
+    
+    private var subviewsToAdd = [UIView]()
+    private var sublayouts = [LayoutType]()
     private var constraintClosures = [() -> [NSLayoutConstraint]]()
     
     init(view: T) {
