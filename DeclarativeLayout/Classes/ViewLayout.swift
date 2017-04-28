@@ -51,6 +51,18 @@ public class ViewLayout<T: UIView> {
         constraintClosures.append(constraints)
     }
     
+    func allconstraints() -> [NSLayoutConstraint] {
+        let initialConstraints = constraintClosures.flatMap { $0() }
+        return sublayouts.reduce(initialConstraints) { (combinedConstraints, layout) -> [NSLayoutConstraint] in
+            switch layout {
+            case .uistackview(let layout):
+                return combinedConstraints + layout.allconstraints()
+            case .uiview(let layout):
+                return combinedConstraints + layout.allconstraints()
+            }
+        }
+    }
+    
     func executeAddSubviews() {
         
         for (i, subview) in subviewsToAdd.enumerated() {
