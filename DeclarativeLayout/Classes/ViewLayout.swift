@@ -20,6 +20,7 @@ public class ViewLayout<T: UIView> {
     public func add(_ subview: UIView,
                     layoutClosure: ((UIViewSubviewLayout) -> Void)?)
     {
+        subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayout = UIViewSubviewLayout(view: subview,
                                             superview: view)
         
@@ -32,6 +33,7 @@ public class ViewLayout<T: UIView> {
     public func addStack(_ stackview: UIStackView,
                          layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
     {
+        stackview.translatesAutoresizingMaskIntoConstraints = false
         let subLayout = UIStackViewSubviewLayout(view: stackview,
                                                  superview: view)
         
@@ -84,27 +86,4 @@ public class ViewLayout<T: UIView> {
         }
     }
     
-    func executeActivateConstraints() {
-
-        view
-            .constraints
-            .forEach { $0.isActive = false }
-        
-        if constraintClosures.count > 0 {
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        constraintClosures
-            .flatMap { $0() }
-            .forEach { $0.isActive = true }
-        
-        for sublayout in sublayouts {
-            switch sublayout {
-            case .uiview(let layout):
-                layout.executeActivateConstraints()
-            case .uistackview(let layout):
-                layout.executeActivateConstraints()
-            }
-        }
-    }
 }
