@@ -106,7 +106,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             layout.add(self.submitButton) { (layout) in
                 
                 layout.activate([
-                    layout.view.topAnchor.constraint(equalTo: self.passwordContainerView.bottomAnchor, constant: 20),
+                    layout.view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor, constant: 20),
                     layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor, constant: -20),
                 ])

@@ -122,7 +122,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
     }
     
     private func layoutSubmitButton() {
-        submitButton.topAnchor.constraint(equalTo: passwordContainerView.bottomAnchor, constant: 20).isActive = true
+        submitButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
         submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
