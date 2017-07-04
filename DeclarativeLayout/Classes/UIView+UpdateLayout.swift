@@ -33,6 +33,10 @@ public extension UIView {
                 if matchingConstraint.priority != constraint.priority {
                     matchingConstraint.priority = constraint.priority
                 }
+                
+                if matchingConstraint.identifier != constraint.identifier {
+                    matchingConstraint.identifier = constraint.identifier
+                }
             }
         }
         
