@@ -46,8 +46,8 @@ public class ViewLayout<T: UIView> {
     /*
      @autoclosure is important so that frameworks like Anchorage that activate constraints on creation can be used.
      This will prevent the constraints from really being created/activated until after we have made sure all of the
-     involved views have been added to the view hierarchy. If a constraint, involving one or more views
-     that are not in the hierarchy, is activated the application will crash.
+     involved views have been added to the view hierarchy. If a constraint involving one or more views
+     that are not in the hierarchy is activated the application will crash.
      */
     public func activate(_ constraints: @escaping @autoclosure () -> [NSLayoutConstraint] ) {
         constraintClosures.append(constraints)
