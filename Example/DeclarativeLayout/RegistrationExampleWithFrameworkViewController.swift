@@ -2,7 +2,8 @@ import UIKit
 import DeclarativeLayout
 
 class RegistrationExampleWithFrameworkViewController: UIViewController {
-
+    
+    private var viewLayout: ViewLayout? = nil
     private let registerOrSignInSegmentedControl = UISegmentedControl()
     private let headerLabel = UILabel()
     private let stackView = UIStackView()
@@ -19,13 +20,15 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         super.viewDidLoad()
         
         title = "With Framework"
+        
+        viewLayout = ViewLayout(view: view)
         layoutAllViews()
         configureAllViews()
     }
     
     private func layoutAllViews() {
         
-        view.updateLayoutTo { (layout) in
+        viewLayout?.updateLayoutTo { (layout) in
             
             layout.add(self.registerOrSignInSegmentedControl) { (layout) in
                 
@@ -97,7 +100,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                             layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor, constant: -20),
                             layout.view.bottomAnchor.constraint(greaterThanOrEqualTo: layout.superview.bottomAnchor, constant: -20),
                             layout.view.centerYAnchor.constraint(equalTo: layout.superview.centerYAnchor),
-                            layout.view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor)
+                            layout.view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
                         ])
                     }
                 }
@@ -139,6 +142,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             headerLabel.text = "Sign In"
         }
         
+        stackView.axis = .vertical
         emailLabel.text = "Email"
         emailTextField.placeholder = "example@example.com"
         if #available(iOS 10.0, *) {
