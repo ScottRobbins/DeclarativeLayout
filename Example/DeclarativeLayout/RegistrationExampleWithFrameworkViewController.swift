@@ -47,7 +47,6 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             layout.addStack(stackView) { (layout) in
                 
-                layout.axis = .vertical
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
                     layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
