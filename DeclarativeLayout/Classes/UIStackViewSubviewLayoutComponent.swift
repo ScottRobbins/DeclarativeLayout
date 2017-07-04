@@ -1,11 +1,11 @@
 import UIKit
 
-public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
+public class UIStackViewSubviewLayoutComponent: SubviewLayoutComponent<UIStackView> {
     
     private var arrangedSubviewsToAdd = [UIView]()
     
     public func addArranged(_ subview: UIView,
-                            layoutClosure: ((UIViewSubviewLayout) -> Void)?)
+                            layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)
     {
         arrangedSubviewsToAdd.append(subview)
         
@@ -13,7 +13,7 @@ public class UIStackViewSubviewLayout: SubviewLayout<UIStackView> {
     }
     
     public func addArrangedStack(_ subview: UIStackView,
-                                 layoutClosure: ((UIStackViewSubviewLayout) -> Void)?)
+                                 layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)
     {
         arrangedSubviewsToAdd.append(subview)
 

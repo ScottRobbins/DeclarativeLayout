@@ -1,6 +1,6 @@
 import UIKit
 
-public class SubviewLayout<T: UIView>: ViewLayout<T> {
+public class SubviewLayoutComponent<T: UIView>: ViewLayoutComponent<T> {
     
     public let superview: UIView
     

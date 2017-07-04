@@ -2,13 +2,13 @@ import UIKit
 
 public extension UIView {
     
-    public func updateLayoutTo(_ layoutClosure: (UIViewLayout) -> ()) {
-        let layout = UIViewLayout(view: self)
-        layoutClosure(layout)
+    public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent) -> ()) {
+        let layoutComponent = UIViewLayoutComponent(view: self)
+        layoutClosure(layoutComponent)
         
-        layout.executeAddSubviews()
+        layoutComponent.executeAddSubviews()
 
-        let newConstraints = layout.allconstraints()
+        let newConstraints = layoutComponent.allconstraints()
         let currentConstraints = allConstraintsRecursively(fromView: self)
         
         var constraintsToRemove = currentConstraints
