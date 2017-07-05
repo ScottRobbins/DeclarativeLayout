@@ -12,10 +12,42 @@ public class ViewLayout {
         let layoutComponent = UIViewLayoutComponent(view: view)
         layoutClosure(layoutComponent)
         
-        layoutComponent.executeAddSubviews()
+        addSubviews(with: layoutComponent)
+        removeUnneededSubviews(with: layoutComponent)
+        updateConstraints(with: layoutComponent)
         
-        let newConstraints = layoutComponent.allconstraints()
-        let currentConstraints = currentLayoutComponent.allconstraints()
+        currentLayoutComponent = layoutComponent
+    }
+    
+    private func addSubviews<T>(with layoutComponent: ViewLayoutComponent<T>) {
+        
+        for (i, subview) in layoutComponent.subviews.enumerated() {
+            layoutComponent.view.insertSubview(subview, at: i)
+        }
+        
+        for sublayoutComponent in layoutComponent.sublayoutComponents {
+            switch sublayoutComponent {
+            case .uiview(let layoutComponent):
+                addSubviews(with: layoutComponent)
+            case .uistackview(let layoutComponent):
+                addSubviews(with: layoutComponent)
+                
+                for (i, subview) in layoutComponent.arrangedSubviews.enumerated() {
+                    layoutComponent.view.insertArrangedSubview(subview, at: i)
+                }
+            }
+        }
+    }
+    
+    private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent) {
+        currentLayoutComponent.allSubviews()
+            .filter { !layoutComponent.allSubviews().contains($0) }
+            .forEach { $0.removeFromSuperview() }
+    }
+    
+    private func updateConstraints(with layoutComponent: UIViewLayoutComponent) {
+        let newConstraints = layoutComponent.allConstraints()
+        let currentConstraints = currentLayoutComponent.allConstraints()
         
         var constraintsToRemove = currentConstraints
         var constraintsToActivate = newConstraints

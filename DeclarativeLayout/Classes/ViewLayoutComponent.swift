@@ -2,15 +2,15 @@ import UIKit
 
 public class ViewLayoutComponent<T: UIView> {
     
-    private enum LayoutComponentType {
+    enum LayoutComponentType {
         case uiview(layout: UIViewSubviewLayoutComponent)
         case uistackview(layout: UIStackViewSubviewLayoutComponent)
     }
     
     public let view: T
     
-    private var subviewsToAdd = [UIView]()
-    private var sublayoutComponents = [LayoutComponentType]()
+    private(set) var subviews = [UIView]()
+    private(set) var sublayoutComponents = [LayoutComponentType]()
     private var constraintClosures = [() -> [NSLayoutConstraint]]()
     
     init(view: T) {
@@ -25,7 +25,7 @@ public class ViewLayoutComponent<T: UIView> {
                                                               superview: view)
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
-        subviewsToAdd.append(subview)
+        subviews.append(subview)
         
         layoutClosure?(subLayoutComponent)
     }
@@ -38,7 +38,7 @@ public class ViewLayoutComponent<T: UIView> {
                                                                    superview: view)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
-        subviewsToAdd.append(stackview)
+        subviews.append(stackview)
         
         layoutClosure?(subLayoutComponent)
     }
@@ -53,37 +53,26 @@ public class ViewLayoutComponent<T: UIView> {
         constraintClosures.append(constraints)
     }
     
-    func allconstraints() -> [NSLayoutConstraint] {
+    func allConstraints() -> [NSLayoutConstraint] {
         let initialConstraints = constraintClosures.flatMap { $0() }
         return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [NSLayoutConstraint] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allconstraints()
+                return combinedConstraints + layoutComponent.allConstraints()
             case .uiview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allconstraints()
+                return combinedConstraints + layoutComponent.allConstraints()
             }
         }
     }
     
-    func executeAddSubviews() {
-        
-        for (i, subview) in subviewsToAdd.enumerated() {
-            view.insertSubview(subview, at: i)
-        }
-        
-        view
-            .subviews
-            .filter { !subviewsToAdd.contains($0) }
-            .forEach { $0.removeFromSuperview() }
-        
-        for sublayoutComponent in sublayoutComponents {
-            switch sublayoutComponent {
-            case .uiview(let layoutComponent):
-                layoutComponent.executeAddSubviews()
+    func allSubviews() -> [UIView] {
+        return sublayoutComponents.reduce(subviews) { (subviews, layoutComponent) -> [UIView] in
+            switch layoutComponent {
             case .uistackview(let layoutComponent):
-                layoutComponent.executeAddSubviews()
+                return subviews + layoutComponent.allSubviews()
+            case .uiview(let layoutComponent):
+                return subviews + layoutComponent.allSubviews()
             }
         }
     }
-    
 }
