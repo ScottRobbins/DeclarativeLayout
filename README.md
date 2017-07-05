@@ -22,7 +22,7 @@ pod "DeclarativeLayout"
 
 ## Author
 
-hotcocoatouch, scott.robbins@mobiledefense.com
+hotcocoatouch, srscottrobbins@gmail.com
 
 ## License
 
