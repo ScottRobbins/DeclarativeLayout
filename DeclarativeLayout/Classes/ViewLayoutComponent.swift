@@ -7,11 +7,16 @@ public class ViewLayoutComponent<T: UIView> {
         case uistackview(layout: UIStackViewSubviewLayoutComponent)
     }
     
+    enum ConstraintContainer {
+        case closures(closures: [() -> [NSLayoutConstraint]])
+        case constraints(constraints: [NSLayoutConstraint])
+    }
+    
     public let view: T
     
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
-    private var constraintClosures = [() -> [NSLayoutConstraint]]()
+    private var constraintContainer = ConstraintContainer.closures(closures: [() -> [NSLayoutConstraint]]())
     
     init(view: T) {
         self.view = view
@@ -50,11 +55,26 @@ public class ViewLayoutComponent<T: UIView> {
      that are not in the hierarchy, is activated the application will crash.
      */
     public func activate(_ constraints: @escaping @autoclosure () -> [NSLayoutConstraint] ) {
-        constraintClosures.append(constraints)
+        switch constraintContainer {
+        case .closures(let closures):
+            constraintContainer = .closures(closures: closures + [constraints])
+        case .constraints(_):
+            // No code should actually get here
+            constraintContainer = .closures(closures: [constraints])
+        }
     }
     
     func allConstraints() -> [NSLayoutConstraint] {
-        let initialConstraints = constraintClosures.flatMap { $0() }
+        
+        let initialConstraints: [NSLayoutConstraint]
+        switch constraintContainer {
+        case .closures(let closures):
+            initialConstraints = closures.flatMap { $0() }
+            constraintContainer = .constraints(constraints: initialConstraints)
+        case .constraints(let constraints):
+            initialConstraints = constraints
+        }
+        
         return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [NSLayoutConstraint] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
