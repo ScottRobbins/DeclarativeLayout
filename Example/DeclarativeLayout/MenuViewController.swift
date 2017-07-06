@@ -3,11 +3,12 @@ import UIKit
 class MenuViewController: UITableViewController {
     
     enum Row {
+        case quickStart
         case registrationWithoutFramework
         case registrationWithFramework
         
         static var allRows: [Row] {
-            return [.registrationWithoutFramework, .registrationWithFramework]
+            return [.quickStart, .registrationWithoutFramework, .registrationWithFramework]
         }
     }
     
@@ -29,6 +30,8 @@ class MenuViewController: UITableViewController {
         cell.textLabel?.lineBreakMode = .byWordWrapping
         
         switch Row.allRows[indexPath.row] {
+        case .quickStart:
+            cell.textLabel?.text = "Quick Start Example"
         case .registrationWithoutFramework:
             cell.textLabel?.text = "Registration Screen Without Framework"
         case .registrationWithFramework:
@@ -40,6 +43,8 @@ class MenuViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Row.allRows[indexPath.row] {
+        case .quickStart:
+            navigationController?.pushViewController(QuickStartViewController(), animated: true)
         case .registrationWithoutFramework:
             navigationController?.pushViewController(RegistrationWithoutFrameworkViewController(), animated: true)
         case .registrationWithFramework:

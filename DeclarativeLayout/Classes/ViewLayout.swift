@@ -55,7 +55,7 @@ public class ViewLayout {
         for constraint in newConstraints {
             let matchingConstraints = currentConstraints.filter { $0 == constraint }
             
-            if let matchingConstraint = matchingConstraints.first {
+            for matchingConstraint in matchingConstraints {
                 if let index = constraintsToRemove.index(of: matchingConstraint) {
                     constraintsToRemove.remove(at: index)
                 }
