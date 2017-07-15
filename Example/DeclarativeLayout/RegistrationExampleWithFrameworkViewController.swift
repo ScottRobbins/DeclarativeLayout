@@ -3,7 +3,7 @@ import DeclarativeLayout
 
 class RegistrationExampleWithFrameworkViewController: UIViewController {
     
-    private var viewLayout: ViewLayout? = nil
+    private var viewLayout: ViewLayout!
     private let registerOrSignInSegmentedControl = UISegmentedControl()
     private let headerLabel = UILabel()
     private let stackView = UIStackView()
@@ -28,7 +28,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     
     private func layoutAllViews() {
         
-        viewLayout?.updateLayoutTo { (layout) in
+        viewLayout.updateLayoutTo { (layout) in
             
             layout.add(self.registerOrSignInSegmentedControl) { (layout) in
                 
@@ -125,9 +125,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         }
     }
     
-    private func configureAllViews() {
-        view.backgroundColor = .white
-        
+    private func configureAllViews() {        
         registerOrSignInSegmentedControl.insertSegment(withTitle: "Register", at: 0, animated: false)
         registerOrSignInSegmentedControl.insertSegment(withTitle: "Sign In", at: 1, animated: false)
         

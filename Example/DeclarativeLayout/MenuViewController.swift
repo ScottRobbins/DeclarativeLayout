@@ -1,6 +1,7 @@
 import UIKit
+import DeclarativeLayout
 
-class MenuViewController: UITableViewController {
+class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     enum Row {
         case quickStart
@@ -12,18 +13,41 @@ class MenuViewController: UITableViewController {
         }
     }
     
+    private let tableView = UITableView()
+    private var viewLayout: ViewLayout!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewLayout = ViewLayout(view: view)
         title = "Menu"
         tableView.rowHeight = UITableViewAutomaticDimension
+        layoutAllViews()
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    private func layoutAllViews() {
+        
+        viewLayout.updateLayoutTo { (layout) in
+            
+            layout.add(tableView) { (layout) in
+                
+                layout.activate([
+                    layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor),
+                    layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
+                    layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
+                    layout.view.bottomAnchor.constraint(equalTo: layout.superview.bottomAnchor),
+                ])
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Row.allRows.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.numberOfLines = 0
@@ -41,7 +65,7 @@ class MenuViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Row.allRows[indexPath.row] {
         case .quickStart:
             navigationController?.pushViewController(QuickStartViewController(), animated: true)
