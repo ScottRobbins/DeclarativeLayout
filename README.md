@@ -107,7 +107,7 @@ That will give you a view looking like this:
 
  As an example, let's layout a view that goes from the layout above, to a new one that involves some of these things. When animating the change it looks like:
 
-![Video animating change](/Resources/animatingChange.gif)
+![Video animating change](/Resources/animateChange.gif)
 
 ```swift
 viewLayout.updateLayoutTo { (layout) in
