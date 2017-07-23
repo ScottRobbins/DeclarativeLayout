@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeLayout'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of DeclarativeLayout.'
+  s.summary          = 'This library is a wrapper around UIKit/Autolayout that allows you to declaratively define the layout of your views'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+This library is a wrapper around UIKit/Autolayout that allows you to declaratively define the layout of your views. Redefine the layout of your views and the library will handle adding/removing subviews as well as activating and deactivating constraints as needed.
                        DESC
 
   s.homepage         = 'https://github.com/HotCocoaTouch/DeclarativeLayout'
