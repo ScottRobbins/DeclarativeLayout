@@ -107,10 +107,7 @@ That will give you a view looking like this:
 
  As an example, let's layout a view that goes from the layout above, to a new one that involves some of these things. When animating the change it looks like:
 
-<video width="400" autoplay loop>
-  <source src="/Resources/animateChange.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+![Video animating change](/Resources/animatingChange.gif)
 
 ```swift
 viewLayout.updateLayoutTo { (layout) in
