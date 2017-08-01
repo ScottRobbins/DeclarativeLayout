@@ -30,7 +30,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         
         viewLayout.updateLayoutTo { (layout) in
             
-            layout.add(self.registerOrSignInSegmentedControl) { (layout) in
+            layout.addView(self.registerOrSignInSegmentedControl) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor, constant: 84),
@@ -39,7 +39,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 ])
             }
             
-            layout.add(self.headerLabel) { (layout) in
+            layout.addView(self.headerLabel) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.registerOrSignInSegmentedControl.bottomAnchor, constant: 30),
@@ -48,7 +48,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 ])
             }
             
-            layout.addStack(stackView) { (layout) in
+            layout.addStackView(stackView) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
@@ -56,9 +56,9 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
                 ])
                 
-                layout.addArranged(self.emailContainerView) { (layout) in
+                layout.addArrangedView(self.emailContainerView) { (layout) in
                     
-                    layout.add(self.emailLabel) { (layout) in
+                    layout.addView(self.emailLabel) { (layout) in
                         
                         layout.activate([
                             layout.view.topAnchor.constraint(greaterThanOrEqualTo: layout.superview.topAnchor, constant: 20),
@@ -69,7 +69,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ])
                     }
                     
-                    layout.add(self.emailTextField) { (layout) in
+                    layout.addView(self.emailTextField) { (layout) in
                         
                         layout.activate([
                             layout.view.topAnchor.constraint(greaterThanOrEqualTo: layout.superview.topAnchor, constant: 20),
@@ -80,9 +80,9 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                 }
                 
-                layout.addArranged(self.passwordContainerView) { (layout) in
+                layout.addArrangedView(self.passwordContainerView) { (layout) in
                     
-                    layout.add(self.passwordLabel) { (layout) in
+                    layout.addView(self.passwordLabel) { (layout) in
                         
                         layout.activate([
                             layout.view.topAnchor.constraint(greaterThanOrEqualTo: layout.superview.topAnchor, constant: 20),
@@ -93,7 +93,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ])
                     }
                     
-                    layout.add(self.passwordTextField) { (layout) in
+                    layout.addView(self.passwordTextField) { (layout) in
                         
                         layout.activate([
                             layout.view.topAnchor.constraint(greaterThanOrEqualTo: layout.superview.topAnchor, constant: 20),
@@ -106,7 +106,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 }
             }
             
-            layout.add(self.submitButton) { (layout) in
+            layout.addView(self.submitButton) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
@@ -115,7 +115,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 ])
             }
             
-            layout.add(self.forgotMyPasswordButton) { (layout) in
+            layout.addView(self.forgotMyPasswordButton) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.submitButton.bottomAnchor, constant: 20),

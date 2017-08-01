@@ -49,7 +49,7 @@ class QuickStartViewController: UIViewController {
         
         viewLayout.updateLayoutTo { (layout) in
             
-            layout.add(self.headerLabel) { (layout) in
+            layout.addView(self.headerLabel) { (layout) in
                 
                 // layout.view is the headerLabel
                 // layout.superview is the VC's view
@@ -60,7 +60,7 @@ class QuickStartViewController: UIViewController {
                 ])
             }
             
-            layout.addStack(self.stackView) { (layout) in
+            layout.addStackView(self.stackView) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
@@ -68,7 +68,7 @@ class QuickStartViewController: UIViewController {
                     layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor, constant: -20),
                 ])
                 
-                layout.addArranged(self.redBox) { (layout) in
+                layout.addArrangedView(self.redBox) { (layout) in
                     
                     layout.activate([
                         layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
@@ -76,7 +76,7 @@ class QuickStartViewController: UIViewController {
                     ])
                     
                     if self.layoutType == .layout1 { // In layout1 the blue box will be inside of the red box
-                        layout.add(self.blueBox) { (layout) in
+                        layout.addView(self.blueBox) { (layout) in
                             
                             layout.activate([
                                 layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor, constant: 20),
@@ -94,21 +94,18 @@ class QuickStartViewController: UIViewController {
                 }
                 
                 if self.layoutType == .layout1 { // layout1 has a green box, layout 2 does not
-                    layout.addArranged(self.greenBox) { (layout) in
+                    layout.addArrangedView(self.greenBox) { (layout) in
                         
                         layout.activate([
                             layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
                             layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
-                        ])
-                        
-                        layout.activate([
                             layout.view.heightAnchor.constraint(equalToConstant: 300),
                         ])
                     }
                 }
                 
                 if self.layoutType == .layout2 { // In layout2 the blue box will be below the red box
-                    layout.addArranged(self.blueBox) { (layout) in
+                    layout.addArrangedView(self.blueBox) { (layout) in
                         
                         layout.activate([
                             layout.view.heightAnchor.constraint(equalToConstant: 100)

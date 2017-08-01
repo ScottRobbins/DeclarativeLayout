@@ -31,7 +31,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         viewLayout.updateLayoutTo { (layout) in
             
-            layout.add(tableView) { (layout) in
+            layout.addView(tableView) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor),
