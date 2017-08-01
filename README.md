@@ -33,21 +33,21 @@ viewLayout.updateLayoutTo { (layout) in
 `layout` is of type `UIViewLayoutComponent`. There are a few important properties and methods to know about:
 * `view: UIView`
     * Access the view for that layout. 
-* `public func add(_ subview: UIView, layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)`
+* `public func addView(_ subview: UIView, layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)`
     * This is where you will define that you would like the view passed in added as a subview
-* `public func addStack(_ stackview: UIStackView, layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)`
+* `public func addStackView(_ stackview: UIStackView, layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)`
     * Similarly to the `add` method, here you can specifically add a `UIStackView`. This will allow you to add arranged subviews in the closure.
 * `public func activate(_ constraints: @escaping @autoclosure () -> [NSLayoutConstraint])`
     * Here you can add all of your constraints as an array for that view. This will also activate the constraints. Make sure not to activate the constraints yourself, as if the views are not addded to the view hierarchy yet, which is managed by the `ViewLayout`, your app will crash.
 
-There are a couple specialized forms of `UIViewLayoutComponent`, including a `UISubviewLayoutComponent`, which will add a property to access the `superView`, a `UIStackViewSubviewLayoutComponent`, which will add an `addArranged` method.
+There are a couple specialized forms of `UIViewLayoutComponent`, including a `UISubviewLayoutComponent`, which will add a property to access the `superView`, a `UIStackViewSubviewLayoutComponent`, which will add an `addArrangedView` method.
 
 Here's an example of everything together. 
 
 ```swift
 viewLayout.updateLayoutTo { (layout) in
     
-    layout.add(self.headerLabel) { (layout) in
+    layout.addView(self.headerLabel) { (layout) in
         
         // layout.view is the headerLabel
         // layout.superview is the VC's view
@@ -58,7 +58,7 @@ viewLayout.updateLayoutTo { (layout) in
         ])
     }
     
-    layout.addStack(self.stackView) { (layout) in
+    layout.addStackView(self.stackView) { (layout) in
         
         layout.activate([
             layout.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
@@ -66,14 +66,14 @@ viewLayout.updateLayoutTo { (layout) in
             layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor, constant: -20),
         ])
         
-        layout.addArranged(self.redBox) { (layout) in
+        layout.addArrangedView(self.redBox) { (layout) in
             
             layout.activate([
                 layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
                 layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
             ])
             
-            layout.add(self.blueBox) { (layout) in
+            layout.addView(self.blueBox) { (layout) in
                 
                 layout.activate([
                     layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor, constant: 20),
@@ -85,7 +85,7 @@ viewLayout.updateLayoutTo { (layout) in
             }
         }
         
-        layout.addArranged(self.greenBox) { (layout) in
+        layout.addArrangedView(self.greenBox) { (layout) in
             
             layout.activate([
                 layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
@@ -112,7 +112,7 @@ That will give you a view looking like this:
 ```swift
 viewLayout.updateLayoutTo { (layout) in
     
-    layout.add(self.headerLabel) { (layout) in
+    layout.addView(self.headerLabel) { (layout) in
         
         // layout.view is the headerLabel
         // layout.superview is the VC's view
@@ -123,7 +123,7 @@ viewLayout.updateLayoutTo { (layout) in
         ])
     }
     
-    layout.addStack(self.stackView) { (layout) in
+    layout.addStackView(self.stackView) { (layout) in
         
         layout.activate([
             layout.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
@@ -131,7 +131,7 @@ viewLayout.updateLayoutTo { (layout) in
             layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor, constant: -20),
         ])
         
-        layout.addArranged(self.redBox) { (layout) in
+        layout.addArrangedView(self.redBox) { (layout) in
             
             layout.activate([
                 layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
@@ -139,7 +139,7 @@ viewLayout.updateLayoutTo { (layout) in
             ])
             
             if self.layoutType == .layout1 { // In layout1 the blue box will be inside of the red box
-                layout.add(self.blueBox) { (layout) in
+                layout.addView(self.blueBox) { (layout) in
                     
                     layout.activate([
                         layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor, constant: 20),
@@ -157,21 +157,18 @@ viewLayout.updateLayoutTo { (layout) in
         }
         
         if self.layoutType == .layout1 { // layout1 has a green box, layout 2 does not
-            layout.addArranged(self.greenBox) { (layout) in
+            layout.addArrangedView(self.greenBox) { (layout) in
                 
                 layout.activate([
                     layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
                     layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
-                ])
-                
-                layout.activate([
                     layout.view.heightAnchor.constraint(equalToConstant: 300),
                 ])
             }
         }
         
         if self.layoutType == .layout2 { // In layout2 the blue box will be below the red box
-            layout.addArranged(self.blueBox) { (layout) in
+            layout.addArrangedView(self.blueBox) { (layout) in
                 
                 layout.activate([
                     layout.view.heightAnchor.constraint(equalToConstant: 100)
