@@ -4,19 +4,19 @@ public class UIStackViewSubviewLayoutComponent: SubviewLayoutComponent<UIStackVi
     
     private(set) var arrangedSubviews = [UIView]()
     
-    public func addArranged(_ subview: UIView,
+    public func addArrangedView(_ subview: UIView,
                             layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)
     {
         arrangedSubviews.append(subview)
         
-        add(subview, layoutClosure: layoutClosure)
+        addView(subview, layoutClosure: layoutClosure)
     }
     
-    public func addArrangedStack(_ subview: UIStackView,
+    public func addArrangedStackView(_ subview: UIStackView,
                                  layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)
     {
         arrangedSubviews.append(subview)
 
-        addStack(subview, layoutClosure: layoutClosure)
+        addStackView(subview, layoutClosure: layoutClosure)
     }
 }

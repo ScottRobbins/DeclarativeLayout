@@ -22,7 +22,7 @@ public class ViewLayoutComponent<T: UIView> {
         self.view = view
     }
     
-    public func add(_ subview: UIView,
+    public func addView(_ subview: UIView,
                     layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ public class ViewLayoutComponent<T: UIView> {
         layoutClosure?(subLayoutComponent)
     }
     
-    public func addStack(_ stackview: UIStackView,
+    public func addStackView(_ stackview: UIStackView,
                          layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)
     {
         stackview.translatesAutoresizingMaskIntoConstraints = false
