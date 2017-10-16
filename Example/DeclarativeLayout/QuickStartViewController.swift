@@ -5,8 +5,8 @@ class QuickStartViewController: UIViewController {
     // MARK: - Properties
     
     private var viewLayout: ViewLayout!
-    
-    private let headerLabel = UILabel()
+    // MARK: - This is a test
+    private let headerLabel = UILabel() // yo dawg this
     private let stackView = UIStackView()
     private let redBox = UIView()
     private let blueBox = UIView()
