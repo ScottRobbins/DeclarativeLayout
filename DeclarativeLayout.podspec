@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeLayout'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'This library is a wrapper around UIKit/Autolayout that allows you to declaratively define the layout of your views'
 
   s.description      = <<-DESC
