@@ -3,7 +3,7 @@ import DeclarativeLayout
 
 class RegistrationExampleWithFrameworkViewController: UIViewController {
     
-    private var viewLayout: ViewLayout!
+    private lazy var viewLayout = ViewLayout(view: view)
     private let registerOrSignInSegmentedControl = UISegmentedControl()
     private let headerLabel = UILabel()
     private let stackView = UIStackView()
@@ -21,7 +21,6 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         
         title = "With Framework"
         
-        viewLayout = ViewLayout(view: view)
         layoutAllViews()
         configureAllViews()
     }

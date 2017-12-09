@@ -4,7 +4,7 @@ class QuickStartViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var viewLayout: ViewLayout!
+    private lazy var viewLayout = ViewLayout(view: view)
     // MARK: - This is a test
     private let headerLabel = UILabel() // yo dawg this
     private let stackView = UIStackView()
@@ -26,7 +26,6 @@ class QuickStartViewController: UIViewController {
         
         title = "Quick Start"
         
-        viewLayout = ViewLayout(view: view)
         layoutAllViews()
         configureAllViews()
     }

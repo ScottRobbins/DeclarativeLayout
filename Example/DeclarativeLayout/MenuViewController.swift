@@ -14,12 +14,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private let tableView = UITableView()
-    private var viewLayout: ViewLayout!
+    private lazy var viewLayout = ViewLayout(view: view)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewLayout = ViewLayout(view: view)
         title = "Menu"
         tableView.rowHeight = UITableViewAutomaticDimension
         layoutAllViews()
