@@ -1,14 +1,14 @@
-public class ViewLayout {
+public class ViewLayout<T: UIView> {
     
-    private let view: UIView
-    private var currentLayoutComponent: UIViewLayoutComponent
+    private let view: T
+    private var currentLayoutComponent: UIViewLayoutComponent<T>
     
-    public init(view: UIView) {
+    public init(view: T) {
         self.view = view
         self.currentLayoutComponent = UIViewLayoutComponent(view: view)
     }
     
-    public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent) -> ()) {
+    public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent<T>) -> ()) {
         let layoutComponent = UIViewLayoutComponent(view: view)
         layoutClosure(layoutComponent)
         
@@ -50,13 +50,13 @@ public class ViewLayout {
         }
     }
     
-    private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent) {
+    private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent<T>) {
         currentLayoutComponent.allSubviews()
             .filter { !layoutComponent.allSubviews().contains($0) }
             .forEach { $0.removeFromSuperview() }
     }
     
-    private func updateConstraints(with layoutComponent: UIViewLayoutComponent) {
+    private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
         let currentConstraints = currentLayoutComponent.allConstraints()
         
