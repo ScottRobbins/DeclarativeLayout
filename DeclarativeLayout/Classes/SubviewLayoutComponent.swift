@@ -1,11 +1,11 @@
 import UIKit
 
-public class SubviewLayoutComponent<T: UIView>: ViewLayoutComponent<T> {
+public class SubviewLayoutComponent<T: UIView, R: UIView>: ViewLayoutComponent<T> {
     
-    public let superview: UIView
+    public let superview: R
     
     init(view: T,
-         superview: UIView)
+         superview: R)
     {
         self.superview = superview
         

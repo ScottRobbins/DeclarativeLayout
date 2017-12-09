@@ -1,11 +1,27 @@
 import UIKit
 
-public class ViewLayoutComponent<T: UIView> {
-    
-    enum LayoutComponentType {
-        case uiview(layout: UIViewSubviewLayoutComponent)
-        case uistackview(layout: UIStackViewSubviewLayoutComponent)
-    }
+enum LayoutComponentType {
+    case uiview(layout: UIViewLayoutComponentType)
+    case uistackview(layout: UIStackViewLayoutComponentType)
+}
+
+protocol ViewLayoutComponentType {
+    func allSubviews() -> [UIView]
+    func allConstraints() -> [NSLayoutConstraint]
+    var subviews: [UIView] { get }
+    var sublayoutComponents: [LayoutComponentType] { get }
+}
+
+protocol UIViewLayoutComponentType: ViewLayoutComponentType {
+    var downcastedView: UIView { get }
+}
+
+protocol UIStackViewLayoutComponentType: ViewLayoutComponentType {
+    var downcastedView: UIStackView { get }
+    var arrangedSubviews: [UIView] { get }
+}
+
+public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     
     enum ConstraintContainer {
         case closures(closures: [() -> [NSLayoutConstraint]])
@@ -13,7 +29,6 @@ public class ViewLayoutComponent<T: UIView> {
     }
     
     public let view: T
-    
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
     private var constraintContainer = ConstraintContainer.closures(closures: [() -> [NSLayoutConstraint]]())
@@ -22,8 +37,8 @@ public class ViewLayoutComponent<T: UIView> {
         self.view = view
     }
     
-    public func addView(_ subview: UIView,
-                    layoutClosure: ((UIViewSubviewLayoutComponent) -> Void)?)
+    public func addView<R>(_ subview: R,
+                    layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)?)
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
@@ -35,8 +50,8 @@ public class ViewLayoutComponent<T: UIView> {
         layoutClosure?(subLayoutComponent)
     }
     
-    public func addStackView(_ stackview: UIStackView,
-                         layoutClosure: ((UIStackViewSubviewLayoutComponent) -> Void)?)
+    public func addStackView<R>(_ stackview: R,
+                         layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)?)
     {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: stackview,

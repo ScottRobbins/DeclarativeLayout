@@ -19,12 +19,23 @@ public class ViewLayout {
         currentLayoutComponent = layoutComponent
     }
     
-    private func addSubviews<T>(with layoutComponent: ViewLayoutComponent<T>) {
-        
+    private func addSubviews(with layoutComponent: UIViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
-            layoutComponent.view.insertSubview(subview, at: i)
+            layoutComponent.downcastedView.insertSubview(subview, at: i)
         }
         
+        addSubviewsForSublayoutComponents(with: layoutComponent)
+    }
+    
+    private func addSubviews(with layoutComponent: UIStackViewLayoutComponentType) {
+        for (i, subview) in layoutComponent.subviews.enumerated() {
+            layoutComponent.downcastedView.insertSubview(subview, at: i)
+        }
+        
+        addSubviewsForSublayoutComponents(with: layoutComponent)
+    }
+    
+    private func addSubviewsForSublayoutComponents(with layoutComponent: ViewLayoutComponentType) {
         for sublayoutComponent in layoutComponent.sublayoutComponents {
             switch sublayoutComponent {
             case .uiview(let layoutComponent):
@@ -33,7 +44,7 @@ public class ViewLayout {
                 addSubviews(with: layoutComponent)
                 
                 for (i, subview) in layoutComponent.arrangedSubviews.enumerated() {
-                    layoutComponent.view.insertArrangedSubview(subview, at: i)
+                    layoutComponent.downcastedView.insertArrangedSubview(subview, at: i)
                 }
             }
         }
