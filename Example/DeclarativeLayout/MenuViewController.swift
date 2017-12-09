@@ -25,6 +25,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         layoutAllViews()
         tableView.delegate = self
         tableView.dataSource = self
+        view.backgroundColor = .white 
     }
     
     private func layoutAllViews() {

@@ -125,7 +125,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         }
     }
     
-    private func configureAllViews() {        
+    private func configureAllViews() {
+        view.backgroundColor = .white
         registerOrSignInSegmentedControl.insertSegment(withTitle: "Register", at: 0, animated: false)
         registerOrSignInSegmentedControl.insertSegment(withTitle: "Sign In", at: 1, animated: false)
         

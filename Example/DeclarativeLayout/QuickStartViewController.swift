@@ -119,6 +119,7 @@ class QuickStartViewController: UIViewController {
     // MARK: - Configuration
     
     private func configureAllViews() {
+        view.backgroundColor = .white
         headerLabel.font = .systemFont(ofSize: 25)
         headerLabel.numberOfLines = 0
         headerLabel.lineBreakMode = .byWordWrapping

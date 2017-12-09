@@ -12,10 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = UINavigationController(rootViewController: MenuViewController())
         window?.rootViewController = navController
+        window?.backgroundColor = .white
         window?.makeKeyAndVisible()
-        
-        UIView.appearance().backgroundColor = .white
-        
+                
         return true
     }
 
