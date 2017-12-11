@@ -7,7 +7,7 @@ enum LayoutComponentType {
 
 protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
-    func allConstraints() -> [NSLayoutConstraint]
+    func allConstraints() -> [LayoutConstraint]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
 }
@@ -25,7 +25,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     
     enum ConstraintContainer {
         case closures(closures: [() -> [NSLayoutConstraint]])
-        case constraints(constraints: [NSLayoutConstraint])
+        case constraints(constraints: [LayoutConstraint])
     }
     
     public let view: T
@@ -79,18 +79,18 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         }
     }
     
-    func allConstraints() -> [NSLayoutConstraint] {
+    func allConstraints() -> [LayoutConstraint] {
         
-        let initialConstraints: [NSLayoutConstraint]
+        let initialConstraints: [LayoutConstraint]
         switch constraintContainer {
         case .closures(let closures):
-            initialConstraints = closures.flatMap { $0() }
+            initialConstraints = closures.flatMap { $0() }.map(LayoutConstraint.init)
             constraintContainer = .constraints(constraints: initialConstraints)
         case .constraints(let constraints):
             initialConstraints = constraints
         }
         
-        return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [NSLayoutConstraint] in
+        return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [LayoutConstraint] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
                 return combinedConstraints + layoutComponent.allConstraints()

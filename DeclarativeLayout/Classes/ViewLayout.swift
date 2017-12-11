@@ -75,21 +75,21 @@ public class ViewLayout<T: UIView> {
                     constraintsToActivate.remove(at: index)
                 }
                 
-                if matchingConstraint.constant != constraint.constant {
-                    matchingConstraint.constant = constraint.constant
+                if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
+                    matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
                 }
                 
-                if matchingConstraint.priority != constraint.priority {
-                    matchingConstraint.priority = constraint.priority
+                if matchingConstraint.wrappedConstraint.priority != constraint.wrappedConstraint.priority {
+                    matchingConstraint.wrappedConstraint.priority = constraint.wrappedConstraint.priority
                 }
                 
-                if matchingConstraint.identifier != constraint.identifier {
-                    matchingConstraint.identifier = constraint.identifier
+                if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
+                    matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
                 }
             }
         }
         
-        NSLayoutConstraint.deactivate(constraintsToRemove)
-        NSLayoutConstraint.activate(constraintsToActivate)
+        NSLayoutConstraint.deactivate(constraintsToRemove.map() { $0.wrappedConstraint })
+        NSLayoutConstraint.activate(constraintsToActivate.map() { $0.wrappedConstraint })
     }
 }
