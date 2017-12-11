@@ -59,14 +59,14 @@ public class ViewLayout<T: UIView> {
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
         let currentConstraints = currentLayoutComponent.allConstraints()
+        let currentConstraintDictionary = currentConstraints.constraintDictionary
         
         var constraintsToRemove = currentConstraints
         var constraintsToActivate = newConstraints
         
         for constraint in newConstraints {
-            let matchingConstraints = currentConstraints.filter { $0 == constraint }
-            
-            for matchingConstraint in matchingConstraints {
+            if let matchingConstraint = currentConstraintDictionary[constraint] {
+                
                 if let index = constraintsToRemove.index(of: matchingConstraint) {
                     constraintsToRemove.remove(at: index)
                 }
@@ -91,5 +91,17 @@ public class ViewLayout<T: UIView> {
         
         NSLayoutConstraint.deactivate(constraintsToRemove.map() { $0.wrappedConstraint })
         NSLayoutConstraint.activate(constraintsToActivate.map() { $0.wrappedConstraint })
+    }
+}
+
+extension Array where Element == LayoutConstraint {
+    
+    /// This just maps all of the constraints as keys with themselves as the values. Just makes it a faster operation to find matches of new constraints later on
+    var constraintDictionary: [LayoutConstraint: LayoutConstraint] {
+        return reduce([:]) { (dictionary, constraint) -> [LayoutConstraint: LayoutConstraint] in
+            var mutableDictionary = dictionary
+            mutableDictionary[constraint] = constraint
+            return mutableDictionary
+        }
     }
 }
