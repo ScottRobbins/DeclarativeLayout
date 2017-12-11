@@ -47,7 +47,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 ])
             }
             
-            component.addStackView(stackView) { (component) in
+            component.addStackView(self.stackView) { (component) in
                 
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
