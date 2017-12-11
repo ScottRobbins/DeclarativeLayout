@@ -58,13 +58,13 @@ public class ViewLayout<T: UIView> {
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
-        let currentConstraints = currentLayoutComponent.allConstraints()
+        let currentConstraints = HashSet<LayoutConstraint>(currentLayoutComponent.allConstraints())
         
-        var matchedConstraints = HashSet<LayoutConstraint>()
-        
-        for constraint in newConstraints.allElements() {
+        var constraintsToActivate = [NSLayoutConstraint]()
+        var currentConstraintsToRemove = currentConstraints
+        for constraint in newConstraints {
             if let matchingConstraint = currentConstraints.get(constraint) {
-                matchedConstraints.insert(matchingConstraint)
+                currentConstraintsToRemove.remove(matchingConstraint)
                 
                 if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
                     matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
@@ -83,15 +83,12 @@ public class ViewLayout<T: UIView> {
                                                 it will deactivate it when not needed so there aren’t duplicate constraints laying around
                                             */
                 constraint.wrappedConstraint.isActive = false
+            } else {
+                constraintsToActivate.append(constraint.wrappedConstraint)
             }
         }
         
-        let constraintsToRemove = currentConstraints
-            .difference(matchedConstraints)
-            .allElements()
-            .map { $0.wrappedConstraint }
-        let constraintsToActivate = newConstraints
-            .difference(matchedConstraints)
+        let constraintsToRemove = currentConstraintsToRemove
             .allElements()
             .map { $0.wrappedConstraint }
         NSLayoutConstraint.deactivate(constraintsToRemove)
