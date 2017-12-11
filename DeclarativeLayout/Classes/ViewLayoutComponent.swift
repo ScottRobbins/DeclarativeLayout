@@ -7,7 +7,7 @@ enum LayoutComponentType {
 
 protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
-    func allConstraints() -> [LayoutConstraint]
+    func allConstraints() -> HashSet<LayoutConstraint>
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
 }
@@ -25,7 +25,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     
     enum ConstraintContainer {
         case closures(closures: [() -> [NSLayoutConstraint]])
-        case constraints(constraints: [LayoutConstraint])
+        case constraints(constraints: HashSet<LayoutConstraint>)
     }
     
     public let view: T
@@ -79,23 +79,23 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         }
     }
     
-    func allConstraints() -> [LayoutConstraint] {
+    func allConstraints() -> HashSet<LayoutConstraint> {
         
-        let initialConstraints: [LayoutConstraint]
+        let initialConstraints: HashSet<LayoutConstraint>
         switch constraintContainer {
         case .closures(let closures):
-            initialConstraints = closures.flatMap { $0() }.map(LayoutConstraint.init)
+            initialConstraints = HashSet(closures.flatMap { $0() }.map(LayoutConstraint.init))
             constraintContainer = .constraints(constraints: initialConstraints)
         case .constraints(let constraints):
             initialConstraints = constraints
         }
         
-        return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [LayoutConstraint] in
+        return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> HashSet<LayoutConstraint> in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allConstraints()
+                return combinedConstraints.union(layoutComponent.allConstraints())
             case .uiview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allConstraints()
+                return combinedConstraints.union(layoutComponent.allConstraints())
             }
         }
     }

@@ -59,21 +59,12 @@ public class ViewLayout<T: UIView> {
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
         let currentConstraints = currentLayoutComponent.allConstraints()
-        let currentConstraintDictionary = currentConstraints.constraintDictionary
         
-        var constraintsToRemove = currentConstraints
-        var constraintsToActivate = newConstraints
+        var matchedConstraints = HashSet<LayoutConstraint>()
         
-        for constraint in newConstraints {
-            if let matchingConstraint = currentConstraintDictionary[constraint] {
-                
-                if let index = constraintsToRemove.index(of: matchingConstraint) {
-                    constraintsToRemove.remove(at: index)
-                }
-                
-                if let index = constraintsToActivate.index(of: constraint) {
-                    constraintsToActivate.remove(at: index)
-                }
+        for constraint in newConstraints.allElements() {
+            if let matchingConstraint = currentConstraints.get(constraint) {
+                matchedConstraints.insert(matchingConstraint)
                 
                 if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
                     matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
@@ -89,19 +80,15 @@ public class ViewLayout<T: UIView> {
             }
         }
         
-        NSLayoutConstraint.deactivate(constraintsToRemove.map() { $0.wrappedConstraint })
-        NSLayoutConstraint.activate(constraintsToActivate.map() { $0.wrappedConstraint })
-    }
-}
-
-extension Array where Element == LayoutConstraint {
-    
-    /// This just maps all of the constraints as keys with themselves as the values. Just makes it a faster operation to find matches of new constraints later on
-    var constraintDictionary: [LayoutConstraint: LayoutConstraint] {
-        return reduce([:]) { (dictionary, constraint) -> [LayoutConstraint: LayoutConstraint] in
-            var mutableDictionary = dictionary
-            mutableDictionary[constraint] = constraint
-            return mutableDictionary
-        }
+        let constraintsToRemove = currentConstraints
+            .difference(matchedConstraints)
+            .allElements()
+            .map { $0.wrappedConstraint }
+        let constraintsToActivate = newConstraints
+            .difference(matchedConstraints)
+            .allElements()
+            .map { $0.wrappedConstraint }
+        NSLayoutConstraint.deactivate(constraintsToRemove)
+        NSLayoutConstraint.activate(constraintsToActivate)
     }
 }
