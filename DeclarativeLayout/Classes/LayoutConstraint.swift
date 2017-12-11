@@ -9,19 +9,46 @@ class LayoutConstraint {
 
 extension LayoutConstraint: Equatable {
     static func ==(lhs: LayoutConstraint, rhs: LayoutConstraint) -> Bool {
-        guard let lhsFirstItem = lhs.wrappedConstraint.firstItem as? UIView,
-            let rhsFirstItem = rhs.wrappedConstraint.firstItem as? UIView,
-            let lhsSecondItem = lhs.wrappedConstraint.secondItem as? UIView,
-            let rhsSecondItem = rhs.wrappedConstraint.secondItem as? UIView else
-        {
+        
+        let lhsConstraint = lhs.wrappedConstraint
+        let rhsConstraint = rhs.wrappedConstraint
+        
+        // I know the NSLayoutConstraint API says the first Item can be nil, but I don't think that's true. I think it'll crash at runtime anyway if that's true
+        // You can constrain to either UIViews or UILayoutGuides
+        if let lhsFirstItem = lhsConstraint.firstItem as? UIView,
+            let rhsFirstItem = rhsConstraint.firstItem as? UIView {
+            guard lhsFirstItem == rhsFirstItem else {
+                return false
+            }
+        } else if let lhsFirstItem = lhsConstraint.firstItem as? UILayoutGuide,
+            let rhsFirstItem = rhsConstraint.firstItem as? UILayoutGuide {
+            guard lhsFirstItem == rhsFirstItem else {
+                return false
+            }
+        } else {
             return false
         }
         
-        return lhsFirstItem == rhsFirstItem
-            && lhs.wrappedConstraint.firstAttribute == rhs.wrappedConstraint.firstAttribute
-            && lhsSecondItem == rhsSecondItem
-            && lhs.wrappedConstraint.secondAttribute == rhs.wrappedConstraint.secondAttribute
-            && lhs.wrappedConstraint.relation == rhs.wrappedConstraint.relation
-            && lhs.wrappedConstraint.multiplier == rhs.wrappedConstraint.multiplier
+        // If there is a second item, compare them
+        if let lhsSecondItem = lhsConstraint.secondItem as? UIView {
+            guard let rhsSecondItem = rhsConstraint.secondItem as? UIView,
+                lhsSecondItem == rhsSecondItem else
+            {
+                return false
+            }
+        } else if let lhsSecondItem = lhsConstraint.secondItem as? UILayoutGuide {
+            guard let rhsSecondItem = rhsConstraint.secondItem as? UILayoutGuide,
+                lhsSecondItem == rhsSecondItem else
+            {
+                return false
+            }
+        } else if let _ = rhsConstraint.secondItem { // If we got here, it means that the lhs did not have a second item but the rhs did or the lhs had an invalid item
+            return false
+        }
+        
+        return lhsConstraint.firstAttribute == rhsConstraint.firstAttribute
+            && lhsConstraint.secondAttribute == rhsConstraint.secondAttribute
+            && lhsConstraint.relation == rhsConstraint.relation
+            && lhsConstraint.multiplier == rhsConstraint.multiplier
     }
 }
