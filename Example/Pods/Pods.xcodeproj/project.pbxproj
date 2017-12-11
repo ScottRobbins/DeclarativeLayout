@@ -17,6 +17,7 @@
 		461196001EAEF48A0021C497 /* UIViewSubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461195FA1EAEF48A0021C497 /* UIViewSubviewLayoutComponent.swift */; };
 		461196011EAEF48A0021C497 /* ViewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461195FB1EAEF48A0021C497 /* ViewLayoutComponent.swift */; };
 		4636218A1F0C2E4B00AB51F6 /* ViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463621891F0C2E4B00AB51F6 /* ViewLayout.swift */; };
+		46CEEA1B1FDE42B7006DD4E1 /* HashSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CEEA1A1FDE42B7006DD4E1 /* HashSet.swift */; };
 		46F1F0C91FDE171D00054D0D /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1F0C81FDE171D00054D0D /* LayoutConstraint.swift */; };
 		63515C502148ACE508FA6B223AE3EBA2 /* DeclarativeLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B5D54806F4841FB58371215D8AD93C43 /* DeclarativeLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9479C8BA893DAD064804CD65FAA51D80 /* Pods-DeclarativeLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F0BE1FB1491146BAE8F3055268D6A7DB /* Pods-DeclarativeLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +54,7 @@
 		461195FA1EAEF48A0021C497 /* UIViewSubviewLayoutComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewSubviewLayoutComponent.swift; sourceTree = "<group>"; };
 		461195FB1EAEF48A0021C497 /* ViewLayoutComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayoutComponent.swift; sourceTree = "<group>"; };
 		463621891F0C2E4B00AB51F6 /* ViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayout.swift; sourceTree = "<group>"; };
+		46CEEA1A1FDE42B7006DD4E1 /* HashSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSet.swift; sourceTree = "<group>"; };
 		46F1F0C81FDE171D00054D0D /* LayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
 		4D5B289AB83C6F3AC89D92B2DADDB699 /* Pods-DeclarativeLayout_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DeclarativeLayout_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		547D9AD232396F3134DE3B02C1C5698B /* Pods-DeclarativeLayout_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DeclarativeLayout_Tests-frameworks.sh"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				461195FB1EAEF48A0021C497 /* ViewLayoutComponent.swift */,
 				46F1F0C81FDE171D00054D0D /* LayoutConstraint.swift */,
 				463621891F0C2E4B00AB51F6 /* ViewLayout.swift */,
+				46CEEA1A1FDE42B7006DD4E1 /* HashSet.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				46F1F0C91FDE171D00054D0D /* LayoutConstraint.swift in Sources */,
 				461195FC1EAEF48A0021C497 /* SubviewLayoutComponent.swift in Sources */,
 				461196001EAEF48A0021C497 /* UIViewSubviewLayoutComponent.swift in Sources */,
+				46CEEA1B1FDE42B7006DD4E1 /* HashSet.swift in Sources */,
 				461195FD1EAEF48A0021C497 /* UIStackViewSubviewLayoutComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
