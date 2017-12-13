@@ -51,8 +51,9 @@ public class ViewLayout<T: UIView> {
     }
     
     private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent<T>) {
+        let layoutComponentSubviews = HashSet(layoutComponent.allSubviews())
         currentLayoutComponent.allSubviews()
-            .filter { !layoutComponent.allSubviews().contains($0) }
+            .filter { !layoutComponentSubviews.contains($0) }
             .forEach { $0.removeFromSuperview() }
     }
     
