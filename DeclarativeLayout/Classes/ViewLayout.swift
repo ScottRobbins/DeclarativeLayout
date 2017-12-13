@@ -59,7 +59,7 @@ public class ViewLayout<T: UIView> {
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
-        let currentConstraints = HashSet<LayoutConstraint>(currentLayoutComponent.allConstraints())
+        let currentConstraints = HashSet(currentLayoutComponent.allConstraints())
         
         var constraintsToActivate = [NSLayoutConstraint]()
         var currentConstraintsToRemove = currentConstraints
