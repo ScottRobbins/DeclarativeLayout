@@ -21,15 +21,22 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         
         title = "With Framework"
         
-        layoutAllViews()
-        configureAllViews()
+        layoutAndConfigureAllViews()
     }
     
-    private func layoutAllViews() {
+    private func layoutAndConfigureAllViews() {
         
         viewLayout.updateLayoutTo { (component) in
             
+            component.view.backgroundColor = .white
+            
             component.addView(self.registerOrSignInSegmentedControl) { (component) in
+                
+                component.view.insertSegment(withTitle: "Register", at: 0, animated: false)
+                component.view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
+                if component.view.selectedSegmentIndex == -1 {
+                    component.view.selectedSegmentIndex = 0
+                }
                 
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 84),
@@ -40,6 +47,13 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             component.addView(self.headerLabel) { (component) in
                 
+                component.view.font = UIFont.boldSystemFont(ofSize: 18)
+                if self.registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
+                    component.view.text = "Register"
+                } else {
+                    component.view.text = "Sign In"
+                }
+                
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: self.registerOrSignInSegmentedControl.bottomAnchor, constant: 30),
                     component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
@@ -48,6 +62,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             }
             
             component.addStackView(self.stackView) { (component) in
+                
+                component.view.axis = .vertical
                 
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
@@ -59,6 +75,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     
                     component.addView(self.emailLabel) { (component) in
                         
+                        component.view.text = "Email"
+                        
                         component.activate([
                             component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
                             component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
@@ -69,6 +87,15 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                     
                     component.addView(self.emailTextField) { (component) in
+                        
+                        component.view.placeholder = "example@example.com"
+                        if #available(iOS 10.0, *) {
+                            component.view.textContentType = .emailAddress
+                        }
+                        component.view.layer.borderColor = UIColor.blue.cgColor
+                        component.view.layer.borderWidth = 1
+                        component.view.textAlignment = .center
+                        component.view.isUserInteractionEnabled = false
                         
                         component.activate([
                             component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
@@ -83,6 +110,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     
                     component.addView(self.passwordLabel) { (component) in
                         
+                        component.view.text = "Password"
+                        
                         component.activate([
                             component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
                             component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
@@ -93,6 +122,13 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                     
                     component.addView(self.passwordTextField) { (component) in
+                        
+                        component.view.placeholder = "secure password here"
+                        component.view.isSecureTextEntry = true
+                        component.view.layer.borderColor = UIColor.blue.cgColor
+                        component.view.layer.borderWidth = 1
+                        component.view.textAlignment = .center
+                        component.view.isUserInteractionEnabled = false
                         
                         component.activate([
                             component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
@@ -107,6 +143,13 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             component.addView(self.submitButton) { (component) in
                 
+                component.view.setTitle("Submit", for: .normal)
+                component.view.backgroundColor = UIColor.blue
+                component.view.setTitleColor(.white, for: .normal)
+                component.view.layer.cornerRadius = 10
+                component.view.clipsToBounds = true
+                component.view.titleLabel?.textAlignment = .center
+                
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
@@ -116,57 +159,14 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             component.addView(self.forgotMyPasswordButton) { (component) in
                 
+                component.view.setTitle("forgot your password?", for: .normal)
+                component.view.setTitleColor(.blue, for: .normal)
+                
                 component.activate([
                     component.view.topAnchor.constraint(equalTo: self.submitButton.bottomAnchor, constant: 20),
                     component.view.centerXAnchor.constraint(equalTo: component.superview.centerXAnchor),
                 ])
             }
         }
-    }
-    
-    private func configureAllViews() {
-        view.backgroundColor = .white
-        registerOrSignInSegmentedControl.insertSegment(withTitle: "Register", at: 0, animated: false)
-        registerOrSignInSegmentedControl.insertSegment(withTitle: "Sign In", at: 1, animated: false)
-        
-        if registerOrSignInSegmentedControl.selectedSegmentIndex == -1 {
-            registerOrSignInSegmentedControl.selectedSegmentIndex = 0
-        }
-        
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        if registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
-            headerLabel.text = "Register"
-        } else {
-            headerLabel.text = "Sign In"
-        }
-        
-        stackView.axis = .vertical
-        emailLabel.text = "Email"
-        emailTextField.placeholder = "example@example.com"
-        if #available(iOS 10.0, *) {
-            emailTextField.textContentType = .emailAddress
-        }
-        emailTextField.layer.borderColor = UIColor.blue.cgColor
-        emailTextField.layer.borderWidth = 1
-        emailTextField.textAlignment = .center
-        emailTextField.isUserInteractionEnabled = false
-        
-        passwordLabel.text = "Password"
-        passwordTextField.placeholder = "secure password here"
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.layer.borderColor = UIColor.blue.cgColor
-        passwordTextField.layer.borderWidth = 1
-        passwordTextField.textAlignment = .center
-        passwordTextField.isUserInteractionEnabled = false
-        
-        submitButton.setTitle("Submit", for: .normal)
-        submitButton.backgroundColor = UIColor.blue
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.layer.cornerRadius = 10
-        submitButton.clipsToBounds = true
-        submitButton.titleLabel?.textAlignment = .center
-        
-        forgotMyPasswordButton.setTitle("forgot your password?", for: .normal)
-        forgotMyPasswordButton.setTitleColor(.blue, for: .normal)
     }
 }

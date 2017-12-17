@@ -20,24 +20,25 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         title = "Menu"
-        tableView.rowHeight = UITableViewAutomaticDimension
-        layoutAllViews()
-        tableView.delegate = self
-        tableView.dataSource = self
-        view.backgroundColor = .white 
+        
+        layoutAndConfigureAllViews()
     }
     
-    private func layoutAllViews() {
+    private func layoutAndConfigureAllViews() {
         
-        viewLayout.updateLayoutTo { (layout) in
+        viewLayout.updateLayoutTo { (component) in
             
-            layout.addView(tableView) { (layout) in
+            component.view.backgroundColor = .white
+            component.addView(tableView) { (component) in
                 
-                layout.activate([
-                    layout.view.topAnchor.constraint(equalTo: layout.superview.topAnchor),
-                    layout.view.leadingAnchor.constraint(equalTo: layout.superview.leadingAnchor),
-                    layout.view.trailingAnchor.constraint(equalTo: layout.superview.trailingAnchor),
-                    layout.view.bottomAnchor.constraint(equalTo: layout.superview.bottomAnchor),
+                component.view.rowHeight = UITableViewAutomaticDimension
+                component.view.delegate = self
+                component.view.dataSource = self
+                component.activate([
+                    component.view.topAnchor.constraint(equalTo: component.superview.topAnchor),
+                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
+                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+                    component.view.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor),
                 ])
             }
         }
