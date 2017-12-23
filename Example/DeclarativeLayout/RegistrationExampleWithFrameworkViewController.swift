@@ -39,7 +39,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 }
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 84),
+                    component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 35),
                     component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
                     component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
                 ])

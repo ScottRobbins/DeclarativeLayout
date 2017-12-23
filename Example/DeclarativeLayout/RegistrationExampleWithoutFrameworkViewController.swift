@@ -63,7 +63,7 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
     }
     
     private func layoutRegisterOrSignInSegmentedControl() {
-        registerOrSignInSegmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 84).isActive = true
+        registerOrSignInSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 35).isActive = true
         registerOrSignInSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         registerOrSignInSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }

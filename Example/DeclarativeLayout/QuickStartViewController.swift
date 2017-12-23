@@ -55,7 +55,7 @@ class QuickStartViewController: UIViewController {
                 
                 // component.superview is the VC's view
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 75),
+                    component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 35),
                     component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
                     component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
                 ])
