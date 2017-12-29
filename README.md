@@ -1,4 +1,5 @@
-# DeclarativeLayout
+
+![Declarative Layout Banner](/Resources/githubBanner.png)
 
 [![Version](https://img.shields.io/cocoapods/v/DeclarativeLayout.svg?style=flat)](http://cocoapods.org/pods/DeclarativeLayout)
 [![License](https://img.shields.io/cocoapods/l/DeclarativeLayout.svg?style=flat)](http://cocoapods.org/pods/DeclarativeLayout)
