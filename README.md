@@ -57,7 +57,7 @@ viewLayout.updateLayoutTo { (component) in
         // component.view is the headerLabel
         // component.superview is the VC's view
         component.activate([
-            component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 75),
+            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 10),
             component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
             component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
         ])
@@ -122,7 +122,7 @@ viewLayout.updateLayoutTo { (component) in
         // component.view is the headerLabel
         // component.superview is the VC's view
         component.activate([
-            component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 75),
+            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 10),
             component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
             component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
         ])
