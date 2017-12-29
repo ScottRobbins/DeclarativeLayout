@@ -28,6 +28,9 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         case constraints(constraints: [LayoutConstraint])
     }
     
+    /**
+     The component's view. 
+     */
     public let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
@@ -37,8 +40,15 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         self.view = view
     }
     
+    /**
+     Add a subview to the component's view.
+     
+     - parameters:
+        - subview: The view you would like to add as a subview to the component's view.
+        - layoutClosure: A closure that will define the layout component for the subview.
+     */
     public func addView<R>(_ subview: R,
-                    layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)?)
+                           layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)?)
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
@@ -50,24 +60,35 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         layoutClosure?(subLayoutComponent)
     }
     
-    public func addStackView<R>(_ stackview: R,
-                         layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)?)
+    /**
+     Add a subview, that is a stack view, to the component's view.
+     
+     - parameters:
+        - subview: The view you would like to add as a subview to the component's view.
+        - layoutClosure: A closure that will define the layout component for the subview.
+     
+     This will allow you to, in the layout closure, add arranged views for the passed in stack view.
+     */
+    public func addStackView<R>(_ subview: R,
+                                layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)?)
     {
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: stackview,
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
                                                                    superview: view)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
-        subviews.append(stackview)
+        subviews.append(subview)
         
         layoutClosure?(subLayoutComponent)
     }
     
-    /*
-     @autoclosure is important so that frameworks like Anchorage that activate constraints on creation can be used.
-     This will prevent the constraints from really being created/activated until after we have made sure all of the
-     involved views have been added to the view hierarchy. If a constraint, involving one or more views
-     that are not in the hierarchy, is activated the application will crash.
+    /**
+     Define constraints that should be activated
+     
+     - parameters:
+        - constraints: Constraints to activate
+     
+     - important: These are captured as an autoclosure, so that the creation of constraints created in the call to this method will be delayed until after all views are added to the view hierarchy. This will allow users to use libraries that create and activate constraints at the same time.
      */
     public func activate(_ constraints: @escaping @autoclosure () -> [NSLayoutConstraint] ) {
         switch constraintContainer {

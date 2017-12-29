@@ -3,11 +3,23 @@ public class ViewLayout<T: UIView> {
     private let view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
     
+    /**
+     Initialize your view layout with the root view you are defining a layout for
+     
+     - parameters:
+        - view: The root view you would like to define a layout for
+     */
     public init(view: T) {
         self.view = view
         self.currentLayoutComponent = UIViewLayoutComponent(view: view)
     }
     
+    /**
+     Update your layout
+     
+     - parameters:
+        - layoutClosure: A closure that will define the layout component for the ViewLayout's view
+     */
     public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent<T>) -> ()) {
         let layoutComponent = UIViewLayoutComponent(view: view)
         layoutClosure(layoutComponent)
