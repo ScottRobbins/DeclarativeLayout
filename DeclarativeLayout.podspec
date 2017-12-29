@@ -1,10 +1,14 @@
 Pod::Spec.new do |s|
   s.name             = 'DeclarativeLayout'
   s.version          = '0.2.0'
-  s.summary          = 'This library is a wrapper around UIKit/Autolayout that allows you to declaratively define the layout of your views'
+  s.summary          = 'A declarative, expressive and efficient way to lay out your views.'
 
   s.description      = <<-DESC
-This library is a wrapper around UIKit/Autolayout that allows you to declaratively define the layout of your views. Redefine the layout of your views and the library will handle adding/removing subviews as well as activating and deactivating constraints as needed.
+* Declarative - Tell the framework what the layout of your views should be and let the framework intelligently add/modify/remove constraints and views for you.
+* Expressive - Let your code visually express the hierarchy of your views.
+* Fast - The example below, running on an iPhone X will update the layout in under 3 milliseconds.
+* Flexible - Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
+* Small - Small and readable Swift 4 codebase.
                        DESC
 
   s.homepage         = 'https://github.com/HotCocoaTouch/DeclarativeLayout'
