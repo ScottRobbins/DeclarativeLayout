@@ -32,10 +32,12 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             component.addView(self.registerOrSignInSegmentedControl) { (component, view, superview) in
                 
-                view.insertSegment(withTitle: "Register", at: 0, animated: false)
-                view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
-                if view.selectedSegmentIndex == -1 {
-                    view.selectedSegmentIndex = 0
+                if view.numberOfSegments == 0 {
+                    view.insertSegment(withTitle: "Register", at: 0, animated: false)
+                    view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
+                    if view.selectedSegmentIndex == -1 {
+                        view.selectedSegmentIndex = 0
+                    }
                 }
                 
                 component.activate([
