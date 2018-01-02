@@ -20,9 +20,9 @@ public class ViewLayout<T: UIView> {
      - parameters:
         - layoutClosure: A closure that will define the layout component for the ViewLayout's view
      */
-    public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent<T>) -> ()) {
+    public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent<T>, T) -> ()) {
         let layoutComponent = UIViewLayoutComponent(view: view)
-        layoutClosure(layoutComponent)
+        layoutClosure(layoutComponent, view)
         
         addSubviews(with: layoutComponent)
         removeUnneededSubviews(with: layoutComponent)
