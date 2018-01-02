@@ -40,7 +40,7 @@ viewLayout = ViewLayout(view: view)
 Tell your `ViewLayout` you would like to update it
 
 ```swift
-viewLayout.updateLayoutTo { (component, view, superview) in 
+viewLayout.updateLayoutTo { (component, view) in 
     ...
 }
 ```
