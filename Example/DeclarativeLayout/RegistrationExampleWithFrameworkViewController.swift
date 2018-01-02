@@ -26,145 +26,145 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     
     private func layoutAndConfigureAllViews() {
         
-        viewLayout.updateLayoutTo { (component) in
+        viewLayout.updateLayoutTo { (component, view) in
             
-            component.view.backgroundColor = .white
+            view.backgroundColor = .white
             
-            component.addView(self.registerOrSignInSegmentedControl) { (component) in
+            component.addView(self.registerOrSignInSegmentedControl) { (component, view, superview) in
                 
-                component.view.insertSegment(withTitle: "Register", at: 0, animated: false)
-                component.view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
-                if component.view.selectedSegmentIndex == -1 {
-                    component.view.selectedSegmentIndex = 0
+                view.insertSegment(withTitle: "Register", at: 0, animated: false)
+                view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
+                if view.selectedSegmentIndex == -1 {
+                    view.selectedSegmentIndex = 0
                 }
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 35),
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+                    view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 35),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
                 ])
             }
             
-            component.addView(self.headerLabel) { (component) in
+            component.addView(self.headerLabel) { (component, view, superview) in
                 
-                component.view.font = UIFont.boldSystemFont(ofSize: 18)
+                view.font = UIFont.boldSystemFont(ofSize: 18)
                 if self.registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
-                    component.view.text = "Register"
+                    view.text = "Register"
                 } else {
-                    component.view.text = "Sign In"
+                    view.text = "Sign In"
                 }
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: self.registerOrSignInSegmentedControl.bottomAnchor, constant: 30),
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+                    view.topAnchor.constraint(equalTo: self.registerOrSignInSegmentedControl.bottomAnchor, constant: 30),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
                 ])
             }
             
-            component.addStackView(self.stackView) { (component) in
+            component.addStackView(self.stackView) { (component, view, superview) in
                 
-                component.view.axis = .vertical
+                view.axis = .vertical
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+                    view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
                 ])
                 
-                component.addArrangedView(self.emailContainerView) { (component) in
+                component.addArrangedView(self.emailContainerView) { (component, view, superview) in
                     
-                    component.addView(self.emailLabel) { (component) in
+                    component.addView(self.emailLabel) { (component, view, superview) in
                         
-                        component.view.text = "Email"
+                        view.text = "Email"
                         
                         component.activate([
-                            component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
-                            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                            component.view.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
-                            component.view.bottomAnchor.constraint(lessThanOrEqualTo: component.superview.bottomAnchor, constant: -20),
-                            component.view.centerYAnchor.constraint(equalTo: component.superview.centerYAnchor),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
+                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                            view.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
                     
-                    component.addView(self.emailTextField) { (component) in
+                    component.addView(self.emailTextField) { (component, view, superview) in
                         
-                        component.view.placeholder = "example@example.com"
+                        view.placeholder = "example@example.com"
                         if #available(iOS 10.0, *) {
-                            component.view.textContentType = .emailAddress
+                            view.textContentType = .emailAddress
                         }
-                        component.view.layer.borderColor = UIColor.blue.cgColor
-                        component.view.layer.borderWidth = 1
-                        component.view.textAlignment = .center
-                        component.view.isUserInteractionEnabled = false
+                        view.layer.borderColor = UIColor.blue.cgColor
+                        view.layer.borderWidth = 1
+                        view.textAlignment = .center
+                        view.isUserInteractionEnabled = false
                         
                         component.activate([
-                            component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
-                            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
-                            component.view.bottomAnchor.constraint(greaterThanOrEqualTo: component.superview.bottomAnchor, constant: -20),
-                            component.view.centerYAnchor.constraint(equalTo: component.superview.centerYAnchor),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
+                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
+                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
                 }
                 
-                component.addArrangedView(self.passwordContainerView) { (component) in
+                component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
                     
-                    component.addView(self.passwordLabel) { (component) in
+                    component.addView(self.passwordLabel) { (component, view, superview) in
                         
-                        component.view.text = "Password"
+                        view.text = "Password"
                         
                         component.activate([
-                            component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
-                            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                            component.view.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
-                            component.view.bottomAnchor.constraint(lessThanOrEqualTo: component.superview.bottomAnchor, constant: -20),
-                            component.view.centerYAnchor.constraint(equalTo: component.superview.centerYAnchor),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
+                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                            view.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
                     
-                    component.addView(self.passwordTextField) { (component) in
+                    component.addView(self.passwordTextField) { (component, view, superview) in
                         
-                        component.view.placeholder = "secure password here"
-                        component.view.isSecureTextEntry = true
-                        component.view.layer.borderColor = UIColor.blue.cgColor
-                        component.view.layer.borderWidth = 1
-                        component.view.textAlignment = .center
-                        component.view.isUserInteractionEnabled = false
+                        view.placeholder = "secure password here"
+                        view.isSecureTextEntry = true
+                        view.layer.borderColor = UIColor.blue.cgColor
+                        view.layer.borderWidth = 1
+                        view.textAlignment = .center
+                        view.isUserInteractionEnabled = false
                         
                         component.activate([
-                            component.view.topAnchor.constraint(greaterThanOrEqualTo: component.superview.topAnchor, constant: 20),
-                            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
-                            component.view.bottomAnchor.constraint(greaterThanOrEqualTo: component.superview.bottomAnchor, constant: -20),
-                            component.view.centerYAnchor.constraint(equalTo: component.superview.centerYAnchor),
-                            component.view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
+                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
+                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
+                            view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
                         ])
                     }
                 }
             }
             
-            component.addView(self.submitButton) { (component) in
+            component.addView(self.submitButton) { (component, view, superview) in
                 
-                component.view.setTitle("Submit", for: .normal)
-                component.view.backgroundColor = UIColor.blue
-                component.view.setTitleColor(.white, for: .normal)
-                component.view.layer.cornerRadius = 10
-                component.view.clipsToBounds = true
-                component.view.titleLabel?.textAlignment = .center
+                view.setTitle("Submit", for: .normal)
+                view.backgroundColor = UIColor.blue
+                view.setTitleColor(.white, for: .normal)
+                view.layer.cornerRadius = 10
+                view.clipsToBounds = true
+                view.titleLabel?.textAlignment = .center
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+                    view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
                 ])
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component) in
+            component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
                 
-                component.view.setTitle("forgot your password?", for: .normal)
-                component.view.setTitleColor(.blue, for: .normal)
+                view.setTitle("forgot your password?", for: .normal)
+                view.setTitleColor(.blue, for: .normal)
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: self.submitButton.bottomAnchor, constant: 20),
-                    component.view.centerXAnchor.constraint(equalTo: component.superview.centerXAnchor),
+                    view.topAnchor.constraint(equalTo: self.submitButton.bottomAnchor, constant: 20),
+                    view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
                 ])
             }
         }

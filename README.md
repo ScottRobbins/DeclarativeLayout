@@ -40,7 +40,7 @@ viewLayout = ViewLayout(view: view)
 Tell your `ViewLayout` you would like to update it
 
 ```swift
-viewLayout.updateLayoutTo { (component) in 
+viewLayout.updateLayoutTo { (component, view, superview) in 
     ...
 }
 ```
@@ -50,52 +50,52 @@ Use the layout components to define new views that should be in the hierarchy, a
 Here is an example:
 
 ```swift
-viewLayout.updateLayoutTo { (component) in
+viewLayout.updateLayoutTo { (component, view) in
     
-    component.addView(self.headerLabel) { (component) in
+    component.addView(self.headerLabel) { (component, view, superview) in
         
-        // component.view is the headerLabel
-        // component.superview is the VC's view
+        // view is the headerLabel
+        // superview is the VC's view
         component.activate([
-            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 10),
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+            view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 10),
+            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
     }
     
-    component.addStackView(self.stackView) { (component) in
+    component.addStackView(self.stackView) { (component, view, superview) in
         
         component.activate([
-            component.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+            view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
+            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
         
-        component.addArrangedView(self.redBox) { (component) in
+        component.addArrangedView(self.redBox) { (component, view, superview) in
             
             component.activate([
-                component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+                view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
             ])
             
-            component.addView(self.blueBox) { (component) in
+            component.addView(self.blueBox) { (component, view, superview) in
                 
                 component.activate([
-                    component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 20),
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
-                    component.view.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor, constant: -20),
-                    component.view.heightAnchor.constraint(equalToConstant: 100)
+                    view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
+                    view.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -20),
+                    view.heightAnchor.constraint(equalToConstant: 100)
                 ])
             }
         }
         
-        component.addArrangedView(self.greenBox) { (component) in
+        component.addArrangedView(self.greenBox) { (component, view, superview) in
             
             component.activate([
-                component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-                component.view.heightAnchor.constraint(equalToConstant: 300),
+                view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+                view.heightAnchor.constraint(equalToConstant: 300),
             ])
         }
     }
@@ -115,68 +115,68 @@ That will give you a view looking like this:
 Imagine that `self.layoutType` was changed inbetween calls to update the layout.
 
 ```swift
-viewLayout.updateLayoutTo { (component) in
+viewLayout.updateLayoutTo { (component, view) in
     
-    component.addView(self.headerLabel) { (component) in
+    component.addView(self.headerLabel) { (component, view, superview) in
         
-        // component.view is the headerLabel
-        // component.superview is the VC's view
+        // view is the headerLabel
+        // superview is the VC's view
         component.activate([
-            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor, constant: 10),
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+            view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 10),
+            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
     }
     
-    component.addStackView(self.stackView) { (component) in
+    component.addStackView(self.stackView) { (component, view, superview) in
         
         component.activate([
-            component.view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
+            view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
+            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
         
-        component.addArrangedView(self.redBox) { (component) in
+        component.addArrangedView(self.redBox) { (component, view, superview) in
             
             component.activate([
-                component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+                view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
             ])
             
             if self.layoutType == .layout1 { // In layout1 the blue box will be inside of the red box
-                component.addView(self.blueBox) { (component) in
+                component.addView(self.blueBox) { (component, view, superview) in
                     
                     component.activate([
-                        component.view.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: 20),
-                        component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: 20),
-                        component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: -20),
-                        component.view.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor, constant: -20),
-                        component.view.heightAnchor.constraint(equalToConstant: 100)
+                        view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
+                        view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                        view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
+                        view.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -20),
+                        view.heightAnchor.constraint(equalToConstant: 100)
                     ])
                 }
             } else {
                 component.activate([
-                    component.view.heightAnchor.constraint(equalToConstant: 200)
+                    view.heightAnchor.constraint(equalToConstant: 200)
                 ])
             }
         }
         
         if self.layoutType == .layout1 { // layout1 has a green box, layout 2 does not
-            component.addArrangedView(self.greenBox) { (component) in
+            component.addArrangedView(self.greenBox) { (component, view, superview) in
                 
                 component.activate([
-                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-                    component.view.heightAnchor.constraint(equalToConstant: 300),
+                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+                    view.heightAnchor.constraint(equalToConstant: 300),
                 ])
             }
         }
         
         if self.layoutType == .layout2 { // In layout2 the blue box will be below the red box
-            component.addArrangedView(self.blueBox) { (component) in
+            component.addArrangedView(self.blueBox) { (component, view, superview) in
                 
                 component.activate([
-                    component.view.heightAnchor.constraint(equalToConstant: 100)
+                    view.heightAnchor.constraint(equalToConstant: 100)
                 ])
             }
         }
