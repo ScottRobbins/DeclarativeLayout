@@ -30,48 +30,40 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
             
             view.backgroundColor = .white
             
-            component.addView(self.registerOrSignInSegmentedControl) { (component, view, superview) in
+            component.addStackView(self.stackView) { (component, view, superview) in
                 
-                if view.numberOfSegments == 0 {
-                    view.insertSegment(withTitle: "Register", at: 0, animated: false)
-                    view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
-                    if view.selectedSegmentIndex == -1 {
-                        view.selectedSegmentIndex = 0
-                    }
-                }
+                view.axis = .vertical
                 
                 component.activate([
                     view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 35),
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
                     view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
                 ])
-            }
-            
-            component.addView(self.headerLabel) { (component, view, superview) in
                 
-                view.font = UIFont.boldSystemFont(ofSize: 18)
-                if self.registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
-                    view.text = "Register"
-                } else {
-                    view.text = "Sign In"
+                component.addArrangedView(self.registerOrSignInSegmentedControl) { (component, view, superview) in
+                    
+                    if view.numberOfSegments == 0 {
+                        view.insertSegment(withTitle: "Register", at: 0, animated: false)
+                        view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
+                        if view.selectedSegmentIndex == -1 {
+                            view.selectedSegmentIndex = 0
+                        }
+                    }
                 }
                 
-                component.activate([
-                    view.topAnchor.constraint(equalTo: self.registerOrSignInSegmentedControl.bottomAnchor, constant: 30),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
-                ])
-            }
-            
-            component.addStackView(self.stackView) { (component, view, superview) in
+                component.addSpace(30)
                 
-                view.axis = .vertical
+                component.addArrangedView(self.headerLabel) { (component, view, superview) in
+                    
+                    view.font = UIFont.boldSystemFont(ofSize: 18)
+                    if self.registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
+                        view.text = "Register"
+                    } else {
+                        view.text = "Sign In"
+                    }
+                }
                 
-                component.activate([
-                    view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                ])
+                component.addSpace(20)
                 
                 component.addArrangedView(self.emailContainerView) { (component, view, superview) in
                     
@@ -80,10 +72,10 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         view.text = "Email"
                         
                         component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
-                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
+                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                             view.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
@@ -100,13 +92,15 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         view.isUserInteractionEnabled = false
                         
                         component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
-                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
+                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
                 }
+                
+                component.addSpace(40)
                 
                 component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
                     
@@ -115,10 +109,10 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         view.text = "Password"
                         
                         component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
-                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
+                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                             view.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
@@ -133,30 +127,26 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         view.isUserInteractionEnabled = false
                         
                         component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 20),
-                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor, constant: -20),
+                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
+                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                             view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
                         ])
                     }
                 }
-            }
-            
-            component.addView(self.submitButton) { (component, view, superview) in
                 
-                view.setTitle("Submit", for: .normal)
-                view.backgroundColor = UIColor.blue
-                view.setTitleColor(.white, for: .normal)
-                view.layer.cornerRadius = 10
-                view.clipsToBounds = true
-                view.titleLabel?.textAlignment = .center
+                component.addSpace(40)
                 
-                component.activate([
-                    view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
-                ])
+                component.addArrangedView(self.submitButton) { (component, view, superview) in
+                    
+                    view.setTitle("Submit", for: .normal)
+                    view.backgroundColor = UIColor.blue
+                    view.setTitleColor(.white, for: .normal)
+                    view.layer.cornerRadius = 10
+                    view.clipsToBounds = true
+                    view.titleLabel?.textAlignment = .center
+                }
             }
             
             component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
@@ -165,7 +155,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 view.setTitleColor(.blue, for: .normal)
                 
                 component.activate([
-                    view.topAnchor.constraint(equalTo: self.submitButton.bottomAnchor, constant: 20),
+                    view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
                 ])
             }
