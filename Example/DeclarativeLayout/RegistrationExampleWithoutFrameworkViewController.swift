@@ -24,7 +24,6 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
     
     private func layoutAllViews () {
         layoutViewHierarchy()
-        layoutRegisterOrSignInSegmentedControl()
         layoutHeaderLabel()
         layoutStackView()
         layoutEmailContainerView()
@@ -46,8 +45,8 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         forgotMyPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(registerOrSignInSegmentedControl)
-        view.addSubview(headerLabel)
+        stackView.addArrangedSubview(registerOrSignInSegmentedControl)
+        stackView.addArrangedSubview(headerLabel)
         
         emailContainerView.addSubview(emailLabel)
         emailContainerView.addSubview(emailTextField)
@@ -57,78 +56,70 @@ class RegistrationWithoutFrameworkViewController: UIViewController {
         passwordContainerView.addSubview(passwordTextField)
         stackView.addArrangedSubview(passwordContainerView)
         
+        stackView.addArrangedSubview(submitButton)
         view.addSubview(stackView)
-        view.addSubview(submitButton)
         view.addSubview(forgotMyPasswordButton)
     }
     
-    private func layoutRegisterOrSignInSegmentedControl() {
-        registerOrSignInSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 35).isActive = true
-        registerOrSignInSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        registerOrSignInSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+    private func layoutStackView() {
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 35).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
     
     private func layoutHeaderLabel() {
-        headerLabel.topAnchor.constraint(equalTo: registerOrSignInSegmentedControl.bottomAnchor, constant: 20).isActive = true
-        headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        headerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-    }
-    
-    private func layoutStackView() {
-        stackView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        stackView.setCustomSpacing(30, after: registerOrSignInSegmentedControl)
     }
     
     private func layoutEmailContainerView() {
+        stackView.setCustomSpacing(20, after: headerLabel)
         layoutEmailLabel()
         layoutEmailTextField()
     }
     
     private func layoutEmailLabel() {
-        emailLabel.topAnchor.constraint(greaterThanOrEqualTo: emailContainerView.topAnchor, constant: 20).isActive = true
-        emailLabel.leadingAnchor.constraint(equalTo: emailContainerView.leadingAnchor, constant: 20).isActive = true
+        emailLabel.topAnchor.constraint(greaterThanOrEqualTo: emailContainerView.topAnchor).isActive = true
+        emailLabel.leadingAnchor.constraint(equalTo: emailContainerView.leadingAnchor).isActive = true
         emailLabel.trailingAnchor.constraint(equalTo: emailTextField.leadingAnchor, constant: -20).isActive = true
-        emailLabel.bottomAnchor.constraint(lessThanOrEqualTo: emailContainerView.bottomAnchor, constant: -20).isActive = true
+        emailLabel.bottomAnchor.constraint(lessThanOrEqualTo: emailContainerView.bottomAnchor).isActive = true
         emailLabel.centerYAnchor.constraint(equalTo: emailContainerView.centerYAnchor)
     }
     
     private func layoutEmailTextField() {
-        emailTextField.topAnchor.constraint(greaterThanOrEqualTo: emailContainerView.topAnchor, constant: 20).isActive = true
-        emailTextField.trailingAnchor.constraint(equalTo: emailContainerView.trailingAnchor, constant: -20).isActive = true
-        emailTextField.bottomAnchor.constraint(greaterThanOrEqualTo: emailContainerView.bottomAnchor, constant: -20).isActive = true
+        emailTextField.topAnchor.constraint(greaterThanOrEqualTo: emailContainerView.topAnchor).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: emailContainerView.trailingAnchor).isActive = true
+        emailTextField.bottomAnchor.constraint(greaterThanOrEqualTo: emailContainerView.bottomAnchor).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: emailContainerView.centerYAnchor).isActive = true
     }
     
     private func layoutPasswordContainerView() {
+        stackView.setCustomSpacing(40, after: emailContainerView)
         layoutPasswordLabel()
         layoutPasswordTextField()
     }
     
     private func layoutPasswordLabel() {
-        passwordLabel.topAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.topAnchor, constant: 20).isActive = true
-        passwordLabel.leadingAnchor.constraint(equalTo: passwordContainerView.leadingAnchor, constant: 20).isActive = true
+        passwordLabel.topAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.topAnchor).isActive = true
+        passwordLabel.leadingAnchor.constraint(equalTo: passwordContainerView.leadingAnchor).isActive = true
         passwordLabel.trailingAnchor.constraint(equalTo: passwordTextField.leadingAnchor, constant: -20).isActive = true
-        passwordLabel.bottomAnchor.constraint(lessThanOrEqualTo: passwordContainerView.bottomAnchor, constant: -20).isActive = true
+        passwordLabel.bottomAnchor.constraint(lessThanOrEqualTo: passwordContainerView.bottomAnchor).isActive = true
         passwordLabel.centerYAnchor.constraint(equalTo: passwordContainerView.centerYAnchor).isActive = true
     }
     
     private func layoutPasswordTextField() {
-        passwordTextField.topAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.topAnchor, constant: 20).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: passwordContainerView.trailingAnchor, constant: -20).isActive = true
-        passwordTextField.bottomAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.bottomAnchor, constant: -20).isActive = true
+        passwordTextField.topAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.topAnchor).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: passwordContainerView.trailingAnchor).isActive = true
+        passwordTextField.bottomAnchor.constraint(greaterThanOrEqualTo: passwordContainerView.bottomAnchor).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: passwordContainerView.centerYAnchor).isActive = true
         passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor).isActive = true
     }
     
     private func layoutSubmitButton() {
-        submitButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
-        submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        stackView.setCustomSpacing(40, after: passwordContainerView)
     }
     
     private func layoutForgotMyPasswordButton() {
-        forgotMyPasswordButton.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 20).isActive = true
+        forgotMyPasswordButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
         forgotMyPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
