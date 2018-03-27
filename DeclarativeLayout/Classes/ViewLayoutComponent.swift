@@ -19,6 +19,7 @@ protocol UIViewLayoutComponentType: ViewLayoutComponentType {
 protocol UIStackViewLayoutComponentType: ViewLayoutComponentType {
     var downcastedView: UIStackView { get }
     var arrangedSubviews: [UIView] { get }
+    var customSpacings: [(afterView: UIView, space: CGFloat)] { get }
 }
 
 public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {

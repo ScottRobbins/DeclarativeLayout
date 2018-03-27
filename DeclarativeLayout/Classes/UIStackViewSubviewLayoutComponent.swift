@@ -4,6 +4,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
     
     var downcastedView: UIStackView { return view as UIStackView }
     private(set) var arrangedSubviews = [UIView]()
+    private(set) var customSpacings = [(afterView: UIView, space: CGFloat)]()
     
     /**
      Add an arranged subview to the component's view.
@@ -35,5 +36,20 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
         arrangedSubviews.append(subview)
 
         addStackView(subview, layoutClosure: layoutClosure)
+    }
+    
+    /**
+     This is a convenience method to add a space after an arranged subview.
+     If this is called before any arranged subviews are added, it will do nothing.
+     Similarly, if no arranged subviews are added after it is called, it will do nothing.
+     
+     - parameters:
+        - space: The amount of space to add along the UIStackView's axis.
+     */
+    @available(iOS 11.0, *)
+    public func addSpace(_ space: CGFloat) {
+        if let previouslyAddedArrangedSubview = arrangedSubviews.last {
+            customSpacings.append((afterView: previouslyAddedArrangedSubview, space: space))
+        }
     }
 }

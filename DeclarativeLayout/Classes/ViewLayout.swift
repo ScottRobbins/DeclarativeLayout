@@ -58,6 +58,12 @@ public class ViewLayout<T: UIView> {
                 for (i, subview) in layoutComponent.arrangedSubviews.enumerated() {
                     layoutComponent.downcastedView.insertArrangedSubview(subview, at: i)
                 }
+                
+                if #available(iOS 11.0, *) {
+                    for customSpacing in layoutComponent.customSpacings {
+                        layoutComponent.downcastedView.setCustomSpacing(customSpacing.space, after: customSpacing.afterView)
+                    }
+                }
             }
         }
     }
