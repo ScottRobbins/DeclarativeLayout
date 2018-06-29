@@ -28,4 +28,13 @@ class PerformanceTests: XCTestCase {
             view.layoutAndConfigure(with: viewLayout)
         }
     }
+    
+    func testUpdatingWithNewConstraints() {
+        view.layoutAndConfigure(with: viewLayout)
+        view.currentState = .newConstraints
+        
+        self.measure {
+            view.layoutAndConfigure(with: viewLayout)
+        }
+    }
 }
