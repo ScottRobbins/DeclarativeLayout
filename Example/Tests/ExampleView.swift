@@ -12,8 +12,8 @@ class ExampleView: UIView {
     
     var currentState: State = .initial
     
-    private let views1 = Array(repeating: UIView(), count: 100)
-    private let views2 = Array(repeating: UIView(), count: 100)
+    private let views1 = Array(repeating: UIView(), count: 1000)
+    private let views2 = Array(repeating: UIView(), count: 1000)
     
     func layoutAndConfigure(with viewLayout: ViewLayout<ExampleView>) {
         
