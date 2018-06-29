@@ -21,4 +21,11 @@ class PerformanceTests: XCTestCase {
         }
     }
     
+    func testUpdatingWithSameLayout() {
+        view.layoutAndConfigure(with: viewLayout)
+        
+        self.measure {
+            view.layoutAndConfigure(with: viewLayout)
+        }
+    }
 }
