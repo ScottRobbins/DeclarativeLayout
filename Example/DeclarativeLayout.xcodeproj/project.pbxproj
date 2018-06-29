@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2149788490353D0B2054200D /* Pods_DeclarativeLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BD3D129D2F2C0B8041B129 /* Pods_DeclarativeLayout_Tests.framework */; };
 		4641D5F81F0C98ED007C2469 /* QuickStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */; };
+		46B1708220E5F2BC008231CA /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B1708120E5F2BC008231CA /* ExampleView.swift */; };
 		46D4EACB1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */; };
 		46D4EACE1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 		3704899CECACF8397AB5E4CF /* DeclarativeLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DeclarativeLayout.podspec; path = ../DeclarativeLayout.podspec; sourceTree = "<group>"; };
 		41C72FE1BE849DFE605FA852 /* Pods-DeclarativeLayout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeLayout_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickStartViewController.swift; sourceTree = "<group>"; };
+		46B1708120E5F2BC008231CA /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
 		46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithoutFrameworkViewController.swift; sourceTree = "<group>"; };
 		46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithFrameworkViewController.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* DeclarativeLayout_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeclarativeLayout_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 			children = (
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
+				46B1708120E5F2BC008231CA /* ExampleView.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				46B1708220E5F2BC008231CA /* ExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
