@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 import DeclarativeLayout
 
-class Tests: XCTestCase {
+class PerformanceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
