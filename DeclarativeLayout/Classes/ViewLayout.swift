@@ -98,9 +98,9 @@ public class ViewLayout<T: UIView> {
                 }
                 
                 /*
-                                                In case they are using a library that activates the constraint as it is created,
-                                                it will deactivate it when not needed so there aren’t duplicate constraints laying around
-                                            */
+                 In case they are using a library that activates the constraint as it is created,
+                 it will deactivate it when not needed so there aren’t duplicate constraints laying around
+                 */
                 constraint.wrappedConstraint.isActive = false
             } else {
                 constraintsToActivate.append(constraint.wrappedConstraint)
