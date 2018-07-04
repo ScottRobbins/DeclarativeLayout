@@ -16,7 +16,7 @@ class PerformanceTests: XCTestCase {
     
     func testInitialLayout() {
         
-        self.measure() {
+        self.measure {
             view.layoutAndConfigure(with: viewLayout)
         }
     }
