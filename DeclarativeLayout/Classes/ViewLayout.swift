@@ -79,43 +79,47 @@ public class ViewLayout<T: UIView> {
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
         
-        var constraintsToActivate = [NSLayoutConstraint]()
-        var currentConstraintsToRemove = currentConstraints
-        var newCachedConstraints = HashSet<LayoutConstraint>()
-        for constraint in newConstraints {
-            if let matchingConstraint = currentConstraints.get(constraint) {
-                currentConstraintsToRemove.remove(matchingConstraint)
-                newCachedConstraints.insert(matchingConstraint)
-                
-                if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
-                    matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
+        if currentConstraints.count > 0 {
+            var constraintsToActivate = [NSLayoutConstraint]()
+            var currentConstraintsToRemove = currentConstraints
+            var newCachedConstraints = HashSet<LayoutConstraint>()
+            for constraint in newConstraints {
+                if let matchingConstraint = currentConstraints.get(constraint) {
+                    currentConstraintsToRemove.remove(matchingConstraint)
+                    newCachedConstraints.insert(matchingConstraint)
+                    
+                    if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
+                        matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
+                    }
+                    
+                    if matchingConstraint.wrappedConstraint.priority != constraint.wrappedConstraint.priority {
+                        matchingConstraint.wrappedConstraint.priority = constraint.wrappedConstraint.priority
+                    }
+                    
+                    if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
+                        matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
+                    }
+                    
+                    /*
+                     In case they are using a library that activates the constraint as it is created,
+                     it will deactivate it when not needed so there aren’t duplicate constraints laying around
+                     */
+                    constraint.wrappedConstraint.isActive = false
+                } else {
+                    newCachedConstraints.insert(constraint)
+                    constraintsToActivate.append(constraint.wrappedConstraint)
                 }
-                
-                if matchingConstraint.wrappedConstraint.priority != constraint.wrappedConstraint.priority {
-                    matchingConstraint.wrappedConstraint.priority = constraint.wrappedConstraint.priority
-                }
-                
-                if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
-                    matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
-                }
-                
-                /*
-                 In case they are using a library that activates the constraint as it is created,
-                 it will deactivate it when not needed so there aren’t duplicate constraints laying around
-                 */
-                constraint.wrappedConstraint.isActive = false
-            } else {
-                newCachedConstraints.insert(constraint)
-                constraintsToActivate.append(constraint.wrappedConstraint)
             }
+            
+            currentConstraints = newCachedConstraints
+            
+            let constraintsToRemove = currentConstraintsToRemove
+                .allElements()
+                .map { $0.wrappedConstraint }
+            NSLayoutConstraint.deactivate(constraintsToRemove)
+            NSLayoutConstraint.activate(constraintsToActivate)
+        } else {
+            NSLayoutConstraint.activate(newConstraints.map { $0.wrappedConstraint })
         }
-        
-        currentConstraints = newCachedConstraints
-        
-        let constraintsToRemove = currentConstraintsToRemove
-            .allElements()
-            .map { $0.wrappedConstraint }
-        NSLayoutConstraint.deactivate(constraintsToRemove)
-        NSLayoutConstraint.activate(constraintsToActivate)
     }
 }
