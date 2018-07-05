@@ -7,51 +7,54 @@ class PerformanceTests: XCTestCase {
     var view: ExampleView!
     var viewLayout: ViewLayout<ExampleView>!
     
-    override func setUp() {
-        super.setUp()
-        
+    private func setupTest() {
         view = ExampleView()
         viewLayout = ViewLayout(view: view)
     }
     
     func testInitialLayout() {
-        
-        self.measure {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false) {
+            setupTest()
+            startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
         }
     }
     
     func testUpdatingWithSameLayout() {
-        view.layoutAndConfigure(with: viewLayout)
-        
-        self.measure {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false) {
+            setupTest()
+            view.layoutAndConfigure(with: viewLayout)
+            startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
         }
     }
     
     func testUpdatingWithNewConstraints() {
-        view.layoutAndConfigure(with: viewLayout)
-        view.currentState = .newConstraints
-        
-        self.measure {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false) {
+            setupTest()
+            view.layoutAndConfigure(with: viewLayout)
+            view.currentState = .newConstraints
+            startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
         }
     }
     
     func testUpdatingWithNewViewsAndConstraints() {
-        view.layoutAndConfigure(with: viewLayout)
-        view.currentState = .newViewsAndConstraints
-        
-        self.measure {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false) {
+            setupTest()
+            view.layoutAndConfigure(with: viewLayout)
+            view.currentState = .newViewsAndConstraints
+            startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
         }
     }
     
     func testUpdatingWithChangedConstraints() {
-        view.layoutAndConfigure(with: viewLayout)
-        view.currentState = .changedConstraints
-        
-        self.measure {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false) {
+            setupTest()
+            view.layoutAndConfigure(with: viewLayout)
+            view.currentState = .changedConstraints
+            startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
         }
     }
