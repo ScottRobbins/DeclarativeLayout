@@ -17,6 +17,7 @@ class PerformanceTests: XCTestCase {
             setupTest()
             startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
+            stopMeasuring()
         }
     }
     
@@ -26,6 +27,7 @@ class PerformanceTests: XCTestCase {
             view.layoutAndConfigure(with: viewLayout)
             startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
+            stopMeasuring()
         }
     }
     
@@ -36,6 +38,7 @@ class PerformanceTests: XCTestCase {
             view.currentState = .newConstraints
             startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
+            stopMeasuring()
         }
     }
     
@@ -46,6 +49,7 @@ class PerformanceTests: XCTestCase {
             view.currentState = .newViewsAndConstraints
             startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
+            stopMeasuring()
         }
     }
     
@@ -56,6 +60,7 @@ class PerformanceTests: XCTestCase {
             view.currentState = .changedConstraints
             startMeasuring()
             view.layoutAndConfigure(with: viewLayout)
+            stopMeasuring()
         }
     }
 }
