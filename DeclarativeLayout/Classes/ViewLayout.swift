@@ -2,6 +2,7 @@ public class ViewLayout<T: UIView> {
     
     private let view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
+    private var currentConstraints = HashSet<LayoutConstraint>()
     
     /**
      Initialize your view layout with the root view you are defining a layout for
@@ -77,13 +78,14 @@ public class ViewLayout<T: UIView> {
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
         let newConstraints = layoutComponent.allConstraints()
-        let currentConstraints = HashSet(currentLayoutComponent.allConstraints())
         
         var constraintsToActivate = [NSLayoutConstraint]()
         var currentConstraintsToRemove = currentConstraints
+        var newCachedConstraints = HashSet<LayoutConstraint>()
         for constraint in newConstraints {
             if let matchingConstraint = currentConstraints.get(constraint) {
                 currentConstraintsToRemove.remove(matchingConstraint)
+                newCachedConstraints.insert(matchingConstraint)
                 
                 if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
                     matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
@@ -103,9 +105,12 @@ public class ViewLayout<T: UIView> {
                  */
                 constraint.wrappedConstraint.isActive = false
             } else {
+                newCachedConstraints.insert(constraint)
                 constraintsToActivate.append(constraint.wrappedConstraint)
             }
         }
+        
+        currentConstraints = newCachedConstraints
         
         let constraintsToRemove = currentConstraintsToRemove
             .allElements()
