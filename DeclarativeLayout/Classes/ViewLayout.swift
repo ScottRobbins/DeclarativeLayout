@@ -2,6 +2,7 @@ public class ViewLayout<T: UIView> {
     
     private let view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
+    private var currentSubviews = Set<UIView>()
     private var currentConstraints = HashSet<LayoutConstraint>()
     
     /**
@@ -25,8 +26,9 @@ public class ViewLayout<T: UIView> {
         let layoutComponent = UIViewLayoutComponent(view: view)
         layoutClosure(layoutComponent, view)
         
-        addSubviews(with: layoutComponent)
         removeUnneededSubviews(with: layoutComponent)
+        currentSubviews = Set<UIView>()
+        addSubviews(with: layoutComponent)
         updateConstraints(with: layoutComponent)
         
         currentLayoutComponent = layoutComponent
@@ -35,6 +37,7 @@ public class ViewLayout<T: UIView> {
     private func addSubviews(with layoutComponent: UIViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
+            currentSubviews.insert(subview)
         }
         
         addSubviewsForSublayoutComponents(with: layoutComponent)
@@ -43,6 +46,7 @@ public class ViewLayout<T: UIView> {
     private func addSubviews(with layoutComponent: UIStackViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
+            currentSubviews.insert(subview)
         }
         
         addSubviewsForSublayoutComponents(with: layoutComponent)
@@ -71,7 +75,7 @@ public class ViewLayout<T: UIView> {
     
     private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent<T>) {
         let layoutComponentSubviews = Set(layoutComponent.allSubviews())
-        currentLayoutComponent.allSubviews()
+        currentSubviews
             .filter { !layoutComponentSubviews.contains($0) }
             .forEach { $0.removeFromSuperview() }
     }
