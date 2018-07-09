@@ -8,6 +8,11 @@ class PerformanceTests: XCTestCase {
     var viewLayout: ViewLayout<ExampleView>!
     
     private func setupTest() {
+        // It does this twice to populate the selector/instruction pointer cache (maybe?)
+        // of the codepath i'm running
+        view = ExampleView()
+        viewLayout = ViewLayout(view: view)
+        view.layoutAndConfigure(with: viewLayout)
         view = ExampleView()
         viewLayout = ViewLayout(view: view)
     }
