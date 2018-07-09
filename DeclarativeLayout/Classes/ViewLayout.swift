@@ -74,10 +74,12 @@ public class ViewLayout<T: UIView> {
     }
     
     private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent<T>) {
-        let layoutComponentSubviews = Set(layoutComponent.allSubviews())
-        currentSubviews
-            .filter { !layoutComponentSubviews.contains($0) }
-            .forEach { $0.removeFromSuperview() }
+        if currentSubviews.count > 0 {
+            let layoutComponentSubviews = Set(layoutComponent.allSubviews())
+            currentSubviews
+                .filter { !layoutComponentSubviews.contains($0) }
+                .forEach { $0.removeFromSuperview() }
+        }
     }
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
