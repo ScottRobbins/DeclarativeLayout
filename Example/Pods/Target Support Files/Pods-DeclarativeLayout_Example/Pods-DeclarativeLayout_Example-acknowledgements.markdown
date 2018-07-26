@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## DeclarativeLayout
 
-Copyright (c) 2017 hotcocoatouch <scott.robbins@mobiledefense.com>
+Copyright (c) 2018 hotcocoatouch <srscottrobbins@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
