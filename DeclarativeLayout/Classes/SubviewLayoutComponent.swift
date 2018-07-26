@@ -9,13 +9,13 @@ public class SubviewLayoutComponent<T: UIView, R: UIView>: ViewLayoutComponent<T
     
     init(view: T,
          superview: R,
-         activateConstraintsDelegate: ActivateConstraintsDelegate?)
+         collectionDelegate: ConstraintAndViewCollectionDelegate?)
     {
         self.superview = superview
         
         super.init(view: view)
         
-        self.activateConstraintsDelegate = activateConstraintsDelegate
+        self.collectionDelegate = collectionDelegate
     }
 
 }
