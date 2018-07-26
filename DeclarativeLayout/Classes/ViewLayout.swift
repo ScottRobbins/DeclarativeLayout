@@ -105,12 +105,6 @@ public class ViewLayout<T: UIView> {
                     if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
                         matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
                     }
-                    
-                    /*
-                     In case they are using a library that activates the constraint as it is created,
-                     it will deactivate it when not needed so there aren’t duplicate constraints laying around
-                     */
-                    constraint.wrappedConstraint.isActive = false
                 } else {
                     newCachedConstraints.insert(constraint)
                     constraintsToActivate.append(constraint.wrappedConstraint)
