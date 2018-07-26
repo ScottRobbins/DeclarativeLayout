@@ -7,10 +7,10 @@ enum LayoutComponentType {
 
 protocol ConstraintAndViewCollectionDelegate: class {
     func activate(_ constraints: Set<LayoutConstraint>)
+    func addSubview(_ subview: UIView)
 }
 
 protocol ViewLayoutComponentType {
-    func allSubviews() -> [UIView]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
 }
@@ -57,6 +57,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
         subviews.append(subview)
+        collectionDelegate?.addSubview(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
     }
@@ -80,6 +81,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
         subviews.append(subview)
+        collectionDelegate?.addSubview(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
     }
@@ -96,16 +98,5 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     public func activate(_ constraints: [NSLayoutConstraint]) {
         let layoutConstraints = Set(constraints.map(LayoutConstraint.init(wrappedConstraint:)))
         collectionDelegate?.activate(layoutConstraints)
-    }
-    
-    func allSubviews() -> [UIView] {
-        return sublayoutComponents.reduce(subviews) { (subviews, layoutComponent) -> [UIView] in
-            switch layoutComponent {
-            case .uistackview(let layoutComponent):
-                return subviews + layoutComponent.allSubviews()
-            case .uiview(let layoutComponent):
-                return subviews + layoutComponent.allSubviews()
-            }
-        }
     }
 }
