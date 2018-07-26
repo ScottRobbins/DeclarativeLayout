@@ -5,9 +5,12 @@ enum LayoutComponentType {
     case uistackview(layout: UIStackViewLayoutComponentType)
 }
 
+protocol ActivateConstraintsDelegate: class {
+    func activate(_ constraints: Set<LayoutConstraint>)
+}
+
 protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
-    func allConstraints() -> Set<LayoutConstraint>
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
 }
@@ -30,7 +33,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     public let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
-    private var constraints = Set<LayoutConstraint>()
+    
+    weak var activateConstraintsDelegate: ActivateConstraintsDelegate?
     
     init(view: T) {
         self.view = view
@@ -48,7 +52,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
-                                                              superview: view)
+                                                              superview: view,
+                                                              activateConstraintsDelegate: activateConstraintsDelegate)
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
         subviews.append(subview)
@@ -70,7 +75,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
-                                                                   superview: view)
+                                                                   superview: view,
+                                                                   activateConstraintsDelegate: activateConstraintsDelegate)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
         subviews.append(subview)
@@ -88,18 +94,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         If these constraints are activated at the wrong time it can cause your application to crash.
      */
     public func activate(_ constraints: [NSLayoutConstraint]) {
-        self.constraints.formUnion(constraints.map(LayoutConstraint.init(wrappedConstraint:)))
-    }
-    
-    func allConstraints() -> Set<LayoutConstraint> {
-        return sublayoutComponents.reduce(constraints) { (combinedConstraints, layoutComponent) -> Set<LayoutConstraint> in
-            switch layoutComponent {
-            case .uistackview(let layoutComponent):
-                return combinedConstraints.union(layoutComponent.allConstraints())
-            case .uiview(let layoutComponent):
-                return combinedConstraints.union(layoutComponent.allConstraints())
-            }
-        }
+        let layoutConstraints = Set(constraints.map(LayoutConstraint.init(wrappedConstraint:)))
+        activateConstraintsDelegate?.activate(layoutConstraints)
     }
     
     func allSubviews() -> [UIView] {

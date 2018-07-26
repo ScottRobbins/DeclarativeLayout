@@ -83,7 +83,7 @@ public class ViewLayout<T: UIView> {
     }
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
-        let newConstraints = layoutComponent.allConstraints()
+        let newConstraints = layoutComponent.constraints
         
         if currentConstraints.count > 0 {
             var constraintsToActivate = [NSLayoutConstraint]()
