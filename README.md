@@ -15,7 +15,6 @@ A declarative, expressive and efficient way to lay out your views.
 --------------------------|------------------------------------------------------------
 **Declarative** | Tell the framework what the layout of your views should be and let the framework intelligently add/modify/remove constraints and views for you.
 **Expressive** | Let your code visually express the hierarchy of your views.
-**Fast** | The example below, running on an iPhone X will update the layout in under 3 milliseconds.
 **Flexible** | Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
 **Small** | Small and readable Swift 4 codebase.
 
