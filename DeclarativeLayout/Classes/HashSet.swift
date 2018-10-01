@@ -9,7 +9,7 @@ struct HashSet<T: Hashable> {
     init() { }
     
     init(_ elements: [T]) {
-        elements.forEach() { dictionary[$0] = $0 }
+        dictionary.merge(zip(elements, elements)) { (_, new) in new }
     }
     
     mutating func insert(_ element: T) {
