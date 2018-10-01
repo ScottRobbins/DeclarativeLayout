@@ -11,9 +11,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0048117</real>
+					<real>0.0046546</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>Oct 1, 2018 at 1:05:40 AM</string>
+					<string>Oct 1, 2018 at 2:51:48 AM</string>
 				</dict>
 			</dict>
 			<key>testInitialLayoutRealistic()</key>
@@ -61,9 +61,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0029771</real>
+					<real>0.0029541</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>Oct 1, 2018 at 1:04:04 AM</string>
+					<string>Oct 1, 2018 at 2:51:48 AM</string>
 				</dict>
 			</dict>
 			<key>testUpdatingWithNewViewsAndConstraintsOutlier()</key>
@@ -71,9 +71,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0090166</real>
+					<real>0.0086255</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>Oct 1, 2018 at 1:04:04 AM</string>
+					<string>Oct 1, 2018 at 2:51:48 AM</string>
 				</dict>
 			</dict>
 			<key>testUpdatingWithNewViewsAndConstraintsRealistic()</key>
@@ -81,9 +81,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0031096</real>
+					<real>0.0030862</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>Oct 1, 2018 at 1:04:04 AM</string>
+					<string>Oct 1, 2018 at 2:51:48 AM</string>
 				</dict>
 			</dict>
 			<key>testUpdatingWithSameLayoutOutlier()</key>
@@ -101,9 +101,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0033061</real>
+					<real>0.0032462</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>Oct 1, 2018 at 1:04:04 AM</string>
+					<string>Oct 1, 2018 at 2:51:48 AM</string>
 				</dict>
 			</dict>
 		</dict>
