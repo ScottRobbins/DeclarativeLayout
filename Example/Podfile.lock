@@ -6,11 +6,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   DeclarativeLayout:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   DeclarativeLayout: 207818427124fa1a0dfadad6993ae89d75f5c3d3
 
 PODFILE CHECKSUM: 0d1373e0bb9795c40cf58254d7f6d2b1a31601a7
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

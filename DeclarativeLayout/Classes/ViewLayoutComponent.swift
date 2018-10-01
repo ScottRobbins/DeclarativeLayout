@@ -5,9 +5,12 @@ enum LayoutComponentType {
     case uistackview(layout: UIStackViewLayoutComponentType)
 }
 
+protocol ConstraintAndViewCollectionDelegate: class {
+    func activate(_ constraints: Set<LayoutConstraint>)
+    func addSubview(_ subview: UIView)
+}
+
 protocol ViewLayoutComponentType {
-    func allSubviews() -> [UIView]
-    func allConstraints() -> [LayoutConstraint]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
 }
@@ -24,18 +27,14 @@ protocol UIStackViewLayoutComponentType: ViewLayoutComponentType {
 
 public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     
-    enum ConstraintContainer {
-        case closures(closures: [() -> [NSLayoutConstraint]])
-        case constraints(constraints: [LayoutConstraint])
-    }
-    
     /**
      The component's view. 
      */
     public let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
-    private var constraintContainer = ConstraintContainer.closures(closures: [() -> [NSLayoutConstraint]]())
+    
+    weak var collectionDelegate: ConstraintAndViewCollectionDelegate?
     
     init(view: T) {
         self.view = view
@@ -53,10 +52,12 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
-                                                              superview: view)
+                                                              superview: view,
+                                                              collectionDelegate: collectionDelegate)
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
         subviews.append(subview)
+        collectionDelegate?.addSubview(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
     }
@@ -75,10 +76,12 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
-                                                                   superview: view)
+                                                                   superview: view,
+                                                                   collectionDelegate: collectionDelegate)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
         subviews.append(subview)
+        collectionDelegate?.addSubview(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
     }
@@ -89,47 +92,11 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      - parameters:
         - constraints: Constraints to activate
      
-     - important: These are captured as an autoclosure, so that the creation of constraints created in the call to this method will be delayed until after all views are added to the view hierarchy. This will allow users to use libraries that create and activate constraints at the same time.
+     - important: Do not activate these constraints yourself, the framework will do that for you.
+        If these constraints are activated at the wrong time it can cause your application to crash.
      */
-    public func activate(_ constraints: @escaping @autoclosure () -> [NSLayoutConstraint] ) {
-        switch constraintContainer {
-        case .closures(let closures):
-            constraintContainer = .closures(closures: closures + [constraints])
-        case .constraints(_):
-            // No code should actually get here
-            constraintContainer = .closures(closures: [constraints])
-        }
-    }
-    
-    func allConstraints() -> [LayoutConstraint] {
-        
-        let initialConstraints: [LayoutConstraint]
-        switch constraintContainer {
-        case .closures(let closures):
-            initialConstraints = closures.flatMap { $0() }.map(LayoutConstraint.init)
-            constraintContainer = .constraints(constraints: initialConstraints)
-        case .constraints(let constraints):
-            initialConstraints = constraints
-        }
-        
-        return sublayoutComponents.reduce(initialConstraints) { (combinedConstraints, layoutComponent) -> [LayoutConstraint] in
-            switch layoutComponent {
-            case .uistackview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allConstraints()
-            case .uiview(let layoutComponent):
-                return combinedConstraints + layoutComponent.allConstraints()
-            }
-        }
-    }
-    
-    func allSubviews() -> [UIView] {
-        return sublayoutComponents.reduce(subviews) { (subviews, layoutComponent) -> [UIView] in
-            switch layoutComponent {
-            case .uistackview(let layoutComponent):
-                return subviews + layoutComponent.allSubviews()
-            case .uiview(let layoutComponent):
-                return subviews + layoutComponent.allSubviews()
-            }
-        }
+    public func activate(_ constraints: [NSLayoutConstraint]) {
+        let layoutConstraints = Set(constraints.map(LayoutConstraint.init(wrappedConstraint:)))
+        collectionDelegate?.activate(layoutConstraints)
     }
 }
