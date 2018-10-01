@@ -196,6 +196,7 @@ pod "DeclarativeLayout"
 
 * iOS 9.0 or later
 * Xcode 9 or later
+* Supports Swift 4.2
 
 ## License
 
