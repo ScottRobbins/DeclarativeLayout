@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		2149788490353D0B2054200D /* Pods_DeclarativeLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BD3D129D2F2C0B8041B129 /* Pods_DeclarativeLayout_Tests.framework */; };
 		4641D5F81F0C98ED007C2469 /* QuickStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */; };
+		467823C02161D77D0072D45D /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467823BF2161D77D0072D45D /* ExampleView.swift */; };
+		46A8AF402161DCBA001ADBEC /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8AF3F2161DCBA001ADBEC /* PerformanceTests.swift */; };
 		46D4EACB1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */; };
 		46D4EACE1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MenuViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		E3DB990286C097BBB8A9A155 /* Pods_DeclarativeLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0D7F38A9FE0ACBC379C5ED0 /* Pods_DeclarativeLayout_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 		3704899CECACF8397AB5E4CF /* DeclarativeLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DeclarativeLayout.podspec; path = ../DeclarativeLayout.podspec; sourceTree = "<group>"; };
 		41C72FE1BE849DFE605FA852 /* Pods-DeclarativeLayout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeLayout_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickStartViewController.swift; sourceTree = "<group>"; };
+		467823BF2161D77D0072D45D /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
+		46A8AF3F2161DCBA001ADBEC /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithoutFrameworkViewController.swift; sourceTree = "<group>"; };
 		46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithFrameworkViewController.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* DeclarativeLayout_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeclarativeLayout_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +49,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* DeclarativeLayout_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeclarativeLayout_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		790E34459404E600840A3515 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		812E4FD33B59C9B4F1AAA263 /* Pods-DeclarativeLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeLayout_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8DE9FD3B3A11F77DAE87C5D7 /* Pods-DeclarativeLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeLayout_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeclarativeLayout_Tests/Pods-DeclarativeLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,7 +172,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				467823BF2161D77D0072D45D /* ExampleView.swift */,
+				46A8AF3F2161DCBA001ADBEC /* PerformanceTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -261,11 +264,13 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						DevelopmentTeam = 53XWTE6HBL;
+						LastSwiftMigration = 1000;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						DevelopmentTeam = 53XWTE6HBL;
+						LastSwiftMigration = 1000;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -427,7 +432,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				46A8AF402161DCBA001ADBEC /* PerformanceTests.swift in Sources */,
+				467823C02161D77D0072D45D /* ExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,15 +567,14 @@
 			baseConfigurationReference = 41C72FE1BE849DFE605FA852 /* Pods-DeclarativeLayout_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 53XWTE6HBL;
 				INFOPLIST_FILE = DeclarativeLayout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -578,15 +583,14 @@
 			baseConfigurationReference = 812E4FD33B59C9B4F1AAA263 /* Pods-DeclarativeLayout_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 53XWTE6HBL;
 				INFOPLIST_FILE = DeclarativeLayout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -594,7 +598,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8DE9FD3B3A11F77DAE87C5D7 /* Pods-DeclarativeLayout_Tests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 53XWTE6HBL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -608,8 +612,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeclarativeLayout_Example.app/DeclarativeLayout_Example";
 			};
 			name = Debug;
 		};
@@ -617,7 +621,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2DF85089B2F4594131DBA120 /* Pods-DeclarativeLayout_Tests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 53XWTE6HBL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -627,8 +631,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeclarativeLayout_Example.app/DeclarativeLayout_Example";
 			};
 			name = Release;
 		};

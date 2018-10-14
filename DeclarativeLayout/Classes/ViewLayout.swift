@@ -69,7 +69,7 @@ public class ViewLayout<T: UIView> {
     }
     
     private func removeUnneededSubviews(with layoutComponent: UIViewLayoutComponent<T>) {
-        let layoutComponentSubviews = HashSet(layoutComponent.allSubviews())
+        let layoutComponentSubviews = Set(layoutComponent.allSubviews())
         currentLayoutComponent.allSubviews()
             .filter { !layoutComponentSubviews.contains($0) }
             .forEach { $0.removeFromSuperview() }
@@ -96,12 +96,6 @@ public class ViewLayout<T: UIView> {
                 if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
                     matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
                 }
-                
-                /*
-                                                In case they are using a library that activates the constraint as it is created,
-                                                it will deactivate it when not needed so there aren’t duplicate constraints laying around
-                                            */
-                constraint.wrappedConstraint.isActive = false
             } else {
                 constraintsToActivate.append(constraint.wrappedConstraint)
             }

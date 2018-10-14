@@ -31,7 +31,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             view.backgroundColor = .white
             component.addView(tableView) { (component, view, superview) in
                 
-                view.rowHeight = UITableViewAutomaticDimension
+                view.rowHeight = UITableView.automaticDimension
                 view.delegate = self
                 view.dataSource = self
                 component.activate([

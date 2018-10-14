@@ -7,7 +7,7 @@
 
 # Declarative Layout
 
-A declarative, expressive and efficient way to lay out your views. 
+A declarative, expressive and efficient way to lay out your views.
 
 ---
 
@@ -15,7 +15,6 @@ A declarative, expressive and efficient way to lay out your views.
 --------------------------|------------------------------------------------------------
 **Declarative** | Tell the framework what the layout of your views should be and let the framework intelligently add/modify/remove constraints and views for you.
 **Expressive** | Let your code visually express the hierarchy of your views.
-**Fast** | The example below, running on an iPhone X will update the layout in under 3 milliseconds. 
 **Flexible** | Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
 **Small** | Small and readable Swift 4 codebase.
 
@@ -40,7 +39,7 @@ viewLayout = ViewLayout(view: view)
 Tell your `ViewLayout` you would like to update it
 
 ```swift
-viewLayout.updateLayoutTo { (component, view) in 
+viewLayout.updateLayoutTo { (component, view) in
     ...
 }
 ```
@@ -51,9 +50,9 @@ Here is an example:
 
 ```swift
 viewLayout.updateLayoutTo { (component, view) in
-    
+
     component.addView(self.headerLabel) { (component, view, superview) in
-        
+
         // view is the headerLabel
         // superview is the VC's view
         component.activate([
@@ -62,24 +61,24 @@ viewLayout.updateLayoutTo { (component, view) in
             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
     }
-    
+
     component.addStackView(self.stackView) { (component, view, superview) in
-        
+
         component.activate([
             view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
-        
+
         component.addArrangedView(self.redBox) { (component, view, superview) in
-            
+
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
             ])
-            
+
             component.addView(self.blueBox) { (component, view, superview) in
-                
+
                 component.activate([
                     view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -89,9 +88,9 @@ viewLayout.updateLayoutTo { (component, view) in
                 ])
             }
         }
-        
+
         component.addArrangedView(self.greenBox) { (component, view, superview) in
-            
+
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -102,11 +101,11 @@ viewLayout.updateLayoutTo { (component, view) in
 }
 ```
 
-That will give you a view looking like this:  
+That will give you a view looking like this:
 
-<img src="/Resources/layout1.png" width=400 /> 
+<img src="/Resources/layout1.png" width=400 />
 
- If you want to update to a new layout, just call the `updateLayoutTo` method again, defining what your layout should be. The framework will take care of adding, removing and moving views as well as activating, deactivating and modifying constraints. 
+ If you want to update to a new layout, just call the `updateLayoutTo` method again, defining what your layout should be. The framework will take care of adding, removing and moving views as well as activating, deactivating and modifying constraints.
 
  As an example, let's layout a view that goes from the layout above, to a new one that involves some of the same views but in different places. When animating the change it looks like:
 
@@ -116,9 +115,9 @@ Imagine that `self.layoutType` was changed inbetween calls to update the layout.
 
 ```swift
 viewLayout.updateLayoutTo { (component, view) in
-    
+
     component.addView(self.headerLabel) { (component, view, superview) in
-        
+
         // view is the headerLabel
         // superview is the VC's view
         component.activate([
@@ -127,25 +126,25 @@ viewLayout.updateLayoutTo { (component, view) in
             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
     }
-    
+
     component.addStackView(self.stackView) { (component, view, superview) in
-        
+
         component.activate([
             view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
         ])
-        
+
         component.addArrangedView(self.redBox) { (component, view, superview) in
-            
+
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
             ])
-            
+
             if self.layoutType == .layout1 { // In layout1 the blue box will be inside of the red box
                 component.addView(self.blueBox) { (component, view, superview) in
-                    
+
                     component.activate([
                         view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
                         view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -160,10 +159,10 @@ viewLayout.updateLayoutTo { (component, view) in
                 ])
             }
         }
-        
+
         if self.layoutType == .layout1 { // layout1 has a green box, layout 2 does not
             component.addArrangedView(self.greenBox) { (component, view, superview) in
-                
+
                 component.activate([
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                     view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -171,10 +170,10 @@ viewLayout.updateLayoutTo { (component, view) in
                 ])
             }
         }
-        
+
         if self.layoutType == .layout2 { // In layout2 the blue box will be below the red box
             component.addArrangedView(self.blueBox) { (component, view, superview) in
-                
+
                 component.activate([
                     view.heightAnchor.constraint(equalToConstant: 100)
                 ])
@@ -195,8 +194,9 @@ pod "DeclarativeLayout"
 
 ## Requirements
 
-* iOS 9.0 or later 
-* Xcode 9 or later 
+* iOS 9.0 or later
+* Xcode 9 or later
+* Supports Swift 4.2
 
 ## License
 

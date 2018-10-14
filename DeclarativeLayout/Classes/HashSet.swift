@@ -9,7 +9,7 @@ struct HashSet<T: Hashable> {
     init() { }
     
     init(_ elements: [T]) {
-        elements.forEach() { dictionary[$0] = $0 }
+        dictionary.merge(zip(elements, elements)) { (_, new) in new }
     }
     
     mutating func insert(_ element: T) {
@@ -44,38 +44,3 @@ struct HashSet<T: Hashable> {
         return dictionary.isEmpty
     }
 }
-
-extension HashSet {
-    func union(_ otherSet: HashSet<T>) -> HashSet<T> {
-        var combined = HashSet<T>()
-        for obj in dictionary.keys {
-            combined.insert(obj)
-        }
-        for obj in otherSet.dictionary.keys {
-            combined.insert(obj)
-        }
-        return combined
-    }
-    
-    func intersect(_ otherSet: HashSet<T>) -> HashSet<T> {
-        var common = HashSet<T>()
-        for obj in dictionary.keys {
-            if otherSet.contains(obj) {
-                common.insert(obj)
-            }
-        }
-        return common
-    }
-    
-    func difference(_ otherSet: HashSet<T>) -> HashSet<T> {
-        var diff = HashSet<T>()
-        for obj in dictionary.keys {
-            if !otherSet.contains(obj) {
-                diff.insert(obj)
-            }
-        }
-        return diff
-    }
-}
-
-
