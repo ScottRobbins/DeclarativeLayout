@@ -201,3 +201,31 @@ pod "DeclarativeLayout"
 ## License
 
 DeclarativeLayout is available under the MIT license. See the LICENSE file for more info.
+
+## Tips
+
+* This framework makes heavy use of closures and Xcode doesn't always autocomplete using trailing closure syntax. I would suggest making snippets in Xcode to make your development more fluid. Here are the different statements you may want to make snippets for:
+
+```swift
+viewLayout.updateLayoutTo { (component, view) in
+    <#code#>
+}
+
+component.addView(<#view#>) { (component, view, superview) in
+    <#code#>
+}
+
+component.addStackView(<#view#>) { (component, view, superview) in
+    <#code#>
+}
+
+component.addArrangedView(<#view#>) { (component, view, superview) in
+    <#code#>
+}
+
+component.activate([
+    <#constraint#>,
+])
+```
+
+* `UIStackView`s aren't built in a way that makes it convenient to deal with the constraints they add to their arranged subviews. To avoid some hard-to-find bugs, avoid transitioning views from being arranged subviews of a `UIStackView` to not being arranged subviews of the `UIStackView`.
