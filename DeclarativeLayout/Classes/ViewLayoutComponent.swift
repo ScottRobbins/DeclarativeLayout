@@ -27,7 +27,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     /**
      The component's view. 
      */
-    public let view: T
+    public unowned let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
     private var constraints = [LayoutConstraint]()

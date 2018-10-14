@@ -1,6 +1,6 @@
 public class ViewLayout<T: UIView> {
     
-    private let view: T
+    private unowned var view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
     
     /**
