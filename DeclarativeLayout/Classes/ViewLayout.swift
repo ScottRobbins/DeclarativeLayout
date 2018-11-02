@@ -76,36 +76,36 @@ public class ViewLayout<T: UIView> {
     }
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
-        let newConstraints = layoutComponent.allConstraints()
+        let newConstraintsArray = layoutComponent.allConstraints()
         let currentConstraintsArray = currentLayoutComponent.allConstraints()
         
         if currentConstraintsArray.isEmpty {
-            NSLayoutConstraint.activate(newConstraints.map { $0.wrappedConstraint })
+            NSLayoutConstraint.activate(newConstraintsArray.map { $0.wrappedConstraint })
         } else {
+            let newConstraints = Set(newConstraintsArray)
             var currentConstraints = Set(currentConstraintsArray)
-            var constraintsToActivate = [NSLayoutConstraint]()
+            let matchingConstraints = newConstraints.intersection(currentConstraints)
+            let constraintsToRemove = currentConstraints.subtracting(matchingConstraints)
+            let constraintsToAdd = newConstraints.subtracting(matchingConstraints)
             
-            for constraint in newConstraints {
-                if let matchingConstraint = currentConstraints.remove(constraint) {
-                    if matchingConstraint.wrappedConstraint.constant != constraint.wrappedConstraint.constant {
-                        matchingConstraint.wrappedConstraint.constant = constraint.wrappedConstraint.constant
-                    }
-                    
-                    if matchingConstraint.wrappedConstraint.priority != constraint.wrappedConstraint.priority {
-                        matchingConstraint.wrappedConstraint.priority = constraint.wrappedConstraint.priority
-                    }
-                    
-                    if matchingConstraint.wrappedConstraint.identifier != constraint.wrappedConstraint.identifier {
-                        matchingConstraint.wrappedConstraint.identifier = constraint.wrappedConstraint.identifier
-                    }
-                } else {
-                    constraintsToActivate.append(constraint.wrappedConstraint)
+            for constraint in matchingConstraints {
+                let matchingWrappedConstraint = currentConstraints.remove(constraint)!.wrappedConstraint
+                let wrappedConstraint = constraint.wrappedConstraint
+                if matchingWrappedConstraint.constant != wrappedConstraint.constant {
+                    matchingWrappedConstraint.constant = wrappedConstraint.constant
+                }
+                
+                if matchingWrappedConstraint.priority != wrappedConstraint.priority {
+                    matchingWrappedConstraint.priority = wrappedConstraint.priority
+                }
+                
+                if matchingWrappedConstraint.identifier != wrappedConstraint.identifier {
+                    matchingWrappedConstraint.identifier = wrappedConstraint.identifier
                 }
             }
             
-            let constraintsToRemove = currentConstraints.map { $0.wrappedConstraint }
-            NSLayoutConstraint.deactivate(constraintsToRemove)
-            NSLayoutConstraint.activate(constraintsToActivate)
+            NSLayoutConstraint.deactivate(constraintsToRemove.map { $0.wrappedConstraint })
+            NSLayoutConstraint.activate(constraintsToAdd.map { $0.wrappedConstraint })
         }
     }
 }
