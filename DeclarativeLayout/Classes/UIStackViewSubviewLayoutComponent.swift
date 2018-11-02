@@ -14,7 +14,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
         - layoutClosure: A closure that will define the layout component for the subview.
      */
     public func addArrangedView<Q>(_ subview: Q,
-                                   layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)?)
+                                   layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil)
     {
         arrangedSubviews.append(subview)
         
@@ -31,7 +31,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
     public func addArrangedStackView<Q>(_ subview: Q,
-                                        layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)?)
+                                        layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil)
     {
         arrangedSubviews.append(subview)
 
