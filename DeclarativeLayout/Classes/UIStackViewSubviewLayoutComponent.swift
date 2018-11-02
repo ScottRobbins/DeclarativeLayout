@@ -12,13 +12,14 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
      */
-    public func addArrangedView<Q>(_ subview: Q,
-                                   layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil)
+    @discardableResult public func addArrangedView<Q>(_ subview: Q,
+                                                      layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil) -> UIViewSubviewLayoutComponent<Q, T>
     {
         arrangedSubviews.append(subview)
         
-        addView(subview, layoutClosure: layoutClosure)
+        return addView(subview, layoutClosure: layoutClosure)
     }
     
     /**
@@ -27,15 +28,16 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
      
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
-    public func addArrangedStackView<Q>(_ subview: Q,
-                                        layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil)
+    @discardableResult public func addArrangedStackView<Q>(_ subview: Q,
+                                                           layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<Q, T>
     {
         arrangedSubviews.append(subview)
 
-        addStackView(subview, layoutClosure: layoutClosure)
+        return addStackView(subview, layoutClosure: layoutClosure)
     }
     
     /**
