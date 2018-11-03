@@ -14,7 +14,6 @@
 		4B55C00FC8E564C60A0F7B4C161DF8A1 /* UIViewSubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371AA54666C63054A632C6707F270D0 /* UIViewSubviewLayoutComponent.swift */; };
 		6CD15CA36A6D3219480318CD3B045F3E /* UIStackViewSubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF492EDF1D8D780C10738277FCDDB70 /* UIStackViewSubviewLayoutComponent.swift */; };
 		92497F0CF7571BC6E57677098233F8F7 /* SubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F604EE970DC091A04B5619A3F3A56 /* SubviewLayoutComponent.swift */; };
-		92CA6F972F9E2EFA78718D2AA834F4E4 /* HashSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016862A89748FE247C11EE8BE163999 /* HashSet.swift */; };
 		9479C8BA893DAD064804CD65FAA51D80 /* Pods-DeclarativeLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 70E2ECF06BF6F71836EE74C119AA2A79 /* Pods-DeclarativeLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9999FFB9550A26DE87DDB4476206083E /* DeclarativeLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 377F0116988DCD3D04263B67629F89B3 /* DeclarativeLayout-dummy.m */; };
 		9E702A938B7E346F51357CCA71842FFD /* DeclarativeLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2349FA2899BB1201F86DD71DA2FFBBEC /* DeclarativeLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,7 +40,6 @@
 		0539B23BFC05ED06E8F0C1672CF62873 /* ViewLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewLayout.swift; path = DeclarativeLayout/Classes/ViewLayout.swift; sourceTree = "<group>"; };
 		0B1E0F2EE5CA65C4FA73CB80F91F3EF4 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = DeclarativeLayout/Classes/LayoutConstraint.swift; sourceTree = "<group>"; };
 		1791B4DA27E026478D9574B580FEFAB8 /* Pods-DeclarativeLayout_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DeclarativeLayout_Example-resources.sh"; sourceTree = "<group>"; };
-		2016862A89748FE247C11EE8BE163999 /* HashSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HashSet.swift; path = DeclarativeLayout/Classes/HashSet.swift; sourceTree = "<group>"; };
 		20A11A1CB0903E3576403A9424B5421F /* Pods-DeclarativeLayout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DeclarativeLayout_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		2349FA2899BB1201F86DD71DA2FFBBEC /* DeclarativeLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DeclarativeLayout-umbrella.h"; sourceTree = "<group>"; };
 		2391AB0EB26F6CF8E05682AA728241D7 /* Pods-DeclarativeLayout_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DeclarativeLayout_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		24DB4D446C79FC869460EBB3511B7116 /* DeclarativeLayout */ = {
 			isa = PBXGroup;
 			children = (
-				2016862A89748FE247C11EE8BE163999 /* HashSet.swift */,
 				0B1E0F2EE5CA65C4FA73CB80F91F3EF4 /* LayoutConstraint.swift */,
 				691F604EE970DC091A04B5619A3F3A56 /* SubviewLayoutComponent.swift */,
 				FBF492EDF1D8D780C10738277FCDDB70 /* UIStackViewSubviewLayoutComponent.swift */,
@@ -382,7 +379,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9999FFB9550A26DE87DDB4476206083E /* DeclarativeLayout-dummy.m in Sources */,
-				92CA6F972F9E2EFA78718D2AA834F4E4 /* HashSet.swift in Sources */,
 				E140AA81389F5BAA23897EA9F2E58ABA /* LayoutConstraint.swift in Sources */,
 				92497F0CF7571BC6E57677098233F8F7 /* SubviewLayoutComponent.swift in Sources */,
 				6CD15CA36A6D3219480318CD3B045F3E /* UIStackViewSubviewLayoutComponent.swift in Sources */,
