@@ -42,9 +42,10 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
      */
-    public func addView<R>(_ subview: R,
-                           layoutClosure: ((UIViewSubviewLayoutComponent<R, T>, R, T) -> Void)?)
+    @discardableResult public func addView<R>(_ subview: R,
+                                              layoutClosure: ((UIViewSubviewLayoutComponent<R, T>, R, T) -> Void)? = nil) -> UIViewSubviewLayoutComponent<R, T>
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
@@ -54,6 +55,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         subviews.append(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
+        return subLayoutComponent
     }
     
     /**
@@ -62,11 +64,12 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
      
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
-    public func addStackView<R>(_ subview: R,
-                                layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>, R, T) -> Void)?)
+    @discardableResult public func addStackView<R>(_ subview: R,
+                                                   layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>, R, T) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<R, T>
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
@@ -76,6 +79,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         subviews.append(subview)
         
         layoutClosure?(subLayoutComponent, subview, view)
+        return subLayoutComponent
     }
     
     /**
