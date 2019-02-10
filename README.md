@@ -50,7 +50,6 @@ Here is an example:
 
 ```swift
 viewLayout.updateLayoutTo { (component, view) in
-
     component.addView(self.headerLabel) { (component, view, superview) in
 
         // view is the headerLabel
@@ -63,7 +62,6 @@ viewLayout.updateLayoutTo { (component, view) in
     }
 
     component.addStackView(self.stackView) { (component, view, superview) in
-
         component.activate([
             view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -71,14 +69,12 @@ viewLayout.updateLayoutTo { (component, view) in
         ])
 
         component.addArrangedView(self.redBox) { (component, view, superview) in
-
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
             ])
 
             component.addView(self.blueBox) { (component, view, superview) in
-
                 component.activate([
                     view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -90,7 +86,6 @@ viewLayout.updateLayoutTo { (component, view) in
         }
 
         component.addArrangedView(self.greenBox) { (component, view, superview) in
-
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -115,7 +110,6 @@ Imagine that `self.layoutType` was changed inbetween calls to update the layout.
 
 ```swift
 viewLayout.updateLayoutTo { (component, view) in
-
     component.addView(self.headerLabel) { (component, view, superview) in
 
         // view is the headerLabel
@@ -128,7 +122,6 @@ viewLayout.updateLayoutTo { (component, view) in
     }
 
     component.addStackView(self.stackView) { (component, view, superview) in
-
         component.activate([
             view.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 20),
             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -136,7 +129,6 @@ viewLayout.updateLayoutTo { (component, view) in
         ])
 
         component.addArrangedView(self.redBox) { (component, view, superview) in
-
             component.activate([
                 view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -144,7 +136,6 @@ viewLayout.updateLayoutTo { (component, view) in
 
             if self.layoutType == .layout1 { // In layout1 the blue box will be inside of the red box
                 component.addView(self.blueBox) { (component, view, superview) in
-
                     component.activate([
                         view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
                         view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
@@ -162,7 +153,6 @@ viewLayout.updateLayoutTo { (component, view) in
 
         if self.layoutType == .layout1 { // layout1 has a green box, layout 2 does not
             component.addArrangedView(self.greenBox) { (component, view, superview) in
-
                 component.activate([
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                     view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -173,7 +163,6 @@ viewLayout.updateLayoutTo { (component, view) in
 
         if self.layoutType == .layout2 { // In layout2 the blue box will be below the red box
             component.addArrangedView(self.blueBox) { (component, view, superview) in
-
                 component.activate([
                     view.heightAnchor.constraint(equalToConstant: 100)
                 ])
@@ -227,5 +216,3 @@ component.activate([
     <#constraint#>,
 ])
 ```
-
-* `UIStackView`s aren't built in a way that makes it convenient to deal with the constraints they add to their arranged subviews. To avoid some hard-to-find bugs, avoid transitioning views from being arranged subviews of a `UIStackView` to not being arranged subviews of the `UIStackView`.
