@@ -81,9 +81,7 @@ public class ViewLayout<T: UIView> {
         let newArrangedSubviews = layoutComponent.allArrangedSubviews()
         
         for (view, currentLayoutComponent) in currentArrangedSubviews {
-            if !newArrangedSubviews.contains(where: { (newArrangedSubview) -> Bool in
-                return newArrangedSubview.0 == view && newArrangedSubview.1.downcastedView == currentLayoutComponent.downcastedView
-            }) {
+            if newArrangedSubviews[view] == nil {
                 view.removeFromSuperview()
             }
         }

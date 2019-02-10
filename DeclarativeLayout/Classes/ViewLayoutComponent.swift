@@ -7,7 +7,7 @@ enum LayoutComponentType {
 
 protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
-    func allArrangedSubviews() -> [(UIView, UIStackViewLayoutComponentType)]
+    func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType]
     func allConstraints() -> [LayoutConstraint]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
@@ -118,13 +118,13 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         }
     }
     
-    func allArrangedSubviews() -> [(UIView, UIStackViewLayoutComponentType)] {
-        return sublayoutComponents.reduce([]) { (arrangedSubviews, layoutComponent) -> [(UIView, UIStackViewLayoutComponentType)] in
+    func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType] {
+        return sublayoutComponents.reduce([:]) { (arrangedSubviews, layoutComponent) -> [UIView: UIStackViewLayoutComponentType] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return arrangedSubviews + layoutComponent.allArrangedSubviews()
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .uiview(let layoutComponent):
-                return arrangedSubviews + layoutComponent.allArrangedSubviews()
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             }
         }
     }

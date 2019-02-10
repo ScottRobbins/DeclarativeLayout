@@ -55,14 +55,18 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
         }
     }
     
-    override func allArrangedSubviews() -> [(UIView, UIStackViewLayoutComponentType)] {
-        let arrangedSubviewsAndComponents: [(UIView, UIStackViewLayoutComponentType)] = arrangedSubviews.map { ($0, self) }
-        return sublayoutComponents.reduce(arrangedSubviewsAndComponents) { (arrangedSubviews, layoutComponent) -> [(UIView, UIStackViewLayoutComponentType)] in
+    override func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType] {
+        let arrangedSubviewsAndComponents = arrangedSubviews.reduce([:]) { (dict, view) -> [UIView: UIStackViewLayoutComponentType] in
+            var dict = dict
+            dict[view] = self
+            return dict
+        }
+        return sublayoutComponents.reduce(arrangedSubviewsAndComponents) { (arrangedSubviews, layoutComponent) -> [UIView: UIStackViewLayoutComponentType] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return arrangedSubviews + layoutComponent.allArrangedSubviews()
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .uiview(let layoutComponent):
-                return arrangedSubviews + layoutComponent.allArrangedSubviews()
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             }
         }
     }
