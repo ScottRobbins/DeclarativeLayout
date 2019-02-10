@@ -21,19 +21,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         title = "Menu"
         
-        layoutAndConfigureAllViews()
+        layoutAllViews()
+        configureAllViews()
     }
     
-    private func layoutAndConfigureAllViews() {
-        
+    private func layoutAllViews() {
         viewLayout.updateLayoutTo { (component, view) in
-            
-            view.backgroundColor = .white
             component.addView(tableView) { (component, view, superview) in
-                
-                view.rowHeight = UITableView.automaticDimension
-                view.delegate = self
-                view.dataSource = self
                 component.activate([
                     view.topAnchor.constraint(equalTo: superview.topAnchor),
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
@@ -42,6 +36,16 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 ])
             }
         }
+    }
+    
+    // Don't worry about this below here
+    
+    private func configureAllViews() {
+        view.backgroundColor = .white
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

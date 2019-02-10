@@ -21,56 +21,27 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         
         title = "With Framework"
         
-        layoutAndConfigureAllViews()
+        layoutAllViews()
+        configureAllViews()
     }
     
-    private func layoutAndConfigureAllViews() {
+    private func layoutAllViews() {
         
         viewLayout.updateLayoutTo { (component, view) in
-            
-            view.backgroundColor = .white
-            
             component.addStackView(self.stackView) { (component, view, superview) in
-                
                 view.axis = .vertical
-                
                 component.activate([
                     view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 35),
                     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
                     view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
                 ])
                 
-                component.addArrangedView(self.registerOrSignInSegmentedControl) { (component, view, superview) in
-                    
-                    if view.numberOfSegments == 0 {
-                        view.insertSegment(withTitle: "Register", at: 0, animated: false)
-                        view.insertSegment(withTitle: "Sign In", at: 1, animated: false)
-                        if view.selectedSegmentIndex == -1 {
-                            view.selectedSegmentIndex = 0
-                        }
-                    }
-                }
-                
+                component.addArrangedView(self.registerOrSignInSegmentedControl)
                 component.addSpace(30)
-                
-                component.addArrangedView(self.headerLabel) { (component, view, superview) in
-                    
-                    view.font = UIFont.boldSystemFont(ofSize: 18)
-                    if self.registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
-                        view.text = "Register"
-                    } else {
-                        view.text = "Sign In"
-                    }
-                }
-                
+                component.addArrangedView(self.headerLabel)
                 component.addSpace(20)
-                
                 component.addArrangedView(self.emailContainerView) { (component, view, superview) in
-                    
                     component.addView(self.emailLabel) { (component, view, superview) in
-                        
-                        view.text = "Email"
-                        
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
@@ -81,16 +52,6 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                     
                     component.addView(self.emailTextField) { (component, view, superview) in
-                        
-                        view.placeholder = "example@example.com"
-                        if #available(iOS 10.0, *) {
-                            view.textContentType = .emailAddress
-                        }
-                        view.layer.borderColor = UIColor.blue.cgColor
-                        view.layer.borderWidth = 1
-                        view.textAlignment = .center
-                        view.isUserInteractionEnabled = false
-                        
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -101,13 +62,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 }
                 
                 component.addSpace(40)
-                
                 component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
-                    
                     component.addView(self.passwordLabel) { (component, view, superview) in
-                        
-                        view.text = "Password"
-                        
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
@@ -118,14 +74,6 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                     
                     component.addView(self.passwordTextField) { (component, view, superview) in
-                        
-                        view.placeholder = "secure password here"
-                        view.isSecureTextEntry = true
-                        view.layer.borderColor = UIColor.blue.cgColor
-                        view.layer.borderWidth = 1
-                        view.textAlignment = .center
-                        view.isUserInteractionEnabled = false
-                        
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
@@ -137,28 +85,64 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 }
                 
                 component.addSpace(40)
-                
-                component.addArrangedView(self.submitButton) { (component, view, superview) in
-                    
-                    view.setTitle("Submit", for: .normal)
-                    view.backgroundColor = UIColor.blue
-                    view.setTitleColor(.white, for: .normal)
-                    view.layer.cornerRadius = 10
-                    view.clipsToBounds = true
-                    view.titleLabel?.textAlignment = .center
-                }
+                component.addArrangedView(self.submitButton)
             }
             
             component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
-                
-                view.setTitle("forgot your password?", for: .normal)
-                view.setTitleColor(.blue, for: .normal)
-                
                 component.activate([
                     view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
                 ])
             }
         }
+    }
+    
+    // Don't worry about this below here
+    
+    private func configureAllViews() {
+        view.backgroundColor = .white
+        registerOrSignInSegmentedControl.insertSegment(withTitle: "Register", at: 0, animated: false)
+        registerOrSignInSegmentedControl.insertSegment(withTitle: "Sign In", at: 1, animated: false)
+        
+        if registerOrSignInSegmentedControl.selectedSegmentIndex == -1 {
+            registerOrSignInSegmentedControl.selectedSegmentIndex = 0
+        }
+        
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        if registerOrSignInSegmentedControl.selectedSegmentIndex == 0 {
+            headerLabel.text = "Register"
+        } else {
+            headerLabel.text = "Sign In"
+        }
+        
+        stackView.axis = .vertical
+        
+        emailLabel.text = "Email"
+        emailTextField.placeholder = "example@example.com"
+        if #available(iOS 10.0, *) {
+            emailTextField.textContentType = .emailAddress
+        }
+        emailTextField.layer.borderColor = UIColor.blue.cgColor
+        emailTextField.layer.borderWidth = 1
+        emailTextField.textAlignment = .center
+        emailTextField.isUserInteractionEnabled = false
+        
+        passwordLabel.text = "Password"
+        passwordTextField.placeholder = "secure password here"
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.layer.borderColor = UIColor.blue.cgColor
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.textAlignment = .center
+        passwordTextField.isUserInteractionEnabled = false
+        
+        submitButton.setTitle("Submit", for: .normal)
+        submitButton.backgroundColor = UIColor.blue
+        submitButton.setTitleColor(.white, for: .normal)
+        submitButton.layer.cornerRadius = 10
+        submitButton.clipsToBounds = true
+        submitButton.titleLabel?.textAlignment = .center
+        
+        forgotMyPasswordButton.setTitle("forgot your password?", for: .normal)
+        forgotMyPasswordButton.setTitleColor(.blue, for: .normal)
     }
 }
