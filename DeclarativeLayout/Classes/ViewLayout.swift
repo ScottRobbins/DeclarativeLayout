@@ -24,6 +24,7 @@ public class ViewLayout<T: UIView> {
         let layoutComponent = UIViewLayoutComponent(view: view)
         layoutClosure(layoutComponent, view)
         
+        removeUnneededArrangedSubviews(with: layoutComponent)
         addSubviews(with: layoutComponent)
         removeUnneededSubviews(with: layoutComponent)
         updateConstraints(with: layoutComponent)
@@ -73,6 +74,19 @@ public class ViewLayout<T: UIView> {
         currentLayoutComponent.allSubviews()
             .filter { !layoutComponentSubviews.contains($0) }
             .forEach { $0.removeFromSuperview() }
+    }
+    
+    private func removeUnneededArrangedSubviews(with layoutComponent: ViewLayoutComponentType) {
+        let currentArrangedSubviews = currentLayoutComponent.allArrangedSubviews()
+        let newArrangedSubviews = layoutComponent.allArrangedSubviews()
+        
+        for (view, currentLayoutComponent) in currentArrangedSubviews {
+            if !newArrangedSubviews.contains(where: { (newArrangedSubview) -> Bool in
+                return newArrangedSubview.0 == view && newArrangedSubview.1.downcastedView == currentLayoutComponent.downcastedView
+            }) {
+                view.removeFromSuperview()
+            }
+        }
     }
     
     private func updateConstraints(with layoutComponent: UIViewLayoutComponent<T>) {
