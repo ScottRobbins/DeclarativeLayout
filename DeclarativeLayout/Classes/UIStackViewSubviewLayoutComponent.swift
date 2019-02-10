@@ -54,4 +54,20 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
             customSpacings.append((afterView: previouslyAddedArrangedSubview, space: space))
         }
     }
+    
+    override func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType] {
+        let arrangedSubviewsAndComponents = arrangedSubviews.reduce([:]) { (dict, view) -> [UIView: UIStackViewLayoutComponentType] in
+            var dict = dict
+            dict[view] = self
+            return dict
+        }
+        return sublayoutComponents.reduce(arrangedSubviewsAndComponents) { (arrangedSubviews, layoutComponent) -> [UIView: UIStackViewLayoutComponentType] in
+            switch layoutComponent {
+            case .uistackview(let layoutComponent):
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+            case .uiview(let layoutComponent):
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+            }
+        }
+    }
 }
