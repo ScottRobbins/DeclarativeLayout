@@ -83,6 +83,10 @@ public class ViewLayout<T: UIView> {
         for (view, currentLayoutComponent) in currentArrangedSubviews {
             if newArrangedSubviews[view] == nil {
                 view.removeFromSuperview()
+            } else if let newComponent = newArrangedSubviews[view],
+                newComponent.downcastedView != currentLayoutComponent.downcastedView
+            {
+                view.removeFromSuperview()
             }
         }
     }
