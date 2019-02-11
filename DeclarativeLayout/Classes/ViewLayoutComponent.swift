@@ -10,6 +10,7 @@ protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
     func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType]
     func allConstraints() -> [LayoutConstraint]
+    func allLayoutGuides() -> [UILayoutGuide: UIView]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
     var layoutGuides: [UILayoutGuide] { get }
@@ -149,6 +150,25 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .layoutGuide(_):
                 return arrangedSubviews
+            }
+        }
+    }
+    
+    func allLayoutGuides() -> [UILayoutGuide: UIView] {
+        let layoutGuideDict = layoutGuides.reduce([:]) { (dict, layoutGuide) -> [UILayoutGuide: UIView] in
+            var mutableDict = dict
+            mutableDict[layoutGuide] = view
+            return mutableDict
+        }
+        
+        return sublayoutComponents.reduce(layoutGuideDict) { (dict, layoutComponent) -> [UILayoutGuide: UIView] in
+            switch layoutComponent {
+            case .uistackview(let layoutComponent):
+                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
+            case .uiview(let layoutComponent):
+                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
+            case .layoutGuide(_):
+                return dict
             }
         }
     }

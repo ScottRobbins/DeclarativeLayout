@@ -25,14 +25,15 @@ public class ViewLayout<T: UIView> {
         layoutClosure(layoutComponent, view)
         
         removeUnneededArrangedSubviews(with: layoutComponent)
-        addSubviews(with: layoutComponent)
+        removeUnneededLayougGuides(with: layoutComponent)
+        addSubviewsAndLayoutGuides(with: layoutComponent)
         removeUnneededSubviews(with: layoutComponent)
         updateConstraints(with: layoutComponent)
         
         currentLayoutComponent = layoutComponent
     }
     
-    private func addSubviews(with layoutComponent: UIViewLayoutComponentType) {
+    private func addSubviewsAndLayoutGuides(with layoutComponent: UIViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
         }
@@ -41,10 +42,10 @@ public class ViewLayout<T: UIView> {
             layoutComponent.downcastedView.addLayoutGuide(layoutGuide)
         }
         
-        addSubviewsForSublayoutComponents(with: layoutComponent)
+        addSubviewsAndLayoutGuidesForSublayoutComponents(with: layoutComponent)
     }
     
-    private func addSubviews(with layoutComponent: UIStackViewLayoutComponentType) {
+    private func addSubviewsAndLayoutGuides(with layoutComponent: UIStackViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
         }
@@ -53,16 +54,16 @@ public class ViewLayout<T: UIView> {
             layoutComponent.downcastedView.addLayoutGuide(layoutGuide)
         }
         
-        addSubviewsForSublayoutComponents(with: layoutComponent)
+        addSubviewsAndLayoutGuidesForSublayoutComponents(with: layoutComponent)
     }
     
-    private func addSubviewsForSublayoutComponents(with layoutComponent: ViewLayoutComponentType) {
+    private func addSubviewsAndLayoutGuidesForSublayoutComponents(with layoutComponent: ViewLayoutComponentType) {
         for sublayoutComponent in layoutComponent.sublayoutComponents {
             switch sublayoutComponent {
             case .uiview(let layoutComponent):
-                addSubviews(with: layoutComponent)
+                addSubviewsAndLayoutGuides(with: layoutComponent)
             case .uistackview(let layoutComponent):
-                addSubviews(with: layoutComponent)
+                addSubviewsAndLayoutGuides(with: layoutComponent)
                 
                 for (i, subview) in layoutComponent.arrangedSubviews.enumerated() {
                     layoutComponent.downcastedView.insertArrangedSubview(subview, at: i)
@@ -97,6 +98,21 @@ public class ViewLayout<T: UIView> {
                 newComponent.downcastedView != currentLayoutComponent.downcastedView
             {
                 view.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func removeUnneededLayougGuides(with layoutComponent: UIViewLayoutComponent<T>) {
+        let currentLayoutGuides = currentLayoutComponent.allLayoutGuides()
+        let newLayoutGuides = layoutComponent.allLayoutGuides()
+        
+        for (layoutGuide, owningView) in currentLayoutGuides {
+            if newLayoutGuides[layoutGuide] == nil {
+                owningView.removeLayoutGuide(layoutGuide)
+            } else if let newOwningView = newLayoutGuides[layoutGuide],
+                newOwningView != owningView
+            {
+                owningView.removeLayoutGuide(layoutGuide)
             }
         }
     }
