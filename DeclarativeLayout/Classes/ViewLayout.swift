@@ -37,12 +37,20 @@ public class ViewLayout<T: UIView> {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
         }
         
+        for layoutGuide in layoutComponent.layoutGuides {
+            layoutComponent.downcastedView.addLayoutGuide(layoutGuide)
+        }
+        
         addSubviewsForSublayoutComponents(with: layoutComponent)
     }
     
     private func addSubviews(with layoutComponent: UIStackViewLayoutComponentType) {
         for (i, subview) in layoutComponent.subviews.enumerated() {
             layoutComponent.downcastedView.insertSubview(subview, at: i)
+        }
+        
+        for layoutGuide in layoutComponent.layoutGuides {
+            layoutComponent.downcastedView.addLayoutGuide(layoutGuide)
         }
         
         addSubviewsForSublayoutComponents(with: layoutComponent)
@@ -65,6 +73,8 @@ public class ViewLayout<T: UIView> {
                         layoutComponent.downcastedView.setCustomSpacing(customSpacing.space, after: customSpacing.afterView)
                     }
                 }
+            case .layoutGuide(_):
+                break
             }
         }
     }

@@ -3,6 +3,7 @@ import UIKit
 enum LayoutComponentType {
     case uiview(layout: UIViewLayoutComponentType)
     case uistackview(layout: UIStackViewLayoutComponentType)
+    case layoutGuide(layout: LayoutGuideComponentType)
 }
 
 protocol ViewLayoutComponentType {
@@ -11,6 +12,11 @@ protocol ViewLayoutComponentType {
     func allConstraints() -> [LayoutConstraint]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
+    var layoutGuides: [UILayoutGuide] { get }
+}
+
+protocol LayoutGuideComponentType {
+    func allConstraints() -> [LayoutConstraint]
 }
 
 protocol UIViewLayoutComponentType: ViewLayoutComponentType {
@@ -31,6 +37,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     public unowned let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
+    private(set) var layoutGuides = [UILayoutGuide]()
     private var constraints = [LayoutConstraint]()
     
     init(view: T) {
@@ -83,6 +90,17 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         return subLayoutComponent
     }
     
+    @discardableResult public func addLayoutGuide(_ layoutGuide: UILayoutGuide,
+                                                  layoutClosure: ((UILayoutGuideComponent<T>, UILayoutGuide, T) -> Void)? = nil) -> UILayoutGuideComponent<T> {
+        let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
+                                                        owningView: view)
+        sublayoutComponents.append(.layoutGuide(layout: subLayoutComponent))
+        layoutGuides.append(layoutGuide)
+        
+        layoutClosure?(subLayoutComponent, layoutGuide, view)
+        return subLayoutComponent
+    }
+    
     /**
      Define constraints that should be activated
      
@@ -103,6 +121,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return combinedConstraints + layoutComponent.allConstraints()
             case .uiview(let layoutComponent):
                 return combinedConstraints + layoutComponent.allConstraints()
+            case .layoutGuide(let layoutComponent):
+                return combinedConstraints + layoutComponent.allConstraints()
             }
         }
     }
@@ -114,6 +134,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return subviews + layoutComponent.allSubviews()
             case .uiview(let layoutComponent):
                 return subviews + layoutComponent.allSubviews()
+            case .layoutGuide(_):
+                return subviews
             }
         }
     }
@@ -125,6 +147,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .uiview(let layoutComponent):
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+            case .layoutGuide(_):
+                return arrangedSubviews
             }
         }
     }

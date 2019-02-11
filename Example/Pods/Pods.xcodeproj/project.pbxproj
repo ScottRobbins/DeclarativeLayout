@@ -11,6 +11,7 @@
 		2A441A8385A01B14CB7960273E01EE51 /* ViewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53DEB8A41F1B7901E4D138216256E1 /* ViewLayoutComponent.swift */; };
 		2F1BA75F9EC6B66C67B179A61A7EA505 /* Pods-DeclarativeLayout_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DF1C9D9935C528BC1F0A3F769C5EA3 /* Pods-DeclarativeLayout_Example-dummy.m */; };
 		4674DD19965EBE685513BD994B99CFE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */; };
+		468C177E22112157005F4CC2 /* UILayoutGuideComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C177D22112157005F4CC2 /* UILayoutGuideComponent.swift */; };
 		4B55C00FC8E564C60A0F7B4C161DF8A1 /* UIViewSubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371AA54666C63054A632C6707F270D0 /* UIViewSubviewLayoutComponent.swift */; };
 		6CD15CA36A6D3219480318CD3B045F3E /* UIStackViewSubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF492EDF1D8D780C10738277FCDDB70 /* UIStackViewSubviewLayoutComponent.swift */; };
 		92497F0CF7571BC6E57677098233F8F7 /* SubviewLayoutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F604EE970DC091A04B5619A3F3A56 /* SubviewLayoutComponent.swift */; };
@@ -49,6 +50,7 @@
 		377F0116988DCD3D04263B67629F89B3 /* DeclarativeLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DeclarativeLayout-dummy.m"; sourceTree = "<group>"; };
 		38FF02A03255A803B9829F0A557D952C /* Pods_DeclarativeLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeclarativeLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53DEB8A41F1B7901E4D138216256E1 /* ViewLayoutComponent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewLayoutComponent.swift; path = DeclarativeLayout/Classes/ViewLayoutComponent.swift; sourceTree = "<group>"; };
+		468C177D22112157005F4CC2 /* UILayoutGuideComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayoutGuideComponent.swift; sourceTree = "<group>"; };
 		46D2CB91E3E701E6626B0AF40099D498 /* Pods-DeclarativeLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DeclarativeLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5371AA54666C63054A632C6707F270D0 /* UIViewSubviewLayoutComponent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIViewSubviewLayoutComponent.swift; path = DeclarativeLayout/Classes/UIViewSubviewLayoutComponent.swift; sourceTree = "<group>"; };
 		5CEF1015240CD5BA0CBE94CF8FC7A0E5 /* DeclarativeLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DeclarativeLayout.xcconfig; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				5371AA54666C63054A632C6707F270D0 /* UIViewSubviewLayoutComponent.swift */,
 				0539B23BFC05ED06E8F0C1672CF62873 /* ViewLayout.swift */,
 				3B53DEB8A41F1B7901E4D138216256E1 /* ViewLayoutComponent.swift */,
+				468C177D22112157005F4CC2 /* UILayoutGuideComponent.swift */,
 				838E7F428C3226EA07626DA2EEAF6FEB /* Pod */,
 				54402B3959CD44DBDB0443DE809A20EE /* Support Files */,
 			);
@@ -380,6 +383,7 @@
 			files = (
 				9999FFB9550A26DE87DDB4476206083E /* DeclarativeLayout-dummy.m in Sources */,
 				E140AA81389F5BAA23897EA9F2E58ABA /* LayoutConstraint.swift in Sources */,
+				468C177E22112157005F4CC2 /* UILayoutGuideComponent.swift in Sources */,
 				92497F0CF7571BC6E57677098233F8F7 /* SubviewLayoutComponent.swift in Sources */,
 				6CD15CA36A6D3219480318CD3B045F3E /* UIStackViewSubviewLayoutComponent.swift in Sources */,
 				FD07878C287234E9914E4701F892B563 /* UIViewLayoutComponent.swift in Sources */,

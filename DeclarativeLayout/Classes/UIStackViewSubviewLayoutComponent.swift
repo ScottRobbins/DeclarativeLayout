@@ -67,6 +67,8 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .uiview(let layoutComponent):
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+            case .layoutGuide(_):
+                return arrangedSubviews
             }
         }
     }
