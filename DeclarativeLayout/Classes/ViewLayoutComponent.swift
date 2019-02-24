@@ -46,6 +46,21 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     }
     
     /**
+     Add a subview to the component's view. This will just add a regular UIView (`UIView()`).
+     
+     - parameters:
+         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
+     
+     If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
+     unnecessary layout recalculations to occur.
+     */
+    @discardableResult public func addView(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>, UIView, T) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
+    {
+        return addView(UIView(), layoutClosure: layoutClosure)
+    }
+    
+    /**
      Add a subview to the component's view.
      
      - parameters:
@@ -65,6 +80,23 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         
         layoutClosure?(subLayoutComponent, subview, view)
         return subLayoutComponent
+    }
+    
+    /**
+     Add a subview, that is a stack view, to the component's view. This will just add a regular UIStackView (`UIStackView()`).
+     
+     - parameters:
+         - layoutClosure: A closure that will define the layout component for the subview.
+     - returns: The layout component for the subview (the same one passed into the optional closure)
+     
+     This will allow you to, in the layout closure, add arranged views for the passed in stack view.
+     
+     If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
+     unnecessary layout recalculations to occur.
+     */
+    @discardableResult public func addStackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>, UIStackView, T) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
+    {
+        return addStackView(UIStackView(), layoutClosure: layoutClosure)
     }
     
     /**
@@ -89,6 +121,20 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         
         layoutClosure?(subLayoutComponent, subview, view)
         return subLayoutComponent
+    }
+    
+    /**
+     Add a layout guide to the component's view. This will just add a regular UILayoutGuide (`UILayoutGuide()`).
+     
+     - parameters:
+         - layoutClosure: A closure that will define the layout component for the layout guide.
+     - returns: The layout component for the layout guide (the same one passed into the optional closure)
+     
+     If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
+     unnecessary layout recalculations to occur.
+     */
+    @discardableResult public func addLayoutGuide(layoutClosure: ((UILayoutGuideComponent<T>, UILayoutGuide, T) -> Void)? = nil) -> UILayoutGuideComponent<T> {
+        return addLayoutGuide(UILayoutGuide(), layoutClosure: layoutClosure)
     }
     
     /**
