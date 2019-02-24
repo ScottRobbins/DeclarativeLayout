@@ -91,6 +91,14 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         return subLayoutComponent
     }
     
+    /**
+     Add a layout guide to the component's view.
+     
+     - parameters:
+         - layoutGuide: The layout guide you would like ot add to the component's view.
+         - layoutClosure: A closure that will define the layout component for the layout guide.
+     - returns: The layout component for the layout guide (the same one passed into the optional closure)
+     */
     @discardableResult public func addLayoutGuide(_ layoutGuide: UILayoutGuide,
                                                   layoutClosure: ((UILayoutGuideComponent<T>, UILayoutGuide, T) -> Void)? = nil) -> UILayoutGuideComponent<T> {
         let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
