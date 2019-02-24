@@ -1,16 +1,23 @@
 PODS:
-  - DeclarativeLayout (0.5.0)
+  - Anchorage (4.3)
+  - DeclarativeLayout (0.6.0)
 
 DEPENDENCIES:
+  - Anchorage (= 4.3)
   - DeclarativeLayout (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Anchorage
 
 EXTERNAL SOURCES:
   DeclarativeLayout:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  DeclarativeLayout: 207818427124fa1a0dfadad6993ae89d75f5c3d3
+  Anchorage: 21a98675245188427f0bcea21404d42a824a766f
+  DeclarativeLayout: c945437364293e44dbf927a10ae4a047f1a996dc
 
-PODFILE CHECKSUM: 0d1373e0bb9795c40cf58254d7f6d2b1a31601a7
+PODFILE CHECKSUM: 03f7d74d0628b6e07c10436da1340f096ce27d77
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

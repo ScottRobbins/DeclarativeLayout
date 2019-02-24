@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'DeclarativeLayout_Example' do
   pod 'DeclarativeLayout', :path => '../'
+  pod 'Anchorage', '4.3'
 
   target 'DeclarativeLayout_Tests' do
     inherit! :search_paths
