@@ -3,14 +3,21 @@ import UIKit
 enum LayoutComponentType {
     case uiview(layout: UIViewLayoutComponentType)
     case uistackview(layout: UIStackViewLayoutComponentType)
+    case layoutGuide(layout: LayoutGuideComponentType)
 }
 
 protocol ViewLayoutComponentType {
     func allSubviews() -> [UIView]
     func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType]
     func allConstraints() -> [LayoutConstraint]
+    func allLayoutGuides() -> [UILayoutGuide: UIView]
     var subviews: [UIView] { get }
     var sublayoutComponents: [LayoutComponentType] { get }
+    var layoutGuides: [UILayoutGuide] { get }
+}
+
+protocol LayoutGuideComponentType {
+    func allConstraints() -> [LayoutConstraint]
 }
 
 protocol UIViewLayoutComponentType: ViewLayoutComponentType {
@@ -31,6 +38,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     public unowned let view: T
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
+    private(set) var layoutGuides = [UILayoutGuide]()
     private var constraints = [LayoutConstraint]()
     
     init(view: T) {
@@ -84,6 +92,25 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     }
     
     /**
+     Add a layout guide to the component's view.
+     
+     - parameters:
+         - layoutGuide: The layout guide you would like ot add to the component's view.
+         - layoutClosure: A closure that will define the layout component for the layout guide.
+     - returns: The layout component for the layout guide (the same one passed into the optional closure)
+     */
+    @discardableResult public func addLayoutGuide(_ layoutGuide: UILayoutGuide,
+                                                  layoutClosure: ((UILayoutGuideComponent<T>, UILayoutGuide, T) -> Void)? = nil) -> UILayoutGuideComponent<T> {
+        let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
+                                                        owningView: view)
+        sublayoutComponents.append(.layoutGuide(layout: subLayoutComponent))
+        layoutGuides.append(layoutGuide)
+        
+        layoutClosure?(subLayoutComponent, layoutGuide, view)
+        return subLayoutComponent
+    }
+    
+    /**
      Define constraints that should be activated
      
      - parameters:
@@ -103,6 +130,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return combinedConstraints + layoutComponent.allConstraints()
             case .uiview(let layoutComponent):
                 return combinedConstraints + layoutComponent.allConstraints()
+            case .layoutGuide(let layoutComponent):
+                return combinedConstraints + layoutComponent.allConstraints()
             }
         }
     }
@@ -114,6 +143,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return subviews + layoutComponent.allSubviews()
             case .uiview(let layoutComponent):
                 return subviews + layoutComponent.allSubviews()
+            case .layoutGuide(_):
+                return subviews
             }
         }
     }
@@ -125,6 +156,27 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
             case .uiview(let layoutComponent):
                 return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+            case .layoutGuide(_):
+                return arrangedSubviews
+            }
+        }
+    }
+    
+    func allLayoutGuides() -> [UILayoutGuide: UIView] {
+        let layoutGuideDict = layoutGuides.reduce([:]) { (dict, layoutGuide) -> [UILayoutGuide: UIView] in
+            var mutableDict = dict
+            mutableDict[layoutGuide] = view
+            return mutableDict
+        }
+        
+        return sublayoutComponents.reduce(layoutGuideDict) { (dict, layoutComponent) -> [UILayoutGuide: UIView] in
+            switch layoutComponent {
+            case .uistackview(let layoutComponent):
+                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
+            case .uiview(let layoutComponent):
+                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
+            case .layoutGuide(_):
+                return dict
             }
         }
     }
