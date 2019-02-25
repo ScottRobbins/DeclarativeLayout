@@ -7,9 +7,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case quickStart
         case registrationWithoutFramework
         case registrationWithFramework
+        case registrationWithFrameworkAndAnchorage
         
         static var allRows: [Row] {
-            return [.quickStart, .registrationWithoutFramework, .registrationWithFramework]
+            return [.quickStart, .registrationWithoutFramework, .registrationWithFramework, .registrationWithFrameworkAndAnchorage]
         }
     }
     
@@ -65,6 +66,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.textLabel?.text = "Registration Screen Without Framework"
         case .registrationWithFramework:
             cell.textLabel?.text = "Registration Screen With Framework"
+        case .registrationWithFrameworkAndAnchorage:
+            cell.textLabel?.text = "Registration Screen With Framework and Anchorage"
         }
         
         return cell
@@ -78,6 +81,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             navigationController?.pushViewController(RegistrationWithoutFrameworkViewController(), animated: true)
         case .registrationWithFramework:
             navigationController?.pushViewController(RegistrationExampleWithFrameworkViewController(), animated: true)
+        case .registrationWithFrameworkAndAnchorage:
+            navigationController?.pushViewController(RegistrationExampleWithFrameworkAndAnchorageViewController(), animated: true)
         }
     }
 }
