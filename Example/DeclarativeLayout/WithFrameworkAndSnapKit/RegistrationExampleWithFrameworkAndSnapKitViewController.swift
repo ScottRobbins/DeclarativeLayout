@@ -1,24 +1,32 @@
 import UIKit
 import DeclarativeLayout
-import Anchorage
+import SnapKit
 
-// MARK: - Layout extensions for Anchorage
+/*
+ Note about using Snapkit:
+ 
+ Because DeclarativeLayout doesn't necessarily have the views added to the view hierarchy at the time you are
+ creating constraints with snapkit, you cannot use `...ToSuperview()`, it will result in a crash. Additional
+ functionality would be needed on snapkit's end to support passing the context of what the superview is to SnapKit.
+ */
+
+// MARK: - Layout extensions for Snapkit
 
 private extension ViewLayoutComponent {
-    func layout(closure: () -> Void) {
-        activate(Anchorage.batch(active: false, closure: closure))
+    func layout(closure: (ConstraintMaker) -> Void) {
+        activate(view.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
     }
 }
 
 private extension UILayoutGuideComponent {
-    func layout(closure: () -> Void) {
-        activate(Anchorage.batch(active: false, closure: closure))
+    func layout(closure: (ConstraintMaker) -> Void) {
+        activate(layoutGuide.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
     }
 }
 
 // MARK: - Example
 
-class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewController {
+class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController {
     
     private lazy var viewLayout = ViewLayout(view: view)
     private let registerOrSignInSegmentedControl = UISegmentedControl()
@@ -47,10 +55,10 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
         viewLayout.updateLayoutTo { (component, view) in
             component.addStackView(self.stackView) { (component, view, superview) in
                 view.axis = .vertical
-                component.layout {
-                    view.topAnchor == superview.safeAreaLayoutGuide.topAnchor + 35
-                    view.leadingAnchor == superview.leadingAnchor + 20
-                    view.trailingAnchor == superview.trailingAnchor - 20
+                component.layout { (make) -> Void in
+                    make.top.equalTo(superview.safeAreaLayoutGuide).offset(35)
+                    make.leading.equalTo(superview).offset(20)
+                    make.trailing.equalTo(superview).offset(-20)
                 }
                 
                 component.addArrangedView(self.registerOrSignInSegmentedControl)
@@ -59,21 +67,21 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                 component.addSpace(20)
                 component.addArrangedView(self.emailContainerView) { (component, view, superview) in
                     component.addView(self.emailLabel) { (component, view, superview) in
-                        component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.leadingAnchor == superview.leadingAnchor
-                            view.trailingAnchor == self.emailTextField.leadingAnchor - 20
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                        component.layout { (make) in
+                            make.top.greaterThanOrEqualTo(superview)
+                            make.leading.equalTo(superview)
+                            make.trailing.equalTo(self.emailTextField.snp.leading).offset(-20)
+                            make.bottom.lessThanOrEqualTo(superview)
+                            make.centerY.equalTo(superview)
                         }
                     }
                     
                     component.addView(self.emailTextField) { (component, view, superview) in
-                        component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.trailingAnchor == superview.trailingAnchor
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                        component.layout { (make) in
+                            make.top.greaterThanOrEqualTo(superview)
+                            make.trailing.equalTo(superview)
+                            make.bottom.lessThanOrEqualTo(superview)
+                            make.centerY.equalTo(superview)
                         }
                     }
                 }
@@ -81,22 +89,22 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                 component.addSpace(40)
                 component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
                     component.addView(self.passwordLabel) { (component, view, superview) in
-                        component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.leadingAnchor == superview.leadingAnchor
-                            view.trailingAnchor == self.passwordTextField.leadingAnchor - 20
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                        component.layout { (make) in
+                            make.top.greaterThanOrEqualTo(superview)
+                            make.leading.equalTo(superview)
+                            make.trailing.equalTo(self.passwordTextField.snp.leading).offset(-20)
+                            make.bottom.lessThanOrEqualTo(superview)
+                            make.centerY.equalTo(superview)
                         }
                     }
                     
                     component.addView(self.passwordTextField) { (component, view, superview) in
-                        component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.trailingAnchor == superview.trailingAnchor
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
-                            view.leadingAnchor == self.emailTextField.leadingAnchor
+                        component.layout { (make) in
+                            make.top.greaterThanOrEqualTo(superview)
+                            make.trailing.equalTo(superview)
+                            make.bottom.lessThanOrEqualTo(superview)
+                            make.centerY.equalTo(superview)
+                            make.leading.equalTo(self.emailTextField)
                         }
                     }
                 }
@@ -106,9 +114,9 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
             }
             
             component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
-                component.layout {
-                    view.topAnchor == self.stackView.bottomAnchor + 20
-                    view.centerXAnchor == superview.centerXAnchor
+                component.layout { (make) in
+                    make.top.equalTo(self.stackView.snp.bottom).offset(20)
+                    make.centerX.equalTo(superview)
                 }
             }
         }
@@ -163,3 +171,4 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
         forgotMyPasswordButton.setTitleColor(.blue, for: .normal)
     }
 }
+

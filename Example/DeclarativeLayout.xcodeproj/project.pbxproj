@@ -11,6 +11,7 @@
 		4641D5F81F0C98ED007C2469 /* QuickStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */; };
 		467823C02161D77D0072D45D /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467823BF2161D77D0072D45D /* ExampleView.swift */; };
 		46A28F31222369D10073D3B8 /* RegistrationExampleWithFrameworkAndAnchorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A28F30222369D10073D3B8 /* RegistrationExampleWithFrameworkAndAnchorageViewController.swift */; };
+		46A28F342223739C0073D3B8 /* RegistrationExampleWithFrameworkAndSnapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A28F332223739C0073D3B8 /* RegistrationExampleWithFrameworkAndSnapKitViewController.swift */; };
 		46A8AF402161DCBA001ADBEC /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8AF3F2161DCBA001ADBEC /* PerformanceTests.swift */; };
 		46D4EACB1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */; };
 		46D4EACE1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */; };
@@ -40,6 +41,7 @@
 		4641D5F71F0C98ED007C2469 /* QuickStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickStartViewController.swift; sourceTree = "<group>"; };
 		467823BF2161D77D0072D45D /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
 		46A28F30222369D10073D3B8 /* RegistrationExampleWithFrameworkAndAnchorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithFrameworkAndAnchorageViewController.swift; sourceTree = "<group>"; };
+		46A28F332223739C0073D3B8 /* RegistrationExampleWithFrameworkAndSnapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithFrameworkAndSnapKitViewController.swift; sourceTree = "<group>"; };
 		46A8AF3F2161DCBA001ADBEC /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		46D4EACA1EB05DF000D7EFD2 /* RegistrationExampleWithoutFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithoutFrameworkViewController.swift; sourceTree = "<group>"; };
 		46D4EACD1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationExampleWithFrameworkViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = WithFrameworkAndAnchorage;
 			sourceTree = "<group>";
 		};
+		46A28F322223737A0073D3B8 /* WithFrameworkAndSnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				46A28F332223739C0073D3B8 /* RegistrationExampleWithFrameworkAndSnapKitViewController.swift */,
+			);
+			path = WithFrameworkAndSnapKit;
+			sourceTree = "<group>";
+		};
 		46D4EAC51EB05A9100D7EFD2 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 		46D4EAC81EB05D9100D7EFD2 /* RegistrationExample */ = {
 			isa = PBXGroup;
 			children = (
+				46A28F322223737A0073D3B8 /* WithFrameworkAndSnapKit */,
 				46A28F2F222369B60073D3B8 /* WithFrameworkAndAnchorage */,
 				46D4EACC1EB06B4C00D7EFD2 /* WithFramework */,
 				46D4EAC91EB05DD400D7EFD2 /* WithoutFramework */,
@@ -388,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* MenuViewController.swift in Sources */,
+				46A28F342223739C0073D3B8 /* RegistrationExampleWithFrameworkAndSnapKitViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				46D4EACE1EB06B6900D7EFD2 /* RegistrationExampleWithFrameworkViewController.swift in Sources */,
 				46A28F31222369D10073D3B8 /* RegistrationExampleWithFrameworkAndAnchorageViewController.swift in Sources */,
