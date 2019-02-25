@@ -55,7 +55,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                         ])
                     }
@@ -77,7 +77,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         component.activate([
                             view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
                             view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                            view.bottomAnchor.constraint(greaterThanOrEqualTo: superview.bottomAnchor),
+                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
                             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
                             view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
                         ])
