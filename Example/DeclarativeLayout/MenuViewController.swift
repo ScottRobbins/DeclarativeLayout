@@ -34,13 +34,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func layoutAllViews() {
-        viewLayout.updateLayoutTo { (component, view) in
-            component.addView(tableView) { (component, view, superview) in
+        viewLayout.updateLayoutTo { (component) in
+            component.addView(tableView) { (component) in
                 component.activate([
-                    view.topAnchor.constraint(equalTo: superview.topAnchor),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                    view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+                    component.view.topAnchor.constraint(equalTo: component.superview.topAnchor),
+                    component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
+                    component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+                    component.view.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor),
                 ])
             }
         }

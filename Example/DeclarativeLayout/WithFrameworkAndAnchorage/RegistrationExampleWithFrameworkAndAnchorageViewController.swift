@@ -44,59 +44,59 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
     
     private func layoutAllViews() {
         
-        viewLayout.updateLayoutTo { (component, view) in
-            component.addStackView(self.stackView) { (component, view, superview) in
-                view.axis = .vertical
+        viewLayout.updateLayoutTo { (component) in
+            component.addStackView(self.stackView) { (component) in
+                component.view.axis = .vertical
                 component.layout {
-                    view.topAnchor == superview.safeAreaLayoutGuide.topAnchor + 35
-                    view.leadingAnchor == superview.leadingAnchor + 20
-                    view.trailingAnchor == superview.trailingAnchor - 20
+                    component.view.topAnchor == component.superview.safeAreaLayoutGuide.topAnchor + 35
+                    component.view.leadingAnchor == component.superview.leadingAnchor + 20
+                    component.view.trailingAnchor == component.superview.trailingAnchor - 20
                 }
                 
                 component.addArrangedView(self.registerOrSignInSegmentedControl)
                 component.addSpace(30)
                 component.addArrangedView(self.headerLabel)
                 component.addSpace(20)
-                component.addArrangedView(self.emailContainerView) { (component, view, superview) in
-                    component.addView(self.emailLabel) { (component, view, superview) in
+                component.addArrangedView(self.emailContainerView) { (component) in
+                    component.addView(self.emailLabel) { (component) in
                         component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.leadingAnchor == superview.leadingAnchor
-                            view.trailingAnchor == self.emailTextField.leadingAnchor - 20
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                            component.view.topAnchor >= component.superview.topAnchor
+                            component.view.leadingAnchor == component.superview.leadingAnchor
+                            component.view.trailingAnchor == self.emailTextField.leadingAnchor - 20
+                            component.view.bottomAnchor <= component.superview.bottomAnchor
+                            component.view.centerYAnchor == component.superview.centerYAnchor
                         }
                     }
                     
-                    component.addView(self.emailTextField) { (component, view, superview) in
+                    component.addView(self.emailTextField) { (component) in
                         component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.trailingAnchor == superview.trailingAnchor
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                            component.view.topAnchor >= component.superview.topAnchor
+                            component.view.trailingAnchor == component.superview.trailingAnchor
+                            component.view.bottomAnchor <= component.superview.bottomAnchor
+                            component.view.centerYAnchor == component.superview.centerYAnchor
                         }
                     }
                 }
                 
                 component.addSpace(40)
-                component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
-                    component.addView(self.passwordLabel) { (component, view, superview) in
+                component.addArrangedView(self.passwordContainerView) { (component) in
+                    component.addView(self.passwordLabel) { (component) in
                         component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.leadingAnchor == superview.leadingAnchor
-                            view.trailingAnchor == self.passwordTextField.leadingAnchor - 20
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
+                            component.view.topAnchor >= component.superview.topAnchor
+                            component.view.leadingAnchor == component.superview.leadingAnchor
+                            component.view.trailingAnchor == self.passwordTextField.leadingAnchor - 20
+                            component.view.bottomAnchor <= component.superview.bottomAnchor
+                            component.view.centerYAnchor == component.superview.centerYAnchor
                         }
                     }
                     
-                    component.addView(self.passwordTextField) { (component, view, superview) in
+                    component.addView(self.passwordTextField) { (component) in
                         component.layout {
-                            view.topAnchor >= superview.topAnchor
-                            view.trailingAnchor == superview.trailingAnchor
-                            view.bottomAnchor <= superview.bottomAnchor
-                            view.centerYAnchor == superview.centerYAnchor
-                            view.leadingAnchor == self.emailTextField.leadingAnchor
+                            component.view.topAnchor >= component.superview.topAnchor
+                            component.view.trailingAnchor == component.superview.trailingAnchor
+                            component.view.bottomAnchor <= component.superview.bottomAnchor
+                            component.view.centerYAnchor == component.superview.centerYAnchor
+                            component.view.leadingAnchor == self.emailTextField.leadingAnchor
                         }
                     }
                 }
@@ -105,10 +105,10 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                 component.addArrangedView(self.submitButton)
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
+            component.addView(self.forgotMyPasswordButton) { (component) in
                 component.layout {
-                    view.topAnchor == self.stackView.bottomAnchor + 20
-                    view.centerXAnchor == superview.centerXAnchor
+                    component.view.topAnchor == self.stackView.bottomAnchor + 20
+                    component.view.centerXAnchor == component.superview.centerXAnchor
                 }
             }
         }

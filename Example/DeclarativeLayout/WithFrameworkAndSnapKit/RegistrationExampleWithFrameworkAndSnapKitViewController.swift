@@ -52,58 +52,58 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
     
     private func layoutAllViews() {
         
-        viewLayout.updateLayoutTo { (component, view) in
-            component.addStackView(self.stackView) { (component, view, superview) in
-                view.axis = .vertical
+        viewLayout.updateLayoutTo { (component) in
+            component.addStackView(self.stackView) { (component) in
+                component.view.axis = .vertical
                 component.layout { (make) -> Void in
-                    make.top.equalTo(superview.safeAreaLayoutGuide).offset(35)
-                    make.leading.equalTo(superview).offset(20)
-                    make.trailing.equalTo(superview).offset(-20)
+                    make.top.equalTo(component.superview.safeAreaLayoutGuide).offset(35)
+                    make.leading.equalTo(component.superview).offset(20)
+                    make.trailing.equalTo(component.superview).offset(-20)
                 }
                 
                 component.addArrangedView(self.registerOrSignInSegmentedControl)
                 component.addSpace(30)
                 component.addArrangedView(self.headerLabel)
                 component.addSpace(20)
-                component.addArrangedView(self.emailContainerView) { (component, view, superview) in
-                    component.addView(self.emailLabel) { (component, view, superview) in
+                component.addArrangedView(self.emailContainerView) { (component) in
+                    component.addView(self.emailLabel) { (component) in
                         component.layout { (make) in
-                            make.top.greaterThanOrEqualTo(superview)
-                            make.leading.equalTo(superview)
+                            make.top.greaterThanOrEqualTo(component.superview)
+                            make.leading.equalTo(component.superview)
                             make.trailing.equalTo(self.emailTextField.snp.leading).offset(-20)
-                            make.bottom.lessThanOrEqualTo(superview)
-                            make.centerY.equalTo(superview)
+                            make.bottom.lessThanOrEqualTo(component.superview)
+                            make.centerY.equalTo(component.superview)
                         }
                     }
                     
-                    component.addView(self.emailTextField) { (component, view, superview) in
+                    component.addView(self.emailTextField) { (component) in
                         component.layout { (make) in
-                            make.top.greaterThanOrEqualTo(superview)
-                            make.trailing.equalTo(superview)
-                            make.bottom.lessThanOrEqualTo(superview)
-                            make.centerY.equalTo(superview)
+                            make.top.greaterThanOrEqualTo(component.superview)
+                            make.trailing.equalTo(component.superview)
+                            make.bottom.lessThanOrEqualTo(component.superview)
+                            make.centerY.equalTo(component.superview)
                         }
                     }
                 }
                 
                 component.addSpace(40)
-                component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
-                    component.addView(self.passwordLabel) { (component, view, superview) in
+                component.addArrangedView(self.passwordContainerView) { (component) in
+                    component.addView(self.passwordLabel) { (component) in
                         component.layout { (make) in
-                            make.top.greaterThanOrEqualTo(superview)
-                            make.leading.equalTo(superview)
+                            make.top.greaterThanOrEqualTo(component.superview)
+                            make.leading.equalTo(component.superview)
                             make.trailing.equalTo(self.passwordTextField.snp.leading).offset(-20)
-                            make.bottom.lessThanOrEqualTo(superview)
-                            make.centerY.equalTo(superview)
+                            make.bottom.lessThanOrEqualTo(component.superview)
+                            make.centerY.equalTo(component.superview)
                         }
                     }
                     
-                    component.addView(self.passwordTextField) { (component, view, superview) in
+                    component.addView(self.passwordTextField) { (component) in
                         component.layout { (make) in
-                            make.top.greaterThanOrEqualTo(superview)
-                            make.trailing.equalTo(superview)
-                            make.bottom.lessThanOrEqualTo(superview)
-                            make.centerY.equalTo(superview)
+                            make.top.greaterThanOrEqualTo(component.superview)
+                            make.trailing.equalTo(component.superview)
+                            make.bottom.lessThanOrEqualTo(component.superview)
+                            make.centerY.equalTo(component.superview)
                             make.leading.equalTo(self.emailTextField)
                         }
                     }
@@ -113,10 +113,10 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
                 component.addArrangedView(self.submitButton)
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
+            component.addView(self.forgotMyPasswordButton) { (component) in
                 component.layout { (make) in
                     make.top.equalTo(self.stackView.snp.bottom).offset(20)
-                    make.centerX.equalTo(superview)
+                    make.centerX.equalTo(component.superview)
                 }
             }
         }
