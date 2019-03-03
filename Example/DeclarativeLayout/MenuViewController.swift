@@ -30,7 +30,7 @@ private extension UILayoutGuideComponent {
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     enum Row {
-        case quickStart
+        case readme
         case registrationWithoutFramework
         case registrationWithFramework
         case registrationWithFrameworkAndAnchorage
@@ -38,7 +38,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         static var allRows: [Row] {
             return [
-                .quickStart,
+                .readme,
                 .registrationWithoutFramework,
                 .registrationWithFramework,
                 .registrationWithFrameworkAndAnchorage,
@@ -93,7 +93,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.textLabel?.lineBreakMode = .byWordWrapping
         
         switch Row.allRows[indexPath.row] {
-        case .quickStart:
+        case .readme:
             cell.textLabel?.text = "Quick Start Example"
         case .registrationWithoutFramework:
             cell.textLabel?.text = "Registration Screen Without Framework"
@@ -110,8 +110,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Row.allRows[indexPath.row] {
-        case .quickStart:
-            navigationController?.pushViewController(QuickStartViewController(), animated: true)
+        case .readme:
+            navigationController?.pushViewController(READMEExample(), animated: true)
         case .registrationWithoutFramework:
             navigationController?.pushViewController(RegistrationWithoutFrameworkViewController(), animated: true)
         case .registrationWithFramework:
