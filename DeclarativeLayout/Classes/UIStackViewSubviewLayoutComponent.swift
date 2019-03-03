@@ -16,7 +16,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
      unnecessary layout recalculations to occur.
      */
-    @discardableResult public func addArrangedView<UIView>(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>, UIView, T) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
+    @discardableResult public func addArrangedView<UIView>(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
     {
         return addArrangedView(UIView(), layoutClosure: layoutClosure)
     }
@@ -30,7 +30,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      - returns: The layout component for the subview (the same one passed into the optional closure)
      */
     @discardableResult public func addArrangedView<Q>(_ subview: Q,
-                                                      layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil) -> UIViewSubviewLayoutComponent<Q, T>
+                                                      layoutClosure: ((UIViewSubviewLayoutComponent<Q, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<Q, T>
     {
         arrangedSubviews.append(subview)
         
@@ -49,7 +49,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      * If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
      unnecessary layout recalculations to occur.
      */
-    @discardableResult public func addArrangedStackView<UIStackView>(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>, UIStackView, T) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
+    @discardableResult public func addArrangedStackView<UIStackView>(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
     {
         return addArrangedStackView(UIStackView(), layoutClosure: layoutClosure)
     }
@@ -65,7 +65,7 @@ public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: Subvi
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
     @discardableResult public func addArrangedStackView<Q>(_ subview: Q,
-                                                           layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>, Q, T) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<Q, T>
+                                                           layoutClosure: ((UIStackViewSubviewLayoutComponent<Q, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<Q, T>
     {
         arrangedSubviews.append(subview)
 

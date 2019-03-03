@@ -1,6 +1,32 @@
 import UIKit
 import DeclarativeLayout
 
+// MARK: - Layout extensions
+
+private extension UIViewLayoutComponent {
+    func layout(closure: (T) -> [NSLayoutConstraint]) {
+        activate(closure(view))
+    }
+}
+
+private extension UIViewSubviewLayoutComponent {
+    func layout(closure: (T, R) -> [NSLayoutConstraint]) {
+        activate(closure(view, superview))
+    }
+}
+
+private extension UIStackViewSubviewLayoutComponent {
+    func layout(closure: (T, R) -> [NSLayoutConstraint]) {
+        activate(closure(view, superview))
+    }
+}
+
+private extension UILayoutGuideComponent {
+    func layout(closure: (R) -> [NSLayoutConstraint]) {
+        activate(closure(owningView))
+    }
+}
+
 class RegistrationExampleWithFrameworkViewController: UIViewController {
     
     private lazy var viewLayout = ViewLayout(view: view)
@@ -27,60 +53,60 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     
     private func layoutAllViews() {
         
-        viewLayout.updateLayoutTo { (component, view) in
-            component.addStackView(self.stackView) { (component, view, superview) in
-                view.axis = .vertical
-                component.activate([
-                    view.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 35),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
-                ])
+        viewLayout.updateLayoutTo { (component) in
+            component.addStackView(self.stackView) { (component) in
+                component.view.axis = .vertical
+                component.layout {[ // $0 is component's view, $1 is its superview
+                    $0.topAnchor.constraint(equalTo: $1.safeAreaLayoutGuide.topAnchor, constant: 35),
+                    $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor, constant: 20),
+                    $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor, constant: -20),
+                ]}
                 
                 component.addArrangedView(self.registerOrSignInSegmentedControl)
                 component.addSpace(30)
                 component.addArrangedView(self.headerLabel)
                 component.addSpace(20)
-                component.addArrangedView(self.emailContainerView) { (component, view, superview) in
-                    component.addView(self.emailLabel) { (component, view, superview) in
-                        component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
-                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-                            view.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
-                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-                        ])
+                component.addArrangedView(self.emailContainerView) { (component) in
+                    component.addView(self.emailLabel) { (component) in
+                        component.layout {[
+                            $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
+                            $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
+                            $0.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
+                            $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
+                            $0.centerYAnchor.constraint(equalTo: $1.centerYAnchor),
+                        ]}
                     }
                     
-                    component.addView(self.emailTextField) { (component, view, superview) in
-                        component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
-                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
-                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-                        ])
+                    component.addView(self.emailTextField) { (component) in
+                        component.layout {[
+                            $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
+                            $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
+                            $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
+                            $0.centerYAnchor.constraint(equalTo: $1.centerYAnchor),
+                        ]}
                     }
                 }
                 
                 component.addSpace(40)
-                component.addArrangedView(self.passwordContainerView) { (component, view, superview) in
-                    component.addView(self.passwordLabel) { (component, view, superview) in
-                        component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
-                            view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-                            view.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
-                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-                        ])
+                component.addArrangedView(self.passwordContainerView) { (component) in
+                    component.addView(self.passwordLabel) { (component) in
+                        component.layout {[
+                            $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
+                            $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
+                            $0.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
+                            $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
+                            $0.centerYAnchor.constraint(equalTo: $1.centerYAnchor),
+                        ]}
                     }
                     
-                    component.addView(self.passwordTextField) { (component, view, superview) in
-                        component.activate([
-                            view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor),
-                            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                            view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor),
-                            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-                            view.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-                        ])
+                    component.addView(self.passwordTextField) { (component) in
+                        component.layout {[
+                            $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
+                            $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
+                            $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
+                            $0.centerYAnchor.constraint(equalTo: $1.centerYAnchor),
+                            $0.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
+                        ]}
                     }
                 }
                 
@@ -88,11 +114,11 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 component.addArrangedView(self.submitButton)
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component, view, superview) in
-                component.activate([
-                    view.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
-                    view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
-                ])
+            component.addView(self.forgotMyPasswordButton) { (component) in
+                component.layout {[
+                    $0.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
+                    $0.centerXAnchor.constraint(equalTo: $1.centerXAnchor),
+                ]}
             }
         }
     }

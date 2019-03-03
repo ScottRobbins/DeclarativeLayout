@@ -1,6 +1,32 @@
 import UIKit
 import DeclarativeLayout
 
+// MARK: - Layout extensions
+
+private extension UIViewLayoutComponent {
+    func layout(closure: (T) -> [NSLayoutConstraint]) {
+        activate(closure(view))
+    }
+}
+
+private extension UIViewSubviewLayoutComponent {
+    func layout(closure: (T, R) -> [NSLayoutConstraint]) {
+        activate(closure(view, superview))
+    }
+}
+
+private extension UIStackViewSubviewLayoutComponent {
+    func layout(closure: (T, R) -> [NSLayoutConstraint]) {
+        activate(closure(view, superview))
+    }
+}
+
+private extension UILayoutGuideComponent {
+    func layout(closure: (R) -> [NSLayoutConstraint]) {
+        activate(closure(owningView))
+    }
+}
+
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     enum Row {
@@ -34,14 +60,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func layoutAllViews() {
-        viewLayout.updateLayoutTo { (component, view) in
-            component.addView(tableView) { (component, view, superview) in
-                component.activate([
-                    view.topAnchor.constraint(equalTo: superview.topAnchor),
-                    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-                    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-                    view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-                ])
+        viewLayout.updateLayoutTo { (component) in
+            component.addView(tableView) { (component) in
+                component.layout {[
+                    $0.topAnchor.constraint(equalTo: $1.topAnchor),
+                    $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
+                    $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
+                    $0.bottomAnchor.constraint(equalTo: $1.bottomAnchor),
+                ]}
             }
         }
     }
