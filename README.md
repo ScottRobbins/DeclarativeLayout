@@ -187,7 +187,16 @@ pod "DeclarativeLayout"
 * Xcode 9 or later
 * Supports Swift 4.2
 
+## Building on top of DeclarativeLayout
+
+Every method that adds a new layout component (ex: `addView`) will also return a
+layout component. Using the component passed into the optional closure is
+optional. This is done to make it easy for more opinionated layout frameworks to
+be built on top of DeclarativeLayout and take advantage of its constraint and
+view hierarchy diffing.
+
 ## License
 
-DeclarativeLayout is available under the MIT license. See the LICENSE file for more info.
+DeclarativeLayout is available under the MIT license. See the LICENSE file for
+more info.
 
