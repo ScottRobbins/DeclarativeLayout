@@ -18,6 +18,10 @@ A declarative, expressive and efficient way to lay out your views.
 **Flexible** | Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
 **Small** | Small and readable Swift 4 codebase.
 
+[Usage](#usage) | [Updating to a new layout](#updating-to-a-new-layout) | [Installation](#installation) | [Requirements](#requirements)
+| [Building on top of DeclarativeLayout](#building-on-top-of-declarativelayout) |
+[License](#license)
+
 ---
 
 ## Usage
@@ -44,7 +48,9 @@ viewLayout.updateLayoutTo { (component) in
 }
 ```
 
-Use the layout components to define new views that should be in the hierarchy, as well as the constraints that should be active.
+Use the layout components to define new views that should be in the hierarchy,
+as well as the constraints that should be active (Note: All constraints passed
+to `activate(_:)` method should not be active).
 
 Here is an example:
 
@@ -57,6 +63,7 @@ viewLayout.updateLayoutTo { (component) in
             component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35),
         ])
+
         component.view.axis = .vertical
         component.addArrangedView(self.redView) { (component) in
             component.activate([
@@ -99,7 +106,9 @@ viewLayout.updateLayoutTo { (component) in
 
 That will give you a view looking like this:
 
-<img src="/Resources/layout1.png" width=400 />
+<img src="/Resources/layout1.png" height=500 />
+
+## Updating to a new layout
 
 If you want to update to a new layout, just call the `updateLayoutTo` method
 again, defining what your layout should be. The framework will take care of
@@ -108,9 +117,9 @@ modifying constraints.
 
 As an example, let's randomly order these views, the spacing inbetween them and
 their height, re-updating the layout in this way every few seconds. The result
-will look like this:
+will look something like this:
 
-![Video animating change](/Resources/animateChange.gif)
+<img src="/Resources/animateChange.gif" height=500 />
 
 ```swift
 let views = [redView,
@@ -128,6 +137,7 @@ viewLayout.updateLayoutTo { (component) in
             component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35),
         ])
+
         component.view.axis = .vertical
         for view in views.shuffled() {
             component.addArrangedView(view) { (component) in
@@ -154,7 +164,6 @@ pod "DeclarativeLayout"
 ## Requirements
 
 * iOS 9.0 or later
-* Xcode 9 or later
 * Supports Swift 4.2
 
 ## Building on top of DeclarativeLayout
