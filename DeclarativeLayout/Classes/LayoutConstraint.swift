@@ -1,9 +1,29 @@
 class LayoutConstraint {
     
     let wrappedConstraint: NSLayoutConstraint
+    var hashValue: Int
     
     init(wrappedConstraint: NSLayoutConstraint) {
         self.wrappedConstraint = wrappedConstraint
+
+        var hasher = Hasher()
+        if let firstItem = wrappedConstraint.firstItem as? UIView {
+            hasher.combine(firstItem)
+        } else if let firstItem = wrappedConstraint.firstItem as? UILayoutGuide {
+            hasher.combine(firstItem)
+        }
+
+        if let secondItem = wrappedConstraint.secondItem as? UIView {
+            hasher.combine(secondItem)
+        } else if let secondItem = wrappedConstraint.secondItem as? UILayoutGuide {
+            hasher.combine(secondItem)
+        }
+
+        hasher.combine(wrappedConstraint.firstAttribute)
+        hasher.combine(wrappedConstraint.secondAttribute)
+        hasher.combine(wrappedConstraint.relation)
+        hasher.combine(wrappedConstraint.multiplier)
+        hashValue = hasher.finalize()
     }
 }
 
@@ -14,7 +34,6 @@ extension LayoutConstraint: Equatable {
         let rhsConstraint = rhs.wrappedConstraint
         
         // I know the NSLayoutConstraint API says the first Item can be nil, but I don't think that's true. I think it'll crash at runtime anyway if that's true
-        // You can constrain to either UIViews or UILayoutGuides
         if let lhsFirstItem = lhsConstraint.firstItem as? UIView,
             let rhsFirstItem = rhsConstraint.firstItem as? UIView {
             guard lhsFirstItem == rhsFirstItem else {
@@ -29,7 +48,6 @@ extension LayoutConstraint: Equatable {
             return false
         }
         
-        // If there is a second item, compare them
         if let lhsSecondItem = lhsConstraint.secondItem as? UIView {
             guard let rhsSecondItem = rhsConstraint.secondItem as? UIView,
                 lhsSecondItem == rhsSecondItem else
@@ -42,7 +60,7 @@ extension LayoutConstraint: Equatable {
             {
                 return false
             }
-        } else if let _ = rhsConstraint.secondItem { // If we got here, it means that the lhs did not have a second item but the rhs did or the lhs had an invalid item
+        } else if let _ = rhsConstraint.secondItem {
             return false
         }
         
@@ -56,21 +74,6 @@ extension LayoutConstraint: Equatable {
 extension LayoutConstraint: Hashable {
     
     public func hash(into hasher: inout Hasher) {
-        if let firstItem = wrappedConstraint.firstItem as? UIView {
-            hasher.combine(firstItem)
-        } else if let firstItem = wrappedConstraint.firstItem as? UILayoutGuide {
-            hasher.combine(firstItem)
-        }
-        
-        if let secondItem = wrappedConstraint.secondItem as? UIView {
-            hasher.combine(secondItem)
-        } else if let secondItem = wrappedConstraint.secondItem as? UILayoutGuide {
-            hasher.combine(secondItem)
-        }
-        
-        hasher.combine(wrappedConstraint.firstAttribute)
-        hasher.combine(wrappedConstraint.secondAttribute)
-        hasher.combine(wrappedConstraint.relation)
-        hasher.combine(wrappedConstraint.multiplier)
+        hasher.combine(hashValue)
     }
 }
