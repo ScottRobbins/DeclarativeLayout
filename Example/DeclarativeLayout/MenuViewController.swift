@@ -94,7 +94,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         switch Row.allRows[indexPath.row] {
         case .readme:
-            cell.textLabel?.text = "Quick Start Example"
+            cell.textLabel?.text = "README Example"
         case .registrationWithoutFramework:
             cell.textLabel?.text = "Registration Screen Without Framework"
         case .registrationWithFramework:
