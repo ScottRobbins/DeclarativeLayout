@@ -1,29 +1,10 @@
 class LayoutConstraint {
     
     let wrappedConstraint: NSLayoutConstraint
-    var hashValue: Int
+    var cachedHash: Int?
     
     init(wrappedConstraint: NSLayoutConstraint) {
         self.wrappedConstraint = wrappedConstraint
-
-        var hasher = Hasher()
-        if let firstItem = wrappedConstraint.firstItem as? UIView {
-            hasher.combine(firstItem)
-        } else if let firstItem = wrappedConstraint.firstItem as? UILayoutGuide {
-            hasher.combine(firstItem)
-        }
-
-        if let secondItem = wrappedConstraint.secondItem as? UIView {
-            hasher.combine(secondItem)
-        } else if let secondItem = wrappedConstraint.secondItem as? UILayoutGuide {
-            hasher.combine(secondItem)
-        }
-
-        hasher.combine(wrappedConstraint.firstAttribute)
-        hasher.combine(wrappedConstraint.secondAttribute)
-        hasher.combine(wrappedConstraint.relation)
-        hasher.combine(wrappedConstraint.multiplier)
-        hashValue = hasher.finalize()
     }
 }
 
@@ -74,6 +55,29 @@ extension LayoutConstraint: Equatable {
 extension LayoutConstraint: Hashable {
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(hashValue)
+        if let cachedHash = cachedHash {
+            hasher.combine(cachedHash)
+        } else {
+            var newHasher = hasher
+            if let firstItem = wrappedConstraint.firstItem as? UIView {
+                newHasher.combine(firstItem)
+            } else if let firstItem = wrappedConstraint.firstItem as? UILayoutGuide {
+                newHasher.combine(firstItem)
+            }
+
+            if let secondItem = wrappedConstraint.secondItem as? UIView {
+                newHasher.combine(secondItem)
+            } else if let secondItem = wrappedConstraint.secondItem as? UILayoutGuide {
+                newHasher.combine(secondItem)
+            }
+
+            newHasher.combine(wrappedConstraint.firstAttribute)
+            newHasher.combine(wrappedConstraint.secondAttribute)
+            newHasher.combine(wrappedConstraint.relation)
+            newHasher.combine(wrappedConstraint.multiplier)
+            let newHash = newHasher.finalize()
+            cachedHash = newHash
+            hasher.combine(newHash)
+        }
     }
 }
