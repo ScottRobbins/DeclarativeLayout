@@ -1,3 +1,5 @@
+import UIKit
+
 public final class ViewLayout<T: UIView> {
     private unowned var view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
