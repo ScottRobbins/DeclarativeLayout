@@ -35,7 +35,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     /**
      The component's view. 
      */
-    public unowned let view: T
+    public final unowned let view: T
     let cachedLayoutObjectStore: CachedLayoutObjectStore
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()

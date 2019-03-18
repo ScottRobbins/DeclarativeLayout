@@ -1,6 +1,6 @@
 import UIKit
 
-public class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: SubviewLayoutComponent<T, R>, UIStackViewLayoutComponentType {
+public final class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: SubviewLayoutComponent<T, R>, UIStackViewLayoutComponentType {
     
     unowned var downcastedView: UIStackView { return view as UIStackView }
     private(set) var arrangedSubviews = [UIView]()

@@ -5,7 +5,7 @@ public class SubviewLayoutComponent<T: UIView, R: UIView>: ViewLayoutComponent<T
     /**
      The component's view's superview
      */
-    public unowned let superview: R
+    public final unowned let superview: R
     
     init(view: T,
          superview: R,

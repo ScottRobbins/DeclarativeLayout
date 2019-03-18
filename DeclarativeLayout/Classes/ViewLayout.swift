@@ -1,4 +1,4 @@
-public class ViewLayout<T: UIView> {
+public final class ViewLayout<T: UIView> {
     private unowned var view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
     private var currentConstraints: [LayoutConstraint]?

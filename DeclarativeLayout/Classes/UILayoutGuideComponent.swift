@@ -1,16 +1,16 @@
 import UIKit
 
-public class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
+public final class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
     
     /**
      The component's layout guide.
      */
-    public unowned let layoutGuide: UILayoutGuide
+    public unowned final let layoutGuide: UILayoutGuide
     
     /**
      The component's layoutGuide's owningView
      */
-    public unowned let owningView: R
+    public unowned final let owningView: R
 
     private var constraints = [LayoutConstraint]()
     
