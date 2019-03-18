@@ -36,13 +36,15 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      The component's view. 
      */
     public unowned let view: T
+    let cachedLayoutObjectStore: CachedLayoutObjectStore
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
     private(set) var layoutGuides = [UILayoutGuide]()
     private var constraints = [LayoutConstraint]()
     
-    init(view: T) {
+    init(view: T, cachedLayoutObjectStore: CachedLayoutObjectStore) {
         self.view = view
+        self.cachedLayoutObjectStore = cachedLayoutObjectStore
     }
     
     /**
@@ -73,7 +75,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
-                                                              superview: view)
+                                                              superview: view,
+                                                              cachedLayoutObjectStore: cachedLayoutObjectStore)
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
         subviews.append(subview)
@@ -114,7 +117,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
-                                                                   superview: view)
+                                                                   superview: view,
+                                                                   cachedLayoutObjectStore: cachedLayoutObjectStore)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
         subviews.append(subview)

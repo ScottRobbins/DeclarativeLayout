@@ -11,7 +11,7 @@ public class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
      The component's layoutGuide's owningView
      */
     public unowned let owningView: R
-    
+
     private var constraints = [LayoutConstraint]()
     
     init(layoutGuide: UILayoutGuide, owningView: R) {

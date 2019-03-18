@@ -8,11 +8,12 @@ public class SubviewLayoutComponent<T: UIView, R: UIView>: ViewLayoutComponent<T
     public unowned let superview: R
     
     init(view: T,
-         superview: R)
+         superview: R,
+         cachedLayoutObjectStore: CachedLayoutObjectStore)
     {
         self.superview = superview
         
-        super.init(view: view)
+        super.init(view: view, cachedLayoutObjectStore: cachedLayoutObjectStore)
     }
 
 }
