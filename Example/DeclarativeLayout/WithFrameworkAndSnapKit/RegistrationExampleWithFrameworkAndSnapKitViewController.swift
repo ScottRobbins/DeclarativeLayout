@@ -14,7 +14,7 @@ import SnapKit
 
 private extension UIViewLayoutComponent {
     func layout(closure: @escaping (ConstraintMaker) -> Void) {
-        activate(view.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
+        constraints(ownedView.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -23,7 +23,7 @@ private extension UIViewSubviewLayoutComponent {
         let wrappingClosure: (ConstraintMaker) -> Void = {
             closure($0, self.superview)
         }
-        activate(view.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
+        constraints(ownedView.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -32,7 +32,7 @@ private extension UIStackViewSubviewLayoutComponent {
         let wrappingClosure: (ConstraintMaker) -> Void = {
             closure($0, self.superview)
         }
-        activate(view.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
+        constraints(ownedView.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -41,7 +41,7 @@ private extension UILayoutGuideComponent {
         let wrappingClosure: (ConstraintMaker) -> Void = {
             closure($0, self.owningView)
         }
-        activate(layoutGuide.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
+        constraints(layoutGuide.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -72,20 +72,20 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
     private func layoutAllViews() {
         
         viewLayout.updateLayoutTo { (component) in
-            component.addStackView(self.stackView) { (component) in
-                component.view.axis = .vertical
+            component.stackView(self.stackView) { (component) in
+                component.ownedView.axis = .vertical
                 component.layout { // $0 is ConstraintMaker, $1 is superview
                     $0.top.equalTo($1.safeAreaLayoutGuide).offset(35)
                     $0.leading.equalTo($1).offset(20)
                     $0.trailing.equalTo($1).offset(-20)
                 }
                 
-                component.addArrangedView(self.registerOrSignInSegmentedControl)
-                component.addSpace(30)
-                component.addArrangedView(self.headerLabel)
-                component.addSpace(20)
-                component.addArrangedView { (component) in
-                    component.addView(self.emailLabel) { (component) in
+                component.arrangedView(self.registerOrSignInSegmentedControl)
+                component.space(30)
+                component.arrangedView(self.headerLabel)
+                component.space(20)
+                component.arrangedView { (component) in
+                    component.view(self.emailLabel) { (component) in
                         component.layout {
                             $0.top.greaterThanOrEqualTo($1)
                             $0.leading.equalTo($1)
@@ -95,7 +95,7 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
                         }
                     }
                     
-                    component.addView(self.emailTextField) { (component) in
+                    component.view(self.emailTextField) { (component) in
                         component.layout {
                             $0.top.greaterThanOrEqualTo($1)
                             $0.trailing.equalTo($1)
@@ -105,9 +105,9 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
                     }
                 }
                 
-                component.addSpace(40)
-                component.addArrangedView { (component) in
-                    component.addView(self.passwordLabel) { (component) in
+                component.space(40)
+                component.arrangedView { (component) in
+                    component.view(self.passwordLabel) { (component) in
                         component.layout {
                             $0.top.greaterThanOrEqualTo($1)
                             $0.leading.equalTo($1)
@@ -117,7 +117,7 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
                         }
                     }
                     
-                    component.addView(self.passwordTextField) { (component) in
+                    component.view(self.passwordTextField) { (component) in
                         component.layout {
                             $0.top.greaterThanOrEqualTo($1)
                             $0.trailing.equalTo($1)
@@ -128,11 +128,11 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
                     }
                 }
                 
-                component.addSpace(40)
-                component.addArrangedView(self.submitButton)
+                component.space(40)
+                component.arrangedView(self.submitButton)
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component) in
+            component.view(self.forgotMyPasswordButton) { (component) in
                 component.layout {
                     $0.top.equalTo(self.stackView.snp.bottom).offset(20)
                     $0.centerX.equalTo($1)

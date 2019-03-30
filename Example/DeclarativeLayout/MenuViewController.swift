@@ -5,25 +5,25 @@ import DeclarativeLayout
 
 private extension UIViewLayoutComponent {
     func layout(closure: (T) -> [NSLayoutConstraint]) {
-        activate(closure(view))
+        constraints(closure(ownedView))
     }
 }
 
 private extension UIViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        constraints(closure(ownedView, superview))
     }
 }
 
 private extension UIStackViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        constraints(closure(ownedView, superview))
     }
 }
 
 private extension UILayoutGuideComponent {
     func layout(closure: (R) -> [NSLayoutConstraint]) {
-        activate(closure(owningView))
+        constraints(closure(owningView))
     }
 }
 
@@ -61,7 +61,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func layoutAllViews() {
         viewLayout.updateLayoutTo { (component) in
-            component.addView(tableView) { (component) in
+            component.view(tableView) { (component) in
                 component.layout {[
                     $0.topAnchor.constraint(equalTo: $1.topAnchor),
                     $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),

@@ -50,54 +50,54 @@ viewLayout.updateLayoutTo { (component) in
 
 Use the layout components to define new views that should be in the hierarchy,
 as well as the constraints that should be active (Note: All constraints passed
-to `activate(_:)` method should not be active).
+to `.constraints(_:)` method should not be active).
 
 Here is an example:
 
 ```swift
 viewLayout.updateLayoutTo { (component) in
-    component.addStackView(self.stackView) { (component) in
-        component.activate(
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
+    component.stackView(self.stackView) { (component) in
+        component.constraints(
+            component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
+            component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+            component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35)
         )
 
-        component.view.axis = .vertical
-        component.addArrangedView(self.redView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.ownedView.axis = .vertical
+        component.arrangedView(self.redView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.addSpace(20)
-        component.addArrangedView(self.orangeView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.space(20)
+        component.arrangedView(self.orangeView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.addSpace(20)
-        component.addArrangedView(self.yellowView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.space(20)
+        component.arrangedView(self.yellowView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.addSpace(20)
-        component.addArrangedView(self.greenView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.space(20)
+        component.arrangedView(self.greenView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.addSpace(20)
-        component.addArrangedView(self.blueView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.space(20)
+        component.arrangedView(self.blueView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.addSpace(20)
-        component.addArrangedView(self.purpleView) { (component) in
-            component.activate(
-                component.view.heightAnchor.constraint(equalToConstant: 50)
+        component.space(20)
+        component.arrangedView(self.purpleView) { (component) in
+            component.constraints(
+                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
     }
@@ -130,23 +130,23 @@ let views = [redView,
              purpleView]
 
 viewLayout.updateLayoutTo { (component) in
-    component.addStackView(self.stackView) { (component) in
-        component.activate(
-            component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-            component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-            component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
+    component.stackView(self.stackView) { (component) in
+        component.constraints(
+            component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
+            component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
+            component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35),
         )
 
-        component.view.axis = .vertical
+        component.ownedView.axis = .vertical
         for view in views.shuffled() {
-            component.addArrangedView(view) { (component) in
+            component.arrangedView(view) { (component) in
                 let random = CGFloat(Int.random(in: 20..<100))
-                component.activate(
-                    component.view.heightAnchor.constraint(equalToConstant: random)
+                component.constraints(
+                    component.ownedView.heightAnchor.constraint(equalToConstant: random)
                 )
             }
-            component.addSpace(CGFloat(Int.random(in: 0..<50)))
+            component.space(CGFloat(Int.random(in: 0..<50)))
         }
     }
 }
@@ -168,7 +168,7 @@ pod "DeclarativeLayout"
 
 ## Building on top of DeclarativeLayout
 
-Every method that adds a new layout component (ex: `addView`) will also return a
+Every method that adds a new layout component (ex: `view(:)`) will also return a
 layout component. Using the component passed into the optional closure is
 optional. This is done to make it easy for more opinionated layout frameworks to
 be built on top of DeclarativeLayout and take advantage of its constraint and
