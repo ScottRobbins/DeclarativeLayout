@@ -60,7 +60,7 @@ extension LayoutConstraint: Hashable {
         if let cachedHash = cachedHash {
             hasher.combine(cachedHash)
         } else {
-            var newHasher = hasher
+            var newHasher = Hasher()
             if let firstItem = wrappedConstraint.firstItem as? UIView {
                 newHasher.combine(firstItem)
             } else if let firstItem = wrappedConstraint.firstItem as? UILayoutGuide {
