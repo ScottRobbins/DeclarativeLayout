@@ -296,7 +296,7 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "DeclarativeLayout" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -339,7 +339,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
 				"${BUILT_PRODUCTS_DIR}/DeclarativeLayout/DeclarativeLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -352,7 +352,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeclarativeLayout_Example/Pods-DeclarativeLayout_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		31C73B0EC956A230F8B7C35D /* [CP] Check Pods Manifest.lock */ = {
