@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
 * Declarative - Tell the framework what the layout of your views should be and let the framework intelligently add/modify/remove constraints and views for you.
 * Expressive - Let your code visually express the hierarchy of your views.
 * Flexible - Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
-* Small - Small and readable Swift 4 codebase.
+* Small - Small and readable Swift 5 codebase.
                        DESC
 
   s.homepage         = 'https://github.com/HotCocoaTouch/DeclarativeLayout'

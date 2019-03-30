@@ -626,11 +626,11 @@
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
-				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 49CDCA5E532022B7F03361F7B2E4E6F6 /* Products */;
@@ -804,6 +804,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		11830F28ACE7E1143105CA0B05F8D958 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4205818D6A64E5108AA9220A46AA80F /* DeclarativeLayout.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DeclarativeLayout/DeclarativeLayout-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout.modulemap";
+				PRODUCT_MODULE_NAME = DeclarativeLayout;
+				PRODUCT_NAME = DeclarativeLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		127365224BF3353601B7301600433C18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F1F75F435A2C021DDFDE459EC90E640 /* SnapKit.xcconfig */;
@@ -835,41 +867,11 @@
 			};
 			name = Debug;
 		};
-		2F514FD1CA5492A4DD177FF99CF5F61D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4205818D6A64E5108AA9220A46AA80F /* DeclarativeLayout.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DeclarativeLayout/DeclarativeLayout-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout.modulemap";
-				PRODUCT_MODULE_NAME = DeclarativeLayout;
-				PRODUCT_NAME = DeclarativeLayout;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		4CE281642D6EE9FAB113046B4B6328A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -925,6 +927,68 @@
 			};
 			name = Release;
 		};
+		4ED823BB0F73D31ABA2873340BC7F929 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4205818D6A64E5108AA9220A46AA80F /* DeclarativeLayout.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DeclarativeLayout/DeclarativeLayout-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout.modulemap";
+				PRODUCT_MODULE_NAME = DeclarativeLayout;
+				PRODUCT_NAME = DeclarativeLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4F4A1F38205C049697B854B0F4232F54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 426BC5CBC8E9D45E38E24FD730AA0892 /* Anchorage.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Anchorage/Anchorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Anchorage/Anchorage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Anchorage/Anchorage.modulemap";
+				PRODUCT_MODULE_NAME = Anchorage;
+				PRODUCT_NAME = Anchorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		539C6078B96F579B8F7E34FE858C34F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ED4C4C9F648ADD0C4102A87EB3EDE2F8 /* Pods-DeclarativeLayout_Tests.debug.xcconfig */;
@@ -963,6 +1027,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1023,38 +1088,6 @@
 			};
 			name = Debug;
 		};
-		98145663EDDEDCABFB34D5085A04E6E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 426BC5CBC8E9D45E38E24FD730AA0892 /* Anchorage.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Anchorage/Anchorage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Anchorage/Anchorage-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Anchorage/Anchorage.modulemap";
-				PRODUCT_MODULE_NAME = Anchorage;
-				PRODUCT_NAME = Anchorage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		AB0FCBD0A0D962EBAEDA914CB9A2EFCB /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F1F75F435A2C021DDFDE459EC90E640 /* SnapKit.xcconfig */;
@@ -1086,37 +1119,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		AF54E429A1D20DFD191B2A5C28DA7BE8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 426BC5CBC8E9D45E38E24FD730AA0892 /* Anchorage.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Anchorage/Anchorage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Anchorage/Anchorage-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Anchorage/Anchorage.modulemap";
-				PRODUCT_MODULE_NAME = Anchorage;
-				PRODUCT_NAME = Anchorage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		B211E711F82B692347F40155724213CC /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1152,38 +1154,6 @@
 			};
 			name = Debug;
 		};
-		C7D8EC802CDABB8B7D9AC4B35FF6961A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4205818D6A64E5108AA9220A46AA80F /* DeclarativeLayout.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DeclarativeLayout/DeclarativeLayout-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DeclarativeLayout/DeclarativeLayout.modulemap";
-				PRODUCT_MODULE_NAME = DeclarativeLayout;
-				PRODUCT_NAME = DeclarativeLayout;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		D132843E97377C6BF512B59C74C611AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B72609C7BCCCE5B2948A1D5F65E50ECC /* Pods-DeclarativeLayout_Example.release.xcconfig */;
@@ -1212,6 +1182,38 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D7F82C93068AE2D27832C21C26B9B5C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 426BC5CBC8E9D45E38E24FD730AA0892 /* Anchorage.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Anchorage/Anchorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Anchorage/Anchorage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Anchorage/Anchorage.modulemap";
+				PRODUCT_MODULE_NAME = Anchorage;
+				PRODUCT_NAME = Anchorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1260,8 +1262,8 @@
 		2A93363D93825FB9B9787EEB20C52640 /* Build configuration list for PBXNativeTarget "DeclarativeLayout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F514FD1CA5492A4DD177FF99CF5F61D /* Debug */,
-				C7D8EC802CDABB8B7D9AC4B35FF6961A /* Release */,
+				4ED823BB0F73D31ABA2873340BC7F929 /* Debug */,
+				11830F28ACE7E1143105CA0B05F8D958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1305,8 +1307,8 @@
 		EB8F793745CE581E3E730091CED16050 /* Build configuration list for PBXNativeTarget "Anchorage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF54E429A1D20DFD191B2A5C28DA7BE8 /* Debug */,
-				98145663EDDEDCABFB34D5085A04E6E6 /* Release */,
+				4F4A1F38205C049697B854B0F4232F54 /* Debug */,
+				D7F82C93068AE2D27832C21C26B9B5C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
