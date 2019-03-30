@@ -33,10 +33,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     private let registerOrSignInSegmentedControl = UISegmentedControl()
     private let headerLabel = UILabel()
     private let stackView = UIStackView()
-    private let emailContainerView = UIView()
     private let emailLabel = UILabel()
     private let emailTextField = UITextField()
-    private let passwordContainerView = UIView()
     private let passwordLabel = UILabel()
     private let passwordTextField = UITextField()
     private let submitButton = UIButton()
@@ -66,7 +64,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 component.addSpace(30)
                 component.addArrangedView(self.headerLabel)
                 component.addSpace(20)
-                component.addArrangedView(self.emailContainerView) { (component) in
+                component.addArrangedView { (component) in
                     component.addView(self.emailLabel) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
@@ -88,7 +86,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                 }
                 
                 component.addSpace(40)
-                component.addArrangedView(self.passwordContainerView) { (component) in
+                component.addArrangedView { (component) in
                     component.addView(self.passwordLabel) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
