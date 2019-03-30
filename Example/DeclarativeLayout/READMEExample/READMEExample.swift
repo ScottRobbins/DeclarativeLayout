@@ -41,20 +41,20 @@ class READMEExample: UIViewController {
 
         viewLayout.updateLayoutTo { (component) in
             component.addStackView(self.stackView) { (component) in
-                component.activate([
+                component.activate(
                     component.view.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
                     component.view.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
                     component.view.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
-                                                        constant: 35),
-                ])
+                                                        constant: 35)
+                )
 
                 component.view.axis = .vertical
                 for view in views.shuffled() {
                     component.addArrangedView(view) { (component) in
                         let random = CGFloat(Int.random(in: 20..<100))
-                        component.activate([
+                        component.activate(
                             component.view.heightAnchor.constraint(equalToConstant: random)
-                        ])
+                        )
                     }
                     component.addSpace(CGFloat(Int.random(in: 0..<50)))
                 }
