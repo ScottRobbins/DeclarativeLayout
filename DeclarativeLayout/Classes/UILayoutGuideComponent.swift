@@ -18,6 +18,19 @@ public final class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
         self.layoutGuide = layoutGuide
         self.owningView = owningView
     }
+
+    /**
+     Define constraints that should be activated
+
+     - parameters:
+        - constraints: Constraints to activate
+
+     - important: Do not activate these constraints yourself, the framework will do that for you.
+     If these constraints are activated at the wrong time it can cause your application to crash.
+     */
+    public func activate(_ constraints: NSLayoutConstraint...) {
+        activate(constraints)
+    }
     
     /**
      Define constraints that should be activated
