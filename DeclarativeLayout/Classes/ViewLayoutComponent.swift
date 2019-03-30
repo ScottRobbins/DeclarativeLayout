@@ -35,7 +35,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     /**
      The component's view. 
      */
-    public final unowned let view: T
+    public final unowned let ownedView: T
     let cachedLayoutObjectStore: CachedLayoutObjectStore
     private(set) var subviews = [UIView]()
     private(set) var sublayoutComponents = [LayoutComponentType]()
@@ -43,7 +43,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     private var constraints = [LayoutConstraint]()
     
     init(view: T, cachedLayoutObjectStore: CachedLayoutObjectStore) {
-        self.view = view
+        self.ownedView = view
         self.cachedLayoutObjectStore = cachedLayoutObjectStore
     }
 
@@ -102,7 +102,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
-                                                              superview: view,
+                                                              superview: ownedView,
                                                               cachedLayoutObjectStore: cachedLayoutObjectStore)
         
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
@@ -170,7 +170,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
-                                                                   superview: view,
+                                                                   superview: ownedView,
                                                                    cachedLayoutObjectStore: cachedLayoutObjectStore)
         
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
@@ -232,7 +232,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     @discardableResult public func addLayoutGuide(_ layoutGuide: UILayoutGuide,
                                                   layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
         let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
-                                                        owningView: view)
+                                                        owningView: ownedView)
         sublayoutComponents.append(.layoutGuide(layout: subLayoutComponent))
         layoutGuides.append(layoutGuide)
         
@@ -308,7 +308,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     func allLayoutGuides() -> [UILayoutGuide: UIView] {
         let layoutGuideDict = layoutGuides.reduce([:]) { (dict, layoutGuide) -> [UILayoutGuide: UIView] in
             var mutableDict = dict
-            mutableDict[layoutGuide] = view
+            mutableDict[layoutGuide] = ownedView
             return mutableDict
         }
         

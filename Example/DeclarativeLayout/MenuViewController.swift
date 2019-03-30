@@ -5,19 +5,19 @@ import DeclarativeLayout
 
 private extension UIViewLayoutComponent {
     func layout(closure: (T) -> [NSLayoutConstraint]) {
-        activate(closure(view))
+        activate(closure(ownedView))
     }
 }
 
 private extension UIViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        activate(closure(ownedView, superview))
     }
 }
 
 private extension UIStackViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        activate(closure(ownedView, superview))
     }
 }
 

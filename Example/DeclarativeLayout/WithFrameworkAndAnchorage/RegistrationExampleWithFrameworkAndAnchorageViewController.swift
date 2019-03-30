@@ -7,7 +7,7 @@ import Anchorage
 private extension UIViewLayoutComponent {
     func layout(closure: @escaping (T) -> Void) {
         let wrappingClosure: () -> Void = {
-            closure(self.view)
+            closure(self.ownedView)
         }
         activate(Anchorage.batch(active: false, closure: wrappingClosure))
     }
@@ -16,7 +16,7 @@ private extension UIViewLayoutComponent {
 private extension UIViewSubviewLayoutComponent {
     func layout(closure: @escaping (T, R) -> Void) {
         let wrappingClosure: () -> Void = {
-            closure(self.view, self.superview)
+            closure(self.ownedView, self.superview)
         }
         activate(Anchorage.batch(active: false, closure: wrappingClosure))
     }
@@ -25,7 +25,7 @@ private extension UIViewSubviewLayoutComponent {
 private extension UIStackViewSubviewLayoutComponent {
     func layout(closure: @escaping (T, R) -> Void) {
         let wrappingClosure: () -> Void = {
-            closure(self.view, self.superview)
+            closure(self.ownedView, self.superview)
         }
         activate(Anchorage.batch(active: false, closure: wrappingClosure))
     }
@@ -68,7 +68,7 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
         
         viewLayout.updateLayoutTo { (component) in
             component.addStackView(self.stackView) { (component) in
-                component.view.axis = .vertical
+                component.ownedView.axis = .vertical
                 component.layout { // $0 is component's view, $1 is superview
                     $0.topAnchor == $1.safeAreaLayoutGuide.topAnchor + 35
                     $0.leadingAnchor == $1.leadingAnchor + 20

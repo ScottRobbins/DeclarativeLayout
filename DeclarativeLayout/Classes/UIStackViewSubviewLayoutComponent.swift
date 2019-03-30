@@ -2,7 +2,7 @@ import UIKit
 
 public final class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>: SubviewLayoutComponent<T, R>, UIStackViewLayoutComponentType {
     
-    unowned var downcastedView: UIStackView { return view as UIStackView }
+    unowned var downcastedView: UIStackView { return ownedView as UIStackView }
     private(set) var arrangedSubviews = [UIView]()
     private(set) var customSpacings = [(afterView: UIView, space: CGFloat)]()
 

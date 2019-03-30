@@ -5,19 +5,19 @@ import DeclarativeLayout
 
 private extension UIViewLayoutComponent {
     func layout(closure: (T) -> [NSLayoutConstraint]) {
-        activate(closure(view))
+        activate(closure(ownedView))
     }
 }
 
 private extension UIViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        activate(closure(ownedView, superview))
     }
 }
 
 private extension UIStackViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(view, superview))
+        activate(closure(ownedView, superview))
     }
 }
 
@@ -53,7 +53,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
         
         viewLayout.updateLayoutTo { (component) in
             component.addStackView(self.stackView) { (component) in
-                component.view.axis = .vertical
+                component.ownedView.axis = .vertical
                 component.layout {[ // $0 is component's view, $1 is its superview
                     $0.topAnchor.constraint(equalTo: $1.safeAreaLayoutGuide.topAnchor, constant: 35),
                     $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor, constant: 20),

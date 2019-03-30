@@ -14,7 +14,7 @@ import SnapKit
 
 private extension UIViewLayoutComponent {
     func layout(closure: @escaping (ConstraintMaker) -> Void) {
-        activate(view.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
+        activate(ownedView.snp.prepareConstraints(closure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -23,7 +23,7 @@ private extension UIViewSubviewLayoutComponent {
         let wrappingClosure: (ConstraintMaker) -> Void = {
             closure($0, self.superview)
         }
-        activate(view.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
+        activate(ownedView.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -32,7 +32,7 @@ private extension UIStackViewSubviewLayoutComponent {
         let wrappingClosure: (ConstraintMaker) -> Void = {
             closure($0, self.superview)
         }
-        activate(view.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
+        activate(ownedView.snp.prepareConstraints(wrappingClosure).flatMap { $0.layoutConstraints })
     }
 }
 
@@ -73,7 +73,7 @@ class RegistrationExampleWithFrameworkAndSnapKitViewController: UIViewController
         
         viewLayout.updateLayoutTo { (component) in
             component.addStackView(self.stackView) { (component) in
-                component.view.axis = .vertical
+                component.ownedView.axis = .vertical
                 component.layout { // $0 is ConstraintMaker, $1 is superview
                     $0.top.equalTo($1.safeAreaLayoutGuide).offset(35)
                     $0.leading.equalTo($1).offset(20)
