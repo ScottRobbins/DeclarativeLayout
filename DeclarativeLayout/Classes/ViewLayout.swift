@@ -1,7 +1,10 @@
-public class ViewLayout<T: UIView> {
+import UIKit
+
+public final class ViewLayout<T: UIView> {
     private unowned var view: T
     private var currentLayoutComponent: UIViewLayoutComponent<T>
     private var currentConstraints: [LayoutConstraint]?
+    private let cachedLayoutObjectStore = CachedLayoutObjectStore()
 
     /**
      Initialize your view layout with the root view you are defining a layout for
@@ -11,7 +14,8 @@ public class ViewLayout<T: UIView> {
      */
     public init(view: T) {
         self.view = view
-        currentLayoutComponent = UIViewLayoutComponent(view: view)
+        currentLayoutComponent = UIViewLayoutComponent(view: view,
+                                                       cachedLayoutObjectStore: cachedLayoutObjectStore)
     }
 
     /**
@@ -21,7 +25,8 @@ public class ViewLayout<T: UIView> {
         - layoutClosure: A closure that will define the layout component for the ViewLayout's view
      */
     public func updateLayoutTo(_ layoutClosure: (UIViewLayoutComponent<T>) -> ()) {
-        let layoutComponent = UIViewLayoutComponent(view: view)
+        let layoutComponent = UIViewLayoutComponent(view: view,
+                                                    cachedLayoutObjectStore: cachedLayoutObjectStore)
         layoutClosure(layoutComponent)
 
         removeUnneededArrangedSubviews(with: layoutComponent)

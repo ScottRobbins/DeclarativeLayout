@@ -1,4 +1,6 @@
-class LayoutConstraint {
+import UIKit
+
+final class LayoutConstraint {
     
     let wrappedConstraint: NSLayoutConstraint
     var cachedHash: Int?

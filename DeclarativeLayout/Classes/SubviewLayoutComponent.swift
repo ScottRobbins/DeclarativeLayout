@@ -5,14 +5,15 @@ public class SubviewLayoutComponent<T: UIView, R: UIView>: ViewLayoutComponent<T
     /**
      The component's view's superview
      */
-    public unowned let superview: R
+    public final unowned let superview: R
     
     init(view: T,
-         superview: R)
+         superview: R,
+         cachedLayoutObjectStore: CachedLayoutObjectStore)
     {
         self.superview = superview
         
-        super.init(view: view)
+        super.init(view: view, cachedLayoutObjectStore: cachedLayoutObjectStore)
     }
 
 }
