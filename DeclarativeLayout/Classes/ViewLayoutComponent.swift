@@ -59,16 +59,16 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      * Using an identifier will let you refer to the same
      created instance of a `UIView` in subsequent layout updates.
      */
-    @discardableResult public func addView(identifier: String,
+    @discardableResult public func view(identifier: String,
                                            layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil)
         -> UIViewSubviewLayoutComponent<UIView, T>
     {
-        if let view = cachedLayoutObjectStore.viewStorage[identifier] {
-            return addView(view, layoutClosure: layoutClosure)
+        if let _view = cachedLayoutObjectStore.viewStorage[identifier] {
+            return view(_view, layoutClosure: layoutClosure)
         } else {
-            let view = UIView()
-            cachedLayoutObjectStore.viewStorage[identifier] = view
-            return addView(view, layoutClosure: layoutClosure)
+            let _view = UIView()
+            cachedLayoutObjectStore.viewStorage[identifier] = _view
+            return view(_view, layoutClosure: layoutClosure)
         }
     }
     
@@ -84,9 +84,9 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      unnecessary layout recalculations to occur.
      Consider using `addView(identifier:layoutClosure:)` instead for that situation.
      */
-    @discardableResult public func addView(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
+    @discardableResult public func view(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
     {
-        return addView(UIView(), layoutClosure: layoutClosure)
+        return view(UIView(), layoutClosure: layoutClosure)
     }
     
     /**
@@ -97,7 +97,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
         - layoutClosure: A closure that will define the layout component for the subview.
      - returns: The layout component for the subview (the same one passed into the optional closure)
      */
-    @discardableResult public func addView<R>(_ subview: R,
+    @discardableResult public func view<R>(_ subview: R,
                                               layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<R, T>
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
@@ -124,16 +124,16 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      * Using an identifier will let you refer to the same created instance of a `UIStackView` in subsequent layout updates.
      * This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
-    @discardableResult public func addStackView(identifier: String,
+    @discardableResult public func stackView(identifier: String,
                                                 layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>)
         -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
     {
         if let view = cachedLayoutObjectStore.stackViewStorage[identifier] {
-            return addStackView(view, layoutClosure: layoutClosure)
+            return stackView(view, layoutClosure: layoutClosure)
         } else {
             let view = UIStackView()
             cachedLayoutObjectStore.stackViewStorage[identifier] = view
-            return addStackView(view, layoutClosure: layoutClosure)
+            return stackView(view, layoutClosure: layoutClosure)
         }
     }
     
@@ -150,9 +150,9 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      unnecessary layout recalculations to occur.
      Consider using `addStackView(identifier:layoutClosure:)` instead for that situation.
      */
-    @discardableResult public func addStackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
+    @discardableResult public func stackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
     {
-        return addStackView(UIStackView(), layoutClosure: layoutClosure)
+        return stackView(UIStackView(), layoutClosure: layoutClosure)
     }
     
     /**
@@ -165,7 +165,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
-    @discardableResult public func addStackView<R>(_ subview: R,
+    @discardableResult public func stackView<R>(_ subview: R,
                                                    layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<R, T>
     {
         subview.translatesAutoresizingMaskIntoConstraints = false
@@ -192,16 +192,16 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      * Using an identifier will let you refer to the same created instance of a `UILayoutGuide`
      in subsequent layout updates.
      */
-    @discardableResult public func addLayoutGuide(identifier: String,
+    @discardableResult public func layoutGuide(identifier: String,
                                                   layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil)
         -> UILayoutGuideComponent<T>
     {
-        if let layoutGuide = cachedLayoutObjectStore.layoutGuideStorage[identifier] {
-            return addLayoutGuide(layoutGuide, layoutClosure: layoutClosure)
+        if let _layoutGuide = cachedLayoutObjectStore.layoutGuideStorage[identifier] {
+            return layoutGuide(_layoutGuide, layoutClosure: layoutClosure)
         } else {
-            let layoutGuide = UILayoutGuide()
-            cachedLayoutObjectStore.layoutGuideStorage[identifier] = layoutGuide
-            return addLayoutGuide(layoutGuide, layoutClosure: layoutClosure)
+            let _layoutGuide = UILayoutGuide()
+            cachedLayoutObjectStore.layoutGuideStorage[identifier] = _layoutGuide
+            return layoutGuide(_layoutGuide, layoutClosure: layoutClosure)
         }
     }
     
@@ -217,8 +217,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      unnecessary layout recalculations to occur.
      Consider using `addLayoutGuide(identifier:layoutClosure:)` instead for that situation.
      */
-    @discardableResult public func addLayoutGuide(layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
-        return addLayoutGuide(UILayoutGuide(), layoutClosure: layoutClosure)
+    @discardableResult public func layoutGuide(layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
+        return layoutGuide(UILayoutGuide(), layoutClosure: layoutClosure)
     }
     
     /**
@@ -229,7 +229,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
          - layoutClosure: A closure that will define the layout component for the layout guide.
      - returns: The layout component for the layout guide (the same one passed into the optional closure)
      */
-    @discardableResult public func addLayoutGuide(_ layoutGuide: UILayoutGuide,
+    @discardableResult public func layoutGuide(_ layoutGuide: UILayoutGuide,
                                                   layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
         let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
                                                         owningView: ownedView)
@@ -249,8 +249,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      - important: Do not activate these constraints yourself, the framework will do that for you.
      If these constraints are activated at the wrong time it can cause your application to crash.
      */
-    public func activate(_ constraints: NSLayoutConstraint...) {
-        activate(constraints)
+    public func constraints(_ _constraints: NSLayoutConstraint...) {
+        constraints(_constraints)
     }
     
     /**
@@ -262,8 +262,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      - important: Do not activate these constraints yourself, the framework will do that for you.
      If these constraints are activated at the wrong time it can cause your application to crash.
      */
-    public func activate(_ constraints: [NSLayoutConstraint]) {
-        self.constraints += constraints.map(LayoutConstraint.init(wrappedConstraint:))
+    public func constraints(_ _constraints: [NSLayoutConstraint]) {
+        self.constraints += _constraints.map(LayoutConstraint.init(wrappedConstraint:))
     }
     
     func allConstraints() -> [LayoutConstraint] {

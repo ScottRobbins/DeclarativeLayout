@@ -5,25 +5,25 @@ import DeclarativeLayout
 
 private extension UIViewLayoutComponent {
     func layout(closure: (T) -> [NSLayoutConstraint]) {
-        activate(closure(ownedView))
+        constraints(closure(ownedView))
     }
 }
 
 private extension UIViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(ownedView, superview))
+        constraints(closure(ownedView, superview))
     }
 }
 
 private extension UIStackViewSubviewLayoutComponent {
     func layout(closure: (T, R) -> [NSLayoutConstraint]) {
-        activate(closure(ownedView, superview))
+        constraints(closure(ownedView, superview))
     }
 }
 
 private extension UILayoutGuideComponent {
     func layout(closure: (R) -> [NSLayoutConstraint]) {
-        activate(closure(owningView))
+        constraints(closure(owningView))
     }
 }
 
@@ -52,7 +52,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     private func layoutAllViews() {
         
         viewLayout.updateLayoutTo { (component) in
-            component.addStackView(self.stackView) { (component) in
+            component.stackView(self.stackView) { (component) in
                 component.ownedView.axis = .vertical
                 component.layout {[ // $0 is component's view, $1 is its superview
                     $0.topAnchor.constraint(equalTo: $1.safeAreaLayoutGuide.topAnchor, constant: 35),
@@ -60,12 +60,12 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor, constant: -20),
                 ]}
                 
-                component.addArrangedView(self.registerOrSignInSegmentedControl)
-                component.addSpace(30)
-                component.addArrangedView(self.headerLabel)
-                component.addSpace(20)
-                component.addArrangedView { (component) in
-                    component.addView(self.emailLabel) { (component) in
+                component.arrangedView(self.registerOrSignInSegmentedControl)
+                component.space(30)
+                component.arrangedView(self.headerLabel)
+                component.space(20)
+                component.arrangedView { (component) in
+                    component.view(self.emailLabel) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
@@ -75,7 +75,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ]}
                     }
                     
-                    component.addView(self.emailTextField) { (component) in
+                    component.view(self.emailTextField) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
@@ -85,9 +85,9 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                 }
                 
-                component.addSpace(40)
-                component.addArrangedView { (component) in
-                    component.addView(self.passwordLabel) { (component) in
+                component.space(40)
+                component.arrangedView { (component) in
+                    component.view(self.passwordLabel) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
@@ -97,7 +97,7 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ]}
                     }
                     
-                    component.addView(self.passwordTextField) { (component) in
+                    component.view(self.passwordTextField) { (component) in
                         component.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
@@ -108,11 +108,11 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                 }
                 
-                component.addSpace(40)
-                component.addArrangedView(self.submitButton)
+                component.space(40)
+                component.arrangedView(self.submitButton)
             }
             
-            component.addView(self.forgotMyPasswordButton) { (component) in
+            component.view(self.forgotMyPasswordButton) { (component) in
                 component.layout {[
                     $0.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     $0.centerXAnchor.constraint(equalTo: $1.centerXAnchor),

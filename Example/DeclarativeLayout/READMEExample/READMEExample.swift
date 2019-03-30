@@ -40,8 +40,8 @@ class READMEExample: UIViewController {
                      purpleView]
 
         viewLayout.updateLayoutTo { (component) in
-            component.addStackView(self.stackView) { (component) in
-                component.activate(
+            component.stackView(self.stackView) { (component) in
+                component.constraints(
                     component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
                     component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
                     component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
@@ -50,13 +50,13 @@ class READMEExample: UIViewController {
 
                 component.ownedView.axis = .vertical
                 for view in views.shuffled() {
-                    component.addArrangedView(view) { (component) in
+                    component.arrangedView(view) { (component) in
                         let random = CGFloat(Int.random(in: 20..<100))
-                        component.activate(
+                        component.constraints(
                             component.ownedView.heightAnchor.constraint(equalToConstant: random)
                         )
                     }
-                    component.addSpace(CGFloat(Int.random(in: 0..<50)))
+                    component.space(CGFloat(Int.random(in: 0..<50)))
                 }
             }
         }

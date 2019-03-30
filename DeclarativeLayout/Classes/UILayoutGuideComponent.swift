@@ -28,8 +28,8 @@ public final class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
      - important: Do not activate these constraints yourself, the framework will do that for you.
      If these constraints are activated at the wrong time it can cause your application to crash.
      */
-    public func activate(_ constraints: NSLayoutConstraint...) {
-        activate(constraints)
+    public func constraints(_ _constraints: NSLayoutConstraint...) {
+        constraints(_constraints)
     }
     
     /**
@@ -41,8 +41,8 @@ public final class UILayoutGuideComponent<R: UIView>: LayoutGuideComponentType {
      - important: Do not activate these constraints yourself, the framework will do that for you.
      If these constraints are activated at the wrong time it can cause your application to crash.
      */
-    public func activate(_ constraints: [NSLayoutConstraint]) {
-        self.constraints += constraints.map(LayoutConstraint.init(wrappedConstraint:))
+    public func constraints(_ _constraints: [NSLayoutConstraint]) {
+        self.constraints += _constraints.map(LayoutConstraint.init(wrappedConstraint:))
     }
     
     func allConstraints() -> [LayoutConstraint] {
