@@ -164,7 +164,7 @@ pod "DeclarativeLayout"
 ## Requirements
 
 * iOS 9.0 or later
-* Supports Swift 4.2
+* Supports Swift 5
 
 ## Building on top of DeclarativeLayout
 
