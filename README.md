@@ -16,7 +16,7 @@ A declarative, expressive and efficient way to lay out your views.
 **Declarative** | Tell the framework what the layout of your views should be and let the framework intelligently add/modify/remove constraints and views for you.
 **Expressive** | Let your code visually express the hierarchy of your views.
 **Flexible** | Write the same constraints you already do, using whatever autolayout constraint DSL you prefer.
-**Small** | Small and readable Swift 4 codebase.
+**Small** | Small and readable Swift 5 codebase.
 
 [Usage](#usage) | [Updating to a new layout](#updating-to-a-new-layout) | [Installation](#installation) | [Requirements](#requirements)
 | [Building on top of DeclarativeLayout](#building-on-top-of-declarativelayout) |
@@ -164,7 +164,7 @@ pod "DeclarativeLayout"
 ## Requirements
 
 * iOS 9.0 or later
-* Supports Swift 4.2
+* Supports Swift 5
 
 ## Building on top of DeclarativeLayout
 
