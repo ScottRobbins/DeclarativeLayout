@@ -60,9 +60,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func layoutAllViews() {
-        viewLayout.updateLayoutTo { (component) in
-            component.view(tableView) { (component) in
-                component.layout {[
+        viewLayout.updateLayoutTo { (com) in
+            com.view(tableView) { (com) in
+                com.layout {[
                     $0.topAnchor.constraint(equalTo: $1.topAnchor),
                     $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
                     $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),

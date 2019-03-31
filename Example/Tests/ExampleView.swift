@@ -38,40 +38,40 @@ class ExampleView: UIView {
     
     private func layout(with viewLayout: ViewLayout<ExampleView>, views: [UIView], constant: CGFloat) {
         
-        viewLayout.updateLayoutTo { (component) in
+        viewLayout.updateLayoutTo { (com) in
             
-            component.view(views[0]) { (component) in
+            com.view(views[0]) { (com) in
                 
-                component.constraints([
-                    component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: constant),
-                    component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: constant),
-                    component.ownedView.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: constant),
-                    component.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                com.constraints([
+                    com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor, constant: constant),
+                    com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor, constant: constant),
+                    com.ownedView.topAnchor.constraint(equalTo: com.superview.topAnchor, constant: constant),
+                    com.ownedView.heightAnchor.constraint(equalToConstant: 10),
                     ])
             }
             
             let viewsSlice = views.dropFirst().dropLast()
             for viewTuple in viewsSlice.enumerated() {
                 
-                component.view(viewTuple.element) { (component) in
+                com.view(viewTuple.element) { (com) in
                     
-                    component.constraints([
-                        component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: constant),
-                        component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: constant),
-                        component.ownedView.topAnchor.constraint(equalTo: views[viewTuple.offset].bottomAnchor, constant: constant),
-                        component.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                    com.constraints([
+                        com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor, constant: constant),
+                        com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor, constant: constant),
+                        com.ownedView.topAnchor.constraint(equalTo: views[viewTuple.offset].bottomAnchor, constant: constant),
+                        com.ownedView.heightAnchor.constraint(equalToConstant: 10),
                         ])
                 }
             }
             
-            component.view(views.last!) { (component) in
+            com.view(views.last!) { (com) in
                 
-                component.constraints([
-                    component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor, constant: constant),
-                    component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor, constant: constant),
-                    component.ownedView.topAnchor.constraint(equalTo: views[views.count - 2].bottomAnchor, constant: constant),
-                    component.ownedView.heightAnchor.constraint(equalToConstant: 10),
-                    component.ownedView.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor, constant: constant),
+                com.constraints([
+                    com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor, constant: constant),
+                    com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor, constant: constant),
+                    com.ownedView.topAnchor.constraint(equalTo: views[views.count - 2].bottomAnchor, constant: constant),
+                    com.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                    com.ownedView.bottomAnchor.constraint(equalTo: com.superview.bottomAnchor, constant: constant),
                     ])
             }
         }
@@ -79,37 +79,37 @@ class ExampleView: UIView {
     
     private func layoutNewConstraints(with viewLayout: ViewLayout<ExampleView>, views: [UIView], constant: CGFloat) {
         
-        viewLayout.updateLayoutTo { (component) in
+        viewLayout.updateLayoutTo { (com) in
             
-            component.view(views[0]) { (component) in
+            com.view(views[0]) { (com) in
                 
-                component.constraints([
-                    component.ownedView.centerXAnchor.constraint(equalTo: component.superview.centerXAnchor),
-                    component.ownedView.topAnchor.constraint(equalTo: component.superview.topAnchor, constant: constant),
-                    component.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                com.constraints([
+                    com.ownedView.centerXAnchor.constraint(equalTo: com.superview.centerXAnchor),
+                    com.ownedView.topAnchor.constraint(equalTo: com.superview.topAnchor, constant: constant),
+                    com.ownedView.heightAnchor.constraint(equalToConstant: 10),
                     ])
             }
             
             let viewsSlice = views.dropFirst().dropLast()
             for viewTuple in viewsSlice.enumerated() {
                 
-                component.view(viewTuple.element) { (component) in
+                com.view(viewTuple.element) { (com) in
                     
-                    component.constraints([
-                        component.ownedView.centerXAnchor.constraint(equalTo: component.superview.centerXAnchor),
-                        component.ownedView.topAnchor.constraint(equalTo: views[viewTuple.offset].bottomAnchor, constant: constant),
-                        component.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                    com.constraints([
+                        com.ownedView.centerXAnchor.constraint(equalTo: com.superview.centerXAnchor),
+                        com.ownedView.topAnchor.constraint(equalTo: views[viewTuple.offset].bottomAnchor, constant: constant),
+                        com.ownedView.heightAnchor.constraint(equalToConstant: 10),
                         ])
                 }
             }
             
-            component.view(views.last!) { (component) in
+            com.view(views.last!) { (com) in
                 
-                component.constraints([
-                    component.ownedView.centerXAnchor.constraint(equalTo: component.superview.centerXAnchor),
-                    component.ownedView.topAnchor.constraint(equalTo: views[views.count - 2].bottomAnchor, constant: constant),
-                    component.ownedView.heightAnchor.constraint(equalToConstant: 10),
-                    component.ownedView.bottomAnchor.constraint(equalTo: component.superview.bottomAnchor, constant: constant),
+                com.constraints([
+                    com.ownedView.centerXAnchor.constraint(equalTo: com.superview.centerXAnchor),
+                    com.ownedView.topAnchor.constraint(equalTo: views[views.count - 2].bottomAnchor, constant: constant),
+                    com.ownedView.heightAnchor.constraint(equalToConstant: 10),
+                    com.ownedView.bottomAnchor.constraint(equalTo: com.superview.bottomAnchor, constant: constant),
                     ])
             }
         }

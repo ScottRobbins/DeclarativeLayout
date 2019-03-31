@@ -43,7 +43,7 @@ viewLayout = ViewLayout(view: view)
 Tell your `ViewLayout` you would like to update it
 
 ```swift
-viewLayout.updateLayoutTo { (component) in
+viewLayout.updateLayoutTo { (com) in
     ...
 }
 ```
@@ -55,49 +55,49 @@ to `.constraints(_:)` method should not be active).
 Here is an example:
 
 ```swift
-viewLayout.updateLayoutTo { (component) in
-    component.stackView(self.stackView) { (component) in
-        component.constraints(
-            component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-            component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-            component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
+viewLayout.updateLayoutTo { (com) in
+    com.stackView(self.stackView) { (com) in
+        com.constraints(
+            com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor),
+            com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor),
+            com.ownedView.topAnchor.constraint(equalTo: com.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35)
         )
 
-        component.ownedView.axis = .vertical
-        component.arrangedView(self.redView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.ownedView.axis = .vertical
+        com.arrangedView(self.redView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.space(20)
-        component.arrangedView(self.orangeView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.space(20)
+        com.arrangedView(self.orangeView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.space(20)
-        component.arrangedView(self.yellowView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.space(20)
+        com.arrangedView(self.yellowView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.space(20)
-        component.arrangedView(self.greenView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.space(20)
+        com.arrangedView(self.greenView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.space(20)
-        component.arrangedView(self.blueView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.space(20)
+        com.arrangedView(self.blueView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
-        component.space(20)
-        component.arrangedView(self.purpleView) { (component) in
-            component.constraints(
-                component.ownedView.heightAnchor.constraint(equalToConstant: 50)
+        com.space(20)
+        com.arrangedView(self.purpleView) { (com) in
+            com.constraints(
+                com.ownedView.heightAnchor.constraint(equalToConstant: 50)
             )
         }
     }
@@ -129,24 +129,24 @@ let views = [redView,
              blueView,
              purpleView]
 
-viewLayout.updateLayoutTo { (component) in
-    component.stackView(self.stackView) { (component) in
-        component.constraints(
-            component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-            component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-            component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
+viewLayout.updateLayoutTo { (com) in
+    com.stackView(self.stackView) { (com) in
+        com.constraints(
+            com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor),
+            com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor),
+            com.ownedView.topAnchor.constraint(equalTo: com.superview.safeAreaLayoutGuide.topAnchor,
                                                 constant: 35),
         )
 
-        component.ownedView.axis = .vertical
+        com.ownedView.axis = .vertical
         for view in views.shuffled() {
-            component.arrangedView(view) { (component) in
+            com.arrangedView(view) { (com) in
                 let random = CGFloat(Int.random(in: 20..<100))
-                component.constraints(
-                    component.ownedView.heightAnchor.constraint(equalToConstant: random)
+                com.constraints(
+                    com.ownedView.heightAnchor.constraint(equalToConstant: random)
                 )
             }
-            component.space(CGFloat(Int.random(in: 0..<50)))
+            com.space(CGFloat(Int.random(in: 0..<50)))
         }
     }
 }
