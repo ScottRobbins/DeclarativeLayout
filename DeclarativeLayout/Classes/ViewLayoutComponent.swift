@@ -82,7 +82,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      * This will just add a regular UIView (`UIView()`).
      * If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
      unnecessary layout recalculations to occur.
-     Consider using `addView(identifier:layoutClosure:)` instead for that situation.
+     Consider using `view(identifier:layoutClosure:)` instead for that situation.
      */
     @discardableResult public func view(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
     {

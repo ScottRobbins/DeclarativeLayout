@@ -98,7 +98,7 @@ public final class UIStackViewSubviewLayoutComponent<T: UIStackView, R: UIView>:
      * This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      * If you are calling `updateLayoutTo` more than once, you should not use this as it will cause
      unnecessary layout recalculations to occur.
-     Consider using `addArrangedStackView(identifier:layoutClosure:)` instead for that situation.
+     Consider using `arrangedStackView(identifier:layoutClosure:)` instead for that situation.
      */
     @discardableResult public func arrangedStackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
     {
