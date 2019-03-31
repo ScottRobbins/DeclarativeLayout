@@ -31,9 +31,8 @@ protocol UIStackViewLayoutComponentType: ViewLayoutComponentType {
 }
 
 public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
-    
     /**
-     The component's view. 
+     The component's view.
      */
     public final unowned let ownedView: T
     let cachedLayoutObjectStore: CachedLayoutObjectStore
@@ -41,9 +40,9 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     private(set) var sublayoutComponents = [LayoutComponentType]()
     private(set) var layoutGuides = [UILayoutGuide]()
     private var constraints = [LayoutConstraint]()
-    
+
     init(view: T, cachedLayoutObjectStore: CachedLayoutObjectStore) {
-        self.ownedView = view
+        ownedView = view
         self.cachedLayoutObjectStore = cachedLayoutObjectStore
     }
 
@@ -60,9 +59,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      created instance of a `UIView` in subsequent layout updates.
      */
     @discardableResult public func view(identifier: String,
-                                           layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil)
-        -> UIViewSubviewLayoutComponent<UIView, T>
-    {
+                                        layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil)
+        -> UIViewSubviewLayoutComponent<UIView, T> {
         if let _view = cachedLayoutObjectStore.viewStorage[identifier] {
             return view(_view, layoutClosure: layoutClosure)
         } else {
@@ -71,10 +69,10 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
             return view(_view, layoutClosure: layoutClosure)
         }
     }
-    
+
     /**
      Add a subview to the component's view.
-     
+
      - parameters:
          - layoutClosure: A closure that will define the layout component for the subview.
      - returns: The layout component for the subview (the same one passed into the optional closure)
@@ -84,30 +82,28 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      unnecessary layout recalculations to occur.
      Consider using `view(identifier:layoutClosure:)` instead for that situation.
      */
-    @discardableResult public func view(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T>
-    {
+    @discardableResult public func view(layoutClosure: ((UIViewSubviewLayoutComponent<UIView, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<UIView, T> {
         return view(UIView(), layoutClosure: layoutClosure)
     }
-    
+
     /**
      Add a subview to the component's view.
-     
+
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
      - returns: The layout component for the subview (the same one passed into the optional closure)
      */
     @discardableResult public func view<R>(_ subview: R,
-                                              layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<R, T>
-    {
+                                           layoutClosure: ((UIViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIViewSubviewLayoutComponent<R, T> {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIViewSubviewLayoutComponent(view: subview,
                                                               superview: ownedView,
                                                               cachedLayoutObjectStore: cachedLayoutObjectStore)
-        
+
         sublayoutComponents.append(.uiview(layout: subLayoutComponent))
         subviews.append(subview)
-        
+
         layoutClosure?(subLayoutComponent)
         return subLayoutComponent
     }
@@ -125,9 +121,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      * This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
     @discardableResult public func stackView(identifier: String,
-                                                layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>)
-        -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
-    {
+                                             layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>)
+                                                 -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T> {
         if let view = cachedLayoutObjectStore.stackViewStorage[identifier] {
             return stackView(view, layoutClosure: layoutClosure)
         } else {
@@ -136,10 +131,10 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
             return stackView(view, layoutClosure: layoutClosure)
         }
     }
-    
+
     /**
      Add a subview, that is a stack view, to the component's view.
-     
+
      - parameters:
          - layoutClosure: A closure that will define the layout component for the subview.
      - returns: The layout component for the subview (the same one passed into the optional closure)
@@ -150,32 +145,30 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      unnecessary layout recalculations to occur.
      Consider using `addStackView(identifier:layoutClosure:)` instead for that situation.
      */
-    @discardableResult public func stackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T>
-    {
+    @discardableResult public func stackView(layoutClosure: ((UIStackViewSubviewLayoutComponent<UIStackView, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<UIStackView, T> {
         return stackView(UIStackView(), layoutClosure: layoutClosure)
     }
-    
+
     /**
      Add a subview, that is a stack view, to the component's view.
-     
+
      - parameters:
         - subview: The view you would like to add as a subview to the component's view.
         - layoutClosure: A closure that will define the layout component for the subview.
      - returns: The layout component for the subview (the same one passed into the optional closure)
-     
+
      This will allow you to, in the layout closure, add arranged views for the passed in stack view.
      */
     @discardableResult public func stackView<R>(_ subview: R,
-                                                   layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<R, T>
-    {
+                                                layoutClosure: ((UIStackViewSubviewLayoutComponent<R, T>) -> Void)? = nil) -> UIStackViewSubviewLayoutComponent<R, T> {
         subview.translatesAutoresizingMaskIntoConstraints = false
         let subLayoutComponent = UIStackViewSubviewLayoutComponent(view: subview,
                                                                    superview: ownedView,
                                                                    cachedLayoutObjectStore: cachedLayoutObjectStore)
-        
+
         sublayoutComponents.append(.uistackview(layout: subLayoutComponent))
         subviews.append(subview)
-        
+
         layoutClosure?(subLayoutComponent)
         return subLayoutComponent
     }
@@ -193,9 +186,8 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
      in subsequent layout updates.
      */
     @discardableResult public func layoutGuide(identifier: String,
-                                                  layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil)
-        -> UILayoutGuideComponent<T>
-    {
+                                               layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil)
+        -> UILayoutGuideComponent<T> {
         if let _layoutGuide = cachedLayoutObjectStore.layoutGuideStorage[identifier] {
             return layoutGuide(_layoutGuide, layoutClosure: layoutClosure)
         } else {
@@ -204,10 +196,10 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
             return layoutGuide(_layoutGuide, layoutClosure: layoutClosure)
         }
     }
-    
+
     /**
      Add a layout guide to the component's view.
-     
+
      - parameters:
          - layoutClosure: A closure that will define the layout component for the layout guide.
      - returns: The layout component for the layout guide (the same one passed into the optional closure)
@@ -220,22 +212,22 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     @discardableResult public func layoutGuide(layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
         return layoutGuide(UILayoutGuide(), layoutClosure: layoutClosure)
     }
-    
+
     /**
      Add a layout guide to the component's view.
-     
+
      - parameters:
          - layoutGuide: The layout guide you would like ot add to the component's view.
          - layoutClosure: A closure that will define the layout component for the layout guide.
      - returns: The layout component for the layout guide (the same one passed into the optional closure)
      */
     @discardableResult public func layoutGuide(_ layoutGuide: UILayoutGuide,
-                                                  layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
+                                               layoutClosure: ((UILayoutGuideComponent<T>) -> Void)? = nil) -> UILayoutGuideComponent<T> {
         let subLayoutComponent = UILayoutGuideComponent(layoutGuide: layoutGuide,
                                                         owningView: ownedView)
         sublayoutComponents.append(.layoutGuide(layout: subLayoutComponent))
         layoutGuides.append(layoutGuide)
-        
+
         layoutClosure?(subLayoutComponent)
         return subLayoutComponent
     }
@@ -252,20 +244,20 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
     public func constraints(_ _constraints: NSLayoutConstraint...) {
         constraints(_constraints)
     }
-    
+
     /**
      Define constraints that should be activated
-     
+
      - parameters:
         - constraints: Constraints to activate
-     
+
      - important: Do not activate these constraints yourself, the framework will do that for you.
      If these constraints are activated at the wrong time it can cause your application to crash.
      */
     public func constraints(_ _constraints: [NSLayoutConstraint]) {
-        self.constraints += _constraints.map(LayoutConstraint.init(wrappedConstraint:))
+        constraints += _constraints.map(LayoutConstraint.init(wrappedConstraint:))
     }
-    
+
     func allConstraints() -> [LayoutConstraint] {
         return sublayoutComponents.reduce(constraints) { (combinedConstraints, layoutComponent) -> [LayoutConstraint] in
             switch layoutComponent {
@@ -278,7 +270,7 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
             }
         }
     }
-    
+
     func allSubviews() -> [UIView] {
         return sublayoutComponents.reduce(subviews) { (subviews, layoutComponent) -> [UIView] in
             switch layoutComponent {
@@ -286,39 +278,39 @@ public class ViewLayoutComponent<T: UIView>: ViewLayoutComponentType {
                 return subviews + layoutComponent.allSubviews()
             case .uiview(let layoutComponent):
                 return subviews + layoutComponent.allSubviews()
-            case .layoutGuide(_):
+            case .layoutGuide:
                 return subviews
             }
         }
     }
-    
+
     func allArrangedSubviews() -> [UIView: UIStackViewLayoutComponentType] {
         return sublayoutComponents.reduce([:]) { (arrangedSubviews, layoutComponent) -> [UIView: UIStackViewLayoutComponentType] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews()) { a, _ in a }
             case .uiview(let layoutComponent):
-                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews(), uniquingKeysWith: { a,b in  return a })
-            case .layoutGuide(_):
+                return arrangedSubviews.merging(layoutComponent.allArrangedSubviews()) { a, _ in a }
+            case .layoutGuide:
                 return arrangedSubviews
             }
         }
     }
-    
+
     func allLayoutGuides() -> [UILayoutGuide: UIView] {
         let layoutGuideDict = layoutGuides.reduce([:]) { (dict, layoutGuide) -> [UILayoutGuide: UIView] in
             var mutableDict = dict
             mutableDict[layoutGuide] = ownedView
             return mutableDict
         }
-        
+
         return sublayoutComponents.reduce(layoutGuideDict) { (dict, layoutComponent) -> [UILayoutGuide: UIView] in
             switch layoutComponent {
             case .uistackview(let layoutComponent):
-                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
+                return dict.merging(layoutComponent.allLayoutGuides()) { a, _ in a }
             case .uiview(let layoutComponent):
-                return dict.merging(layoutComponent.allLayoutGuides(), uniquingKeysWith: { a,b in  return a })
-            case .layoutGuide(_):
+                return dict.merging(layoutComponent.allLayoutGuides()) { a, _ in a }
+            case .layoutGuide:
                 return dict
             }
         }

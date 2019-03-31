@@ -1,10 +1,9 @@
 import UIKit
 
 final class LayoutConstraint {
-    
     let wrappedConstraint: NSLayoutConstraint
     var cachedHash: Int?
-    
+
     init(wrappedConstraint: NSLayoutConstraint) {
         self.wrappedConstraint = wrappedConstraint
     }
@@ -12,10 +11,9 @@ final class LayoutConstraint {
 
 extension LayoutConstraint: Equatable {
     static func ==(lhs: LayoutConstraint, rhs: LayoutConstraint) -> Bool {
-        
         let lhsConstraint = lhs.wrappedConstraint
         let rhsConstraint = rhs.wrappedConstraint
-        
+
         // I know the NSLayoutConstraint API says the first Item can be nil, but I don't think that's true. I think it'll crash at runtime anyway if that's true
         if let lhsFirstItem = lhsConstraint.firstItem as? UIView,
             let rhsFirstItem = rhsConstraint.firstItem as? UIView {
@@ -30,23 +28,21 @@ extension LayoutConstraint: Equatable {
         } else {
             return false
         }
-        
+
         if let lhsSecondItem = lhsConstraint.secondItem as? UIView {
             guard let rhsSecondItem = rhsConstraint.secondItem as? UIView,
-                lhsSecondItem == rhsSecondItem else
-            {
+                lhsSecondItem == rhsSecondItem else {
                 return false
             }
         } else if let lhsSecondItem = lhsConstraint.secondItem as? UILayoutGuide {
             guard let rhsSecondItem = rhsConstraint.secondItem as? UILayoutGuide,
-                lhsSecondItem == rhsSecondItem else
-            {
+                lhsSecondItem == rhsSecondItem else {
                 return false
             }
         } else if let _ = rhsConstraint.secondItem {
             return false
         }
-        
+
         return lhsConstraint.firstAttribute == rhsConstraint.firstAttribute
             && lhsConstraint.secondAttribute == rhsConstraint.secondAttribute
             && lhsConstraint.relation == rhsConstraint.relation
@@ -55,7 +51,6 @@ extension LayoutConstraint: Equatable {
 }
 
 extension LayoutConstraint: Hashable {
-    
     public func hash(into hasher: inout Hasher) {
         if let cachedHash = cachedHash {
             hasher.combine(cachedHash)
@@ -73,10 +68,10 @@ extension LayoutConstraint: Hashable {
                 newHasher.combine(secondItem)
             }
 
-            newHasher.combine(wrappedConstraint.firstAttribute)
-            newHasher.combine(wrappedConstraint.secondAttribute)
-            newHasher.combine(wrappedConstraint.relation)
-            newHasher.combine(wrappedConstraint.multiplier)
+            newHasher.combine(self.wrappedConstraint.firstAttribute)
+            newHasher.combine(self.wrappedConstraint.secondAttribute)
+            newHasher.combine(self.wrappedConstraint.relation)
+            newHasher.combine(self.wrappedConstraint.multiplier)
             let newHash = newHasher.finalize()
             cachedHash = newHash
             hasher.combine(newHash)
