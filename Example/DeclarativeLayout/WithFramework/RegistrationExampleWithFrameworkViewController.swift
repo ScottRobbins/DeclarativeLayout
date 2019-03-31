@@ -51,22 +51,22 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
     
     private func layoutAllViews() {
         
-        viewLayout.updateLayoutTo { (component) in
-            component.stackView(self.stackView) { (component) in
-                component.ownedView.axis = .vertical
-                component.layout {[ // $0 is component's view, $1 is its superview
+        viewLayout.updateLayoutTo { (com) in
+            com.stackView(self.stackView) { (com) in
+                com.ownedView.axis = .vertical
+                com.layout {[ // $0 is component's view, $1 is its superview
                     $0.topAnchor.constraint(equalTo: $1.safeAreaLayoutGuide.topAnchor, constant: 35),
                     $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor, constant: 20),
                     $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor, constant: -20),
                 ]}
                 
-                component.arrangedView(self.registerOrSignInSegmentedControl)
-                component.space(30)
-                component.arrangedView(self.headerLabel)
-                component.space(20)
-                component.arrangedView { (component) in
-                    component.view(self.emailLabel) { (component) in
-                        component.layout {[
+                com.arrangedView(self.registerOrSignInSegmentedControl)
+                com.space(30)
+                com.arrangedView(self.headerLabel)
+                com.space(20)
+                com.arrangedView { (com) in
+                    com.view(self.emailLabel) { (com) in
+                        com.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
                             $0.trailingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor, constant: -20),
@@ -75,8 +75,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ]}
                     }
                     
-                    component.view(self.emailTextField) { (component) in
-                        component.layout {[
+                    com.view(self.emailTextField) { (com) in
+                        com.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
                             $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
@@ -85,10 +85,10 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                 }
                 
-                component.space(40)
-                component.arrangedView { (component) in
-                    component.view(self.passwordLabel) { (component) in
-                        component.layout {[
+                com.space(40)
+                com.arrangedView { (com) in
+                    com.view(self.passwordLabel) { (com) in
+                        com.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.leadingAnchor.constraint(equalTo: $1.leadingAnchor),
                             $0.trailingAnchor.constraint(equalTo: self.passwordTextField.leadingAnchor, constant: -20),
@@ -97,8 +97,8 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                         ]}
                     }
                     
-                    component.view(self.passwordTextField) { (component) in
-                        component.layout {[
+                    com.view(self.passwordTextField) { (com) in
+                        com.layout {[
                             $0.topAnchor.constraint(greaterThanOrEqualTo: $1.topAnchor),
                             $0.trailingAnchor.constraint(equalTo: $1.trailingAnchor),
                             $0.bottomAnchor.constraint(lessThanOrEqualTo: $1.bottomAnchor),
@@ -108,12 +108,12 @@ class RegistrationExampleWithFrameworkViewController: UIViewController {
                     }
                 }
                 
-                component.space(40)
-                component.arrangedView(self.submitButton)
+                com.space(40)
+                com.arrangedView(self.submitButton)
             }
             
-            component.view(self.forgotMyPasswordButton) { (component) in
-                component.layout {[
+            com.view(self.forgotMyPasswordButton) { (com) in
+                com.layout {[
                     $0.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 20),
                     $0.centerXAnchor.constraint(equalTo: $1.centerXAnchor),
                 ]}

@@ -39,24 +39,24 @@ class READMEExample: UIViewController {
                      blueView,
                      purpleView]
 
-        viewLayout.updateLayoutTo { (component) in
-            component.stackView(self.stackView) { (component) in
-                component.constraints(
-                    component.ownedView.leadingAnchor.constraint(equalTo: component.superview.leadingAnchor),
-                    component.ownedView.trailingAnchor.constraint(equalTo: component.superview.trailingAnchor),
-                    component.ownedView.topAnchor.constraint(equalTo: component.superview.safeAreaLayoutGuide.topAnchor,
+        viewLayout.updateLayoutTo { (com) in
+            com.stackView(self.stackView) { (com) in
+                com.constraints(
+                    com.ownedView.leadingAnchor.constraint(equalTo: com.superview.leadingAnchor),
+                    com.ownedView.trailingAnchor.constraint(equalTo: com.superview.trailingAnchor),
+                    com.ownedView.topAnchor.constraint(equalTo: com.superview.safeAreaLayoutGuide.topAnchor,
                                                         constant: 35)
                 )
 
-                component.ownedView.axis = .vertical
+                com.ownedView.axis = .vertical
                 for view in views.shuffled() {
-                    component.arrangedView(view) { (component) in
+                    com.arrangedView(view) { (com) in
                         let random = CGFloat(Int.random(in: 20..<100))
-                        component.constraints(
-                            component.ownedView.heightAnchor.constraint(equalToConstant: random)
+                        com.constraints(
+                            com.ownedView.heightAnchor.constraint(equalToConstant: random)
                         )
                     }
-                    component.space(CGFloat(Int.random(in: 0..<50)))
+                    com.space(CGFloat(Int.random(in: 0..<50)))
                 }
             }
         }

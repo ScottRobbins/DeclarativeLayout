@@ -66,22 +66,22 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
     
     private func layoutAllViews() {
         
-        viewLayout.updateLayoutTo { (component) in
-            component.stackView(self.stackView) { (component) in
-                component.ownedView.axis = .vertical
-                component.layout { // $0 is component's view, $1 is superview
+        viewLayout.updateLayoutTo { (com) in
+            com.stackView(self.stackView) { (com) in
+                com.ownedView.axis = .vertical
+                com.layout { // $0 is component's view, $1 is superview
                     $0.topAnchor == $1.safeAreaLayoutGuide.topAnchor + 35
                     $0.leadingAnchor == $1.leadingAnchor + 20
                     $0.trailingAnchor == $1.trailingAnchor - 20
                 }
                 
-                component.arrangedView(self.registerOrSignInSegmentedControl)
-                component.space(30)
-                component.arrangedView(self.headerLabel)
-                component.space(20)
-                component.arrangedView { (component) in
-                    component.view(self.emailLabel) { (component) in
-                        component.layout {
+                com.arrangedView(self.registerOrSignInSegmentedControl)
+                com.space(30)
+                com.arrangedView(self.headerLabel)
+                com.space(20)
+                com.arrangedView { (com) in
+                    com.view(self.emailLabel) { (com) in
+                        com.layout {
                             $0.topAnchor >= $1.topAnchor
                             $0.leadingAnchor == $1.leadingAnchor
                             $0.trailingAnchor == self.emailTextField.leadingAnchor - 20
@@ -90,8 +90,8 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                         }
                     }
                     
-                    component.view(self.emailTextField) { (component) in
-                        component.layout {
+                    com.view(self.emailTextField) { (com) in
+                        com.layout {
                             $0.topAnchor >= $1.topAnchor
                             $0.trailingAnchor == $1.trailingAnchor
                             $0.bottomAnchor <= $1.bottomAnchor
@@ -100,10 +100,10 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                     }
                 }
                 
-                component.space(40)
-                component.arrangedView { (component) in
-                    component.view(self.passwordLabel) { (component) in
-                        component.layout {
+                com.space(40)
+                com.arrangedView { (com) in
+                    com.view(self.passwordLabel) { (com) in
+                        com.layout {
                             $0.topAnchor >= $1.topAnchor
                             $0.leadingAnchor == $1.leadingAnchor
                             $0.trailingAnchor == self.passwordTextField.leadingAnchor - 20
@@ -112,8 +112,8 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                         }
                     }
                     
-                    component.view(self.passwordTextField) { (component) in
-                        component.layout {
+                    com.view(self.passwordTextField) { (com) in
+                        com.layout {
                             $0.topAnchor >= $1.topAnchor
                             $0.trailingAnchor == $1.trailingAnchor
                             $0.bottomAnchor <= $1.bottomAnchor
@@ -123,12 +123,12 @@ class RegistrationExampleWithFrameworkAndAnchorageViewController: UIViewControll
                     }
                 }
                 
-                component.space(40)
-                component.arrangedView(self.submitButton)
+                com.space(40)
+                com.arrangedView(self.submitButton)
             }
             
-            component.view(self.forgotMyPasswordButton) { (component) in
-                component.layout {
+            com.view(self.forgotMyPasswordButton) { (com) in
+                com.layout {
                     $0.topAnchor == self.stackView.bottomAnchor + 20
                     $0.centerXAnchor == $1.centerXAnchor
                 }
